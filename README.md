@@ -1,3 +1,7 @@
+# Project Info
+
+The goal of this project is to create a scorecard that can be used when playing the card game Skull King. This scorecard will automate some of the score keeping so that it is easier to keep track of each players score.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
