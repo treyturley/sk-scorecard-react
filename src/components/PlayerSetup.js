@@ -1,6 +1,4 @@
-import { useState } from "react";
 import { FormControl, Row, Col, Container, Button, Form } from "react-bootstrap";
-import ReactDOM from "react-dom/client"
 
 function PlayerSetupForm(props) {
   // const [players, setPlayers] = useState("");
