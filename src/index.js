@@ -1,9 +1,12 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "./pages/Layout";
-import Home from "./pages/Home";
-import NoPage from "./pages/NoPage";
+import Layout from "./components/Layout";
+import Home from "./components/Home";
+import NoPage from "./components/NoPage";
+
+
 
 
 function App() {
