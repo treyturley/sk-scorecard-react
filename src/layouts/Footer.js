@@ -13,17 +13,24 @@ const Footer = () => {
         </Row>
         <Row className="justify-content-md-center">
           <Col md="auto">
-            <Link to={'/'} style={{textDecoration:'none'}}>Home</Link>
+            <Link to={'/'} >Home</Link>
           </Col>
         </Row>
         <Row className="justify-content-md-center">
           <Col md="auto">
-          <a href="https://www.flaticon.com/free-icons/shipwreck" title="shipwreck icons" style={{ textDecoration: 'none', fontSize: '.75em' }}>Shipwreck icons created by Eucalyp - Flaticon</a>
+            <a href="https://cdn.shopify.com/s/files/1/0565/3230/4053/files/sk_rulebook_optimized.pdf?v=1652992950" target="_blank" rel="noreferrer">Rules</a>
+          </Col>
+        </Row>
+        <Row className="justify-content-md-center">
+          <Col md="auto">
+          <a className="shiplink" href="https://www.flaticon.com/free-icons/shipwreck" target="_blank" rel="noreferrer" title="shipwreck icons">Shipwreck icons created by Eucalyp - Flaticon</a>
           </Col>
         </Row>
       </Container>
     </div>
   )
 };
+
+// 
 
 export default Footer;
