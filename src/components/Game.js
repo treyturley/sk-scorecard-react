@@ -4,7 +4,11 @@ import Scorecard from "./Scorecard";
 
 function Game() {
   const [players, setPlayers] = useState([]);
-  const [playersExist, setPlayersExist] = useState(false);
+  const [playersExist, setPlayersExist] = useState(false);  
+
+  // some examples of updating state
+  // https://stackoverflow.com/questions/54150783/react-hooks-usestate-with-object
+  // https://stackoverflow.com/questions/43638938/updating-an-object-with-setstate-in-react
 
   // TODO: Consider if this is a good way to handle the player setup step.
   // An altenative may be passing setPlayersExist as a prop to PlayerSetupForm instead.
@@ -23,10 +27,9 @@ function Game() {
         handleSubmit={handlePlayerSetupSubmit}
       />
     )
+  } else {
+    return <Scorecard players={players} />
   }
-  return <Scorecard players={players} />
-
 }
-
 
 export default Game;
