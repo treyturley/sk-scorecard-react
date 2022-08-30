@@ -14,7 +14,6 @@ function Game() {
   // An altenative may be passing setPlayersExist as a prop to PlayerSetupForm instead.
   const handlePlayerSetupSubmit = (event) => {
     event.preventDefault();
-    // console.log(players);
     // TODO: Do some input validation before moving on to the scorecard
     setPlayersExist(true);
   }
