@@ -1,5 +1,4 @@
 import { Container, Row, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import '../styles/Footer.css';
 
 const Footer = () => {
@@ -13,7 +12,7 @@ const Footer = () => {
         </Row>
         <Row className="justify-content-md-center">
           <Col md="auto">
-            <Link to={'/'} >Home</Link>
+            <a href="/" >Home</a>
           </Col>
         </Row>
         <Row className="justify-content-md-center">
