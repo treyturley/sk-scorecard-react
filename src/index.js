@@ -1,22 +1,18 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "./layouts/Layout";
-import NoPage from "./components/NoPage";
 import Game from "./components/Game";
+import Header from './layouts/Header';
+import Footer from './layouts/Footer'
 
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Game />} />
-          <Route path="*" element={<NoPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <>
+      <Header />
+      <Game />
+      <Footer />
+    </>
   )
 }
 
