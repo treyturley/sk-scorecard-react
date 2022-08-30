@@ -16,7 +16,7 @@ const Footer = () => {
           </Col>
         </Row>
         <Row className="justify-content-md-center">
-          <Col>
+          <Col md="auto">
             <a href="/sk-scorecard-react/">New Game</a>
           </Col>
         </Row>
