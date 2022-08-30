@@ -15,7 +15,7 @@ const Footer = () => {
             <a href="/" >Home</a>
           </Col>
         </Row>
-        <Row>
+        <Row className="justify-content-md-center">
           <Col>
             <a href="/sk-scorecard-react/">New Game</a>
           </Col>
