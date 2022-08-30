@@ -16,13 +16,18 @@ const Footer = () => {
           </Col>
         </Row>
         <Row className="justify-content-md-center">
+          <Col>
+            <a href="/sk-scorecard-react/">New Game</a>
+          </Col>
+        </Row>
+        <Row className="justify-content-md-center">
           <Col md="auto">
             <a href="https://cdn.shopify.com/s/files/1/0565/3230/4053/files/sk_rulebook_optimized.pdf?v=1652992950" target="_blank" rel="noreferrer">Rules</a>
           </Col>
         </Row>
         <Row className="justify-content-md-center">
           <Col md="auto">
-          <a className="shiplink" href="https://www.flaticon.com/free-icons/shipwreck" target="_blank" rel="noreferrer" title="shipwreck icons">Shipwreck icons created by Eucalyp - Flaticon</a>
+            <a className="shiplink" href="https://www.flaticon.com/free-icons/shipwreck" target="_blank" rel="noreferrer" title="shipwreck icons">Shipwreck icons created by Eucalyp - Flaticon</a>
           </Col>
         </Row>
       </Container>
