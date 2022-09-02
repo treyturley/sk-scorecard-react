@@ -1,16 +1,29 @@
 .main-footer {
-    margin-top: 25px;
+    display: flex;
     background-color: lightgray;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 .main-footer a {
     color: black;
 }
 
-.main-footer a:any-link{
+.main-footer a:any-link {
     text-decoration: none;
 }
 
-a.shiplink{
+a.shiplink {
     font-size: 8pt;
+}
+
+@media (max-height: 400px) {
+    .main-footer {
+        position: unset;
+        bottom: unset;
+        /* background-color: aqua; */
+        /* bottom: auto; */
+        /* width: 100%; */
+    }
 }

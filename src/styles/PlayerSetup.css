@@ -1,0 +1,21 @@
+#video{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1;
+}
+
+@media (max-height: 798px) {
+    #video{
+        max-height: 700px;
+    }
+}
+
+@media (max-height: 400px) {
+    #video{
+        top: 15px;
+    }
+}
