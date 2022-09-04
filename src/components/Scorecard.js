@@ -3,6 +3,8 @@ import Round from "./Round"
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import '../styles/Scorecard.css'
+import backgroundVideo from '../video/Sea_Loop.mp4'
 
 function Scorecard({ players }) {
   const [currentRound, setCurrentRound] = useState(1);
@@ -69,10 +71,10 @@ function Scorecard({ players }) {
     roundTotal: 0
   }
 
-/**
- * Initializes new roundScore objs for each player for a new round.
- * @param {number} roundNumber - The current round number.
- */
+  /**
+   * Initializes new roundScore objs for each player for a new round.
+   * @param {number} roundNumber - The current round number.
+   */
   function startRound(roundNumber) {
     const newScoreCard = [...scorecard];
 
@@ -206,15 +208,15 @@ function Scorecard({ players }) {
     // setScorecard(newScoreCard);
 
     // New Solution
-    setScorecard(prevScorecard => 
+    setScorecard(prevScorecard =>
       prevScorecard.map((score) => {
-        if(score.playerName === roundScoreToUpdate.playerName 
-          && score.roundNumber === roundScoreToUpdate.roundNumber){
-            return {...score, roundTotal: total};
-          }
-          return score;
+        if (score.playerName === roundScoreToUpdate.playerName
+          && score.roundNumber === roundScoreToUpdate.roundNumber) {
+          return { ...score, roundTotal: total };
+        }
+        return score;
       })
-      );
+    );
 
     //pass new scorecard and the player we are trying to update the total for
     updatePlayerTotal(newScoreCard, roundScoreToUpdate.playerName);
@@ -261,40 +263,54 @@ function Scorecard({ players }) {
   }
 
   return (
-    <Container>
-      <h1 className='text-center'>Score Totals</h1>
-      <Row xs={2} md={4}>
-        <Col><h4>{playerTotals[0].playerName} : {playerTotals[0].total}</h4></Col>
-        <Col><h4>{playerTotals[1].playerName} : {playerTotals[1].total}</h4></Col>
-        <Col><h4>{playerTotals[2].playerName} : {playerTotals[2].total}</h4></Col>
-        <Col><h4>{playerTotals[3].playerName} : {playerTotals[3].total}</h4></Col>
-      </Row>
-      <hr />
-      <Row>
-        <Col className='text-center'>
-          <input type='button' value='Previus Round' onClick={changeRound}></input>
-        </Col>
-        <Col>
-          <h1 className='text-center'>Round {currentRound}</h1>
-        </Col>
-        <Col className='text-center'>
-          <input type='button' value='Next Round' onClick={changeRound}></input>
-        </Col>
-      </Row>
-      <div>
-        {scorecard.filter(roundScore => roundScore.roundNumber === currentRound)
-          .map((roundScore, index) =>
-            <Round
-              key={index}
-              roundScore={roundScore}
-              onBidChange={onBidChange}
-              onTrickChange={onTrickChange}
-              onBonusChange={onBonusChange}
-              onClickUpdateTotal={onClickUpdateTotal}
-            />
-          )}
-      </div>
-    </Container>
+    <>
+      <Container>
+        <h1 className='text-center'>Score Totals</h1>
+        <Row xs={2} md={4} className='text-center'>
+          <Col><h4 className='player-total'>{playerTotals[0].playerName} : {playerTotals[0].total}</h4></Col>
+          <Col><h4 className='player-total'>{playerTotals[1].playerName} : {playerTotals[1].total}</h4></Col>
+          <Col><h4 className='player-total'>{playerTotals[2].playerName} : {playerTotals[2].total}</h4></Col>
+          <Col><h4 className='player-total'>{playerTotals[3].playerName} : {playerTotals[3].total}</h4></Col>
+        </Row>
+        <hr />
+
+        <div className="round-header">
+          <Row xs={3}>
+            <Col className='text-center'>
+              <div className='round-button'>
+                <input type='button' value='Previus Round' onClick={changeRound}></input>
+              </div>
+            </Col>
+            <Col className='text-center'>
+              <h1 className='text-center round-title'>Round {currentRound}</h1>
+            </Col>
+            <Col className='text-center'>
+              <div className='round-button'>
+                <input type='button' value='Next Round' onClick={changeRound}></input>
+              </div>
+            </Col>
+          </Row>
+        </div>
+
+        <div className='scores'>
+          {scorecard.filter(roundScore => roundScore.roundNumber === currentRound)
+            .map((roundScore, index) =>
+              <Round
+                key={index}
+                roundScore={roundScore}
+                onBidChange={onBidChange}
+                onTrickChange={onTrickChange}
+                onBonusChange={onBonusChange}
+                onClickUpdateTotal={onClickUpdateTotal}
+              />
+            )}
+        </div>
+      </Container>
+
+      <video id='scorecard-video' autoPlay loop muted>
+        <source src={backgroundVideo} type='video/mp4'></source>
+      </video>
+    </>
   )
 }
 
