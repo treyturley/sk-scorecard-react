@@ -182,7 +182,7 @@ function Scorecard({ players }) {
     let total = 0;
 
     // check to see if we need to clear bonus first
-    if (roundScoreToUpdate.bid != roundScoreToUpdate.tricks) {
+    if (roundScoreToUpdate.bid !== roundScoreToUpdate.tricks) {
       roundScoreToUpdate.bonus = 0;
     }
 
