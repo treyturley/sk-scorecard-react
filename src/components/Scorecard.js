@@ -3,6 +3,8 @@ import Round from "./Round"
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import '../styles/Scorecard.css'
+import backgroundVideo from '../video/Sea_Loop.mp4'
 
 function Scorecard({ players }) {
   const [currentRound, setCurrentRound] = useState(1);
@@ -69,10 +71,10 @@ function Scorecard({ players }) {
     roundTotal: 0
   }
 
-/**
- * Initializes new roundScore objs for each player for a new round.
- * @param {number} roundNumber - The current round number.
- */
+  /**
+   * Initializes new roundScore objs for each player for a new round.
+   * @param {number} roundNumber - The current round number.
+   */
   function startRound(roundNumber) {
     const newScoreCard = [...scorecard];
 
@@ -100,7 +102,6 @@ function Scorecard({ players }) {
           startRound(currentRound + 1);
         }
       }
-      // TODO: Behavior around when score totals are updated needs to be checked/tested more
       scorecard.filter((round) => round.roundNumber === currentRound).forEach((roundScore) => updateRoundAndPlayerTotal(roundScore));
     } else {
       if (currentRound > 1) {
@@ -149,18 +150,20 @@ function Scorecard({ players }) {
    * @param {*} roundScoreToUpdate - The roundScore obj that will be updated with the new trick count.
    */
   function onBonusChange(bonus, roundScoreToUpdate) {
-    // TODO: Figure out the max bonus value
-    // FIXME: A bonus cannot be applied unless bid === tricks
-    if (bonus >= 0 && bonus <= 200) {
-      roundScoreToUpdate.bonus = bonus;
-
-      setScorecard(
-        scorecard.map((roundScore) =>
-          roundScore.playerName === roundScoreToUpdate.playerName
-            && roundScore.roundNumber === roundScoreToUpdate.roundNumber
-            ? roundScoreToUpdate
-            : roundScore));
+    if (roundScoreToUpdate.bid > 0 && roundScoreToUpdate.bid === roundScoreToUpdate.tricks) {
+      if (bonus >= 0 && bonus <= 200) {
+        roundScoreToUpdate.bonus = bonus;
+      } else {
+        // maybe alert user as to why no update was made
+      }
+    } else {
+      roundScoreToUpdate.bonus = 0;
     }
+    
+    setScorecard(prevScorecard =>
+      prevScorecard.map((score) =>
+        score.playerName === roundScoreToUpdate.playerName
+          && score.roundNumber === roundScoreToUpdate.roundNumber ? roundScoreToUpdate : score));
   }
 
   /**
@@ -178,45 +181,36 @@ function Scorecard({ players }) {
   function updateRoundAndPlayerTotal(roundScoreToUpdate) {
     let total = 0;
 
+    // check to see if we need to clear bonus first
+    if (roundScoreToUpdate.bid != roundScoreToUpdate.tricks) {
+      roundScoreToUpdate.bonus = 0;
+    }
+
+    // calc total
     total = calculateRoundScore(
       roundScoreToUpdate.roundNumber,
       roundScoreToUpdate.bid,
       roundScoreToUpdate.tricks,
       roundScoreToUpdate.bonus);
 
-    /** Was having issues with updating state in the lines below.
-     * Only the round total would update when round total and player total both were expected to update.
-     * This looks to have been caused by trying to update player total based on a stale scorecard as the 
-     * setScorecard call doesnt necessarily finish before we try to read through it to add up the total. 
-     * 
-     * Old Solution, create a new scorecard and pass that to setScorecard as well updatePlayerTotals. This 
-     * ensures that both functions have the latest scorecard and the order they complete in doesn't matter.
-     * 
-     * New Solution - use functional setState format
-    */
-
-    //create a new score card with the updated round score
+    // create a new score card with the updated round score
     let newScoreCard = scorecard.map((roundScore) =>
       roundScore.playerName === roundScoreToUpdate.playerName
         && roundScore.roundNumber === roundScoreToUpdate.roundNumber
-        ? { ...roundScore, roundTotal: total }
-        : roundScore)
+        ? { ...roundScore, roundTotal: total, bonus: roundScoreToUpdate.bonus }
+        : roundScore);
 
-    // update scorecard state
-    // setScorecard(newScoreCard);
-
-    // New Solution
-    setScorecard(prevScorecard => 
+    // update scorecard with round total and updated bonus
+    setScorecard(prevScorecard =>
       prevScorecard.map((score) => {
-        if(score.playerName === roundScoreToUpdate.playerName 
-          && score.roundNumber === roundScoreToUpdate.roundNumber){
-            return {...score, roundTotal: total};
-          }
-          return score;
+        if (score.playerName === roundScoreToUpdate.playerName
+          && score.roundNumber === roundScoreToUpdate.roundNumber) {
+          return { ...score, roundTotal: total, bonus: roundScoreToUpdate.bonus };
+        }
+        return score;
       })
-      );
+    );
 
-    //pass new scorecard and the player we are trying to update the total for
     updatePlayerTotal(newScoreCard, roundScoreToUpdate.playerName);
   }
 
@@ -230,6 +224,7 @@ function Scorecard({ players }) {
 
     const newPlayerTotals = [...playerTotals];
     newPlayerTotals.find((player) => player.playerName === playerToUpdate).total = totalScore;
+    console.log(totalScore);
 
     setPlayerTotals(newPlayerTotals);
   }
@@ -261,40 +256,54 @@ function Scorecard({ players }) {
   }
 
   return (
-    <Container>
-      <h1 className='text-center'>Score Totals</h1>
-      <Row xs={2} md={4}>
-        <Col><h4>{playerTotals[0].playerName} : {playerTotals[0].total}</h4></Col>
-        <Col><h4>{playerTotals[1].playerName} : {playerTotals[1].total}</h4></Col>
-        <Col><h4>{playerTotals[2].playerName} : {playerTotals[2].total}</h4></Col>
-        <Col><h4>{playerTotals[3].playerName} : {playerTotals[3].total}</h4></Col>
-      </Row>
-      <hr />
-      <Row>
-        <Col className='text-center'>
-          <input type='button' value='Previus Round' onClick={changeRound}></input>
-        </Col>
-        <Col>
-          <h1 className='text-center'>Round {currentRound}</h1>
-        </Col>
-        <Col className='text-center'>
-          <input type='button' value='Next Round' onClick={changeRound}></input>
-        </Col>
-      </Row>
-      <div>
-        {scorecard.filter(roundScore => roundScore.roundNumber === currentRound)
-          .map((roundScore, index) =>
-            <Round
-              key={index}
-              roundScore={roundScore}
-              onBidChange={onBidChange}
-              onTrickChange={onTrickChange}
-              onBonusChange={onBonusChange}
-              onClickUpdateTotal={onClickUpdateTotal}
-            />
-          )}
-      </div>
-    </Container>
+    <>
+      <Container>
+        <h1 className='text-center'>Score Totals</h1>
+        <Row xs={2} md={4} className='text-center'>
+          <Col><h4 className='player-total'>{playerTotals[0].playerName} : {playerTotals[0].total}</h4></Col>
+          <Col><h4 className='player-total'>{playerTotals[1].playerName} : {playerTotals[1].total}</h4></Col>
+          <Col><h4 className='player-total'>{playerTotals[2].playerName} : {playerTotals[2].total}</h4></Col>
+          <Col><h4 className='player-total'>{playerTotals[3].playerName} : {playerTotals[3].total}</h4></Col>
+        </Row>
+        <hr />
+
+        <div className="round-header">
+          <Row xs={3}>
+            <Col className='text-center'>
+              <div className='round-button'>
+                <input type='button' value='Previus Round' onClick={changeRound}></input>
+              </div>
+            </Col>
+            <Col className='text-center'>
+              <h1 className='text-center round-title'>Round {currentRound}</h1>
+            </Col>
+            <Col className='text-center'>
+              <div className='round-button'>
+                <input type='button' value='Next Round' onClick={changeRound}></input>
+              </div>
+            </Col>
+          </Row>
+        </div>
+
+        <div className='scores'>
+          {scorecard.filter(roundScore => roundScore.roundNumber === currentRound)
+            .map((roundScore, index) =>
+              <Round
+                key={index}
+                roundScore={roundScore}
+                onBidChange={onBidChange}
+                onTrickChange={onTrickChange}
+                onBonusChange={onBonusChange}
+                onClickUpdateTotal={onClickUpdateTotal}
+              />
+            )}
+        </div>
+      </Container>
+
+      <video id='scorecard-video' autoPlay loop muted>
+        <source src={backgroundVideo} type='video/mp4'></source>
+      </video>
+    </>
   )
 }
 
