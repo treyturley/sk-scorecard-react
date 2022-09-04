@@ -1,65 +1,79 @@
 import React from 'react'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
+import '../styles/Round.css'
 
 const Round = ({ roundScore, onBidChange, onTrickChange, onBonusChange, onClickUpdateTotal }) => {
 
   return (
-    <div className='mb-4'>
-      <Col>
-        <Row>
-          <Col><h2>Player {roundScore.playerName}</h2></Col>
-          <Col></Col>
-        </Row>
+    <>
+      <Card className='mb-3'>
+        <Card.Header>
+          <Row>
+            <Col><h2>Player: {roundScore.playerName}</h2></Col>
+          </Row>
+        </Card.Header>
 
-        <Row xs={3}>
-          <Col>
-            <h4>Bid: {roundScore.bid}</h4>
-          </Col>
-          <Col>
-            <input type="button" value="Bid -1" onClick={() => onBidChange(roundScore.bid - 1, roundScore)} />
-          </Col>
-          <Col>
-            <input type="button" value="Bid +1" onClick={() => onBidChange(roundScore.bid + 1, roundScore)} />
-          </Col>
-        </Row>
+        <ListGroup variant="flush">
 
-        <Row xs={3}>
-          <Col>
-            <h4>Tricks: {roundScore.tricks}</h4>
-          </Col>
-          <Col>
-            <input type="button" value="Tricks -1" onClick={() => onTrickChange(roundScore.tricks - 1, roundScore)} />
-          </Col>
-          <Col>
-            <input type="button" value="Tricks +1" onClick={() => onTrickChange(roundScore.tricks + 1, roundScore)} />
-          </Col>
-        </Row>
+          <ListGroup.Item>
+            <Row xs={3}>
+              <Col>
+                <h4>Bid: {roundScore.bid}</h4>
+              </Col>
+              <Col>
+                <input type="button" value="Bid -1" onClick={() => onBidChange(roundScore.bid - 1, roundScore)} />
+              </Col>
+              <Col>
+                <input type="button" value="Bid +1" onClick={() => onBidChange(roundScore.bid + 1, roundScore)} />
+              </Col>
+            </Row>
+          </ListGroup.Item>
 
-        <Row xs={3}>
-          <Col>
-            <h4>Bonus: {roundScore.bonus}</h4>
-          </Col>
-          <Col>
-            <input type="button" value="Bonus -10" onClick={() => onBonusChange(roundScore.bonus - 10, roundScore)} />
-          </Col>
-          <Col>
-            <input type="button" value="Bonus +10" onClick={() => onBonusChange(roundScore.bonus + 10, roundScore)} />
-          </Col>
-        </Row>
+          <ListGroup.Item>
+            <Row xs={3}>
+              <Col>
+                <h4>Tricks: {roundScore.tricks}</h4>
+              </Col>
+              <Col>
+                <input type="button" value="Tricks -1" onClick={() => onTrickChange(roundScore.tricks - 1, roundScore)} />
+              </Col>
+              <Col>
+                <input type="button" value="Tricks +1" onClick={() => onTrickChange(roundScore.tricks + 1, roundScore)} />
+              </Col>
+            </Row>
+          </ListGroup.Item>
 
-        <Row  xs={2}>
-          <Col>
-            <h4>Round Total: {roundScore.roundTotal}</h4>
-          </Col>
-          <Col>
-          <input type="button" value="Update Totals" onClick={() => onClickUpdateTotal(roundScore)} />
-          </Col>
-        </Row>
+          <ListGroup.Item>
+            <Row xs={3}>
+              <Col>
+                <h4 className='bonus-header'>Bonus: {roundScore.bonus}</h4>
+              </Col>
+              <Col>
+                <input type="button" value="Bonus -10" onClick={() => onBonusChange(roundScore.bonus - 10, roundScore)} />
+              </Col>
+              <Col>
+                <input type="button" value="Bonus +10" onClick={() => onBonusChange(roundScore.bonus + 10, roundScore)} />
+              </Col>
+            </Row>
+          </ListGroup.Item>
 
-      </Col>
-      
-    </div>
+          <ListGroup.Item>
+            <Row xs={2}>
+              <Col>
+                <h4 className='round-total-header'>Round Total: {roundScore.roundTotal}</h4>
+              </Col>
+              <Col>
+                <input type="button" value="Update Total" onClick={() => onClickUpdateTotal(roundScore)} />
+              </Col>
+            </Row>
+          </ListGroup.Item>
+
+        </ListGroup>
+      </Card>
+    </>
   )
 }
 
