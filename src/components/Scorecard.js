@@ -102,7 +102,6 @@ function Scorecard({ players }) {
           startRound(currentRound + 1);
         }
       }
-      // TODO: Behavior around when score totals are updated needs to be checked/tested more
       scorecard.filter((round) => round.roundNumber === currentRound).forEach((roundScore) => updateRoundAndPlayerTotal(roundScore));
     } else {
       if (currentRound > 1) {
@@ -151,18 +150,20 @@ function Scorecard({ players }) {
    * @param {*} roundScoreToUpdate - The roundScore obj that will be updated with the new trick count.
    */
   function onBonusChange(bonus, roundScoreToUpdate) {
-    // TODO: Figure out the max bonus value
-    // FIXME: A bonus cannot be applied unless bid === tricks
-    if (bonus >= 0 && bonus <= 200) {
-      roundScoreToUpdate.bonus = bonus;
-
-      setScorecard(
-        scorecard.map((roundScore) =>
-          roundScore.playerName === roundScoreToUpdate.playerName
-            && roundScore.roundNumber === roundScoreToUpdate.roundNumber
-            ? roundScoreToUpdate
-            : roundScore));
+    if (roundScoreToUpdate.bid > 0 && roundScoreToUpdate.bid === roundScoreToUpdate.tricks) {
+      if (bonus >= 0 && bonus <= 200) {
+        roundScoreToUpdate.bonus = bonus;
+      } else {
+        // maybe alert user as to why no update was made
+      }
+    } else {
+      roundScoreToUpdate.bonus = 0;
     }
+    
+    setScorecard(prevScorecard =>
+      prevScorecard.map((score) =>
+        score.playerName === roundScoreToUpdate.playerName
+          && score.roundNumber === roundScoreToUpdate.roundNumber ? roundScoreToUpdate : score));
   }
 
   /**
@@ -180,45 +181,36 @@ function Scorecard({ players }) {
   function updateRoundAndPlayerTotal(roundScoreToUpdate) {
     let total = 0;
 
+    // check to see if we need to clear bonus first
+    if (roundScoreToUpdate.bid != roundScoreToUpdate.tricks) {
+      roundScoreToUpdate.bonus = 0;
+    }
+
+    // calc total
     total = calculateRoundScore(
       roundScoreToUpdate.roundNumber,
       roundScoreToUpdate.bid,
       roundScoreToUpdate.tricks,
       roundScoreToUpdate.bonus);
 
-    /** Was having issues with updating state in the lines below.
-     * Only the round total would update when round total and player total both were expected to update.
-     * This looks to have been caused by trying to update player total based on a stale scorecard as the 
-     * setScorecard call doesnt necessarily finish before we try to read through it to add up the total. 
-     * 
-     * Old Solution, create a new scorecard and pass that to setScorecard as well updatePlayerTotals. This 
-     * ensures that both functions have the latest scorecard and the order they complete in doesn't matter.
-     * 
-     * New Solution - use functional setState format
-    */
-
-    //create a new score card with the updated round score
+    // create a new score card with the updated round score
     let newScoreCard = scorecard.map((roundScore) =>
       roundScore.playerName === roundScoreToUpdate.playerName
         && roundScore.roundNumber === roundScoreToUpdate.roundNumber
-        ? { ...roundScore, roundTotal: total }
-        : roundScore)
+        ? { ...roundScore, roundTotal: total, bonus: roundScoreToUpdate.bonus }
+        : roundScore);
 
-    // update scorecard state
-    // setScorecard(newScoreCard);
-
-    // New Solution
+    // update scorecard with round total and updated bonus
     setScorecard(prevScorecard =>
       prevScorecard.map((score) => {
         if (score.playerName === roundScoreToUpdate.playerName
           && score.roundNumber === roundScoreToUpdate.roundNumber) {
-          return { ...score, roundTotal: total };
+          return { ...score, roundTotal: total, bonus: roundScoreToUpdate.bonus };
         }
         return score;
       })
     );
 
-    //pass new scorecard and the player we are trying to update the total for
     updatePlayerTotal(newScoreCard, roundScoreToUpdate.playerName);
   }
 
@@ -232,6 +224,7 @@ function Scorecard({ players }) {
 
     const newPlayerTotals = [...playerTotals];
     newPlayerTotals.find((player) => player.playerName === playerToUpdate).total = totalScore;
+    console.log(totalScore);
 
     setPlayerTotals(newPlayerTotals);
   }
