@@ -24,6 +24,18 @@
     flex-direction: column;
 }
 
+.justify-center{
+    display: flex;
+    justify-content: center;
+}
+
+.btn-clear-round{
+    margin-bottom: 20px;
+    width: 20%;
+    font-weight: 500;
+
+}
+
 @media (min-width: 798px) {
     .container{
         width: 60%;
