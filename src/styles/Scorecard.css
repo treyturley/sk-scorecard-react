@@ -59,9 +59,12 @@
 }
 
 .btn-clear-round{
+    -webkit-appearance: none;
     margin-bottom: 20px;
-    width: 20%;
     font-weight: 500;
+    padding: 1px 6px;
+    border-width: 2px;
+    background-color: lightgray;
 
 }
 
