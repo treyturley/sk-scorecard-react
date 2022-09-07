@@ -45,6 +45,7 @@ form button{
     width: 100px;
     font-weight: bold;
     opacity: .85;
+    background-color: lightgray;
 }
 
 @media (max-height: 798px) {
