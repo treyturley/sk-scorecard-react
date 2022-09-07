@@ -5,3 +5,16 @@
 .round-total-header{
     width: max-content;
 }
+
+.list-group-item h4{
+    margin-bottom: 0px;
+}
+
+.list-group-item input[type=button]{
+    -webkit-appearance: none;
+
+    padding: 1px 5px;
+    border-radius: 0.375rem;
+    border: 1px solid #ced4da;
+    background-color: #ced4da;
+}

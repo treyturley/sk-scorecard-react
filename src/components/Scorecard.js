@@ -239,16 +239,18 @@ function Scorecard({ players, scorecard, setScorecard, setGameComplete, PlayerSc
         <hr />
 
         <div className="round-header">
-          <Row xs={3}>
-            <Col className='text-center'>
+          <Row xs={3} className="round-row">
+            <Col className='text-center round-col'>
               <div className='round-button'>
                 <input type='button' value='Previus Round' onClick={changeRound}></input>
               </div>
             </Col>
-            <Col className='text-center'>
-              <h1 className='text-center round-title'>Round {currentRound}</h1>
+            <Col className='text-center round-col'>
+              <div className=''>
+                <h1 className='round-title'>Round {currentRound}</h1>
+              </div>
             </Col>
-            <Col className='text-center'>
+            <Col className='text-center round-col'>
               <div className='round-button'>
                 <input type='button' value='Next Round' onClick={changeRound}></input>
               </div>
