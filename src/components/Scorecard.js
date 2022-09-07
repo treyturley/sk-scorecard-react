@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState} from "react";
 import Round from "./Round"
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -6,70 +6,8 @@ import Col from 'react-bootstrap/Col';
 import '../styles/Scorecard.css'
 import backgroundVideo from '../video/Sea_Loop.mp4'
 
-function Scorecard({ players }) {
+function Scorecard({ players, scorecard, setScorecard, setGameComplete, PlayerScore, playerTotals, setPlayerTotals }) {
   const [currentRound, setCurrentRound] = useState(1);
-  const [playerTotals, setPlayerTotals] = useState([
-    {
-      playerName: players[0],
-      total: 0
-    },
-    {
-      playerName: players[1],
-      total: 0
-    },
-    {
-      playerName: players[2],
-      total: 0
-    },
-    {
-      playerName: players[3],
-      total: 0
-    },
-  ]);
-
-  const [scorecard, setScorecard] = useState([
-    {
-      playerName: players[0],
-      roundNumber: 1,
-      bid: 0,
-      tricks: 0,
-      bonus: 0,
-      roundTotal: 0
-    },
-    {
-      playerName: players[1],
-      roundNumber: 1,
-      bid: 0,
-      tricks: 0,
-      bonus: 0,
-      roundTotal: 0
-    },
-    {
-      playerName: players[2],
-      roundNumber: 1,
-      bid: 0,
-      tricks: 0,
-      bonus: 0,
-      roundTotal: 0
-    },
-    {
-      playerName: players[3],
-      roundNumber: 1,
-      bid: 0,
-      tricks: 0,
-      bonus: 0,
-      roundTotal: 0
-    },
-  ]);
-
-  const playerScoreTemplate = {
-    playerName: "",
-    roundNumber: 0,
-    bid: 0,
-    tricks: 0,
-    bonus: 0,
-    roundTotal: 0
-  }
 
   /**
    * Initializes new roundScore objs for each player for a new round.
@@ -79,11 +17,8 @@ function Scorecard({ players }) {
     const newScoreCard = [...scorecard];
 
     players.forEach(player => {
-      // TODO: Figure out why we are doing this for newPlayerScore. Why not just do new PlayerScore()
-      let newPlayerScore = JSON.parse(JSON.stringify(playerScoreTemplate));
-      newPlayerScore.playerName = player;
-      newPlayerScore.roundNumber = roundNumber;
-      newScoreCard.push(newPlayerScore);
+      const newScore = new PlayerScore(player, roundNumber, 0, 0, 0, 0);
+      newScoreCard.push(newScore);
     });
 
     setScorecard(newScoreCard);
@@ -101,8 +36,11 @@ function Scorecard({ players }) {
         if (!scorecard.some(roundNumberExists)) {
           startRound(currentRound + 1);
         }
+        scorecard.filter((round) => round.roundNumber === currentRound).forEach((roundScore) => updateRoundAndPlayerTotal(roundScore));
+      } else {
+        scorecard.filter((round) => round.roundNumber === currentRound).forEach((roundScore) => updateRoundAndPlayerTotal(roundScore));
+        setGameComplete(true);
       }
-      scorecard.filter((round) => round.roundNumber === currentRound).forEach((roundScore) => updateRoundAndPlayerTotal(roundScore));
     } else {
       if (currentRound > 1) {
         setCurrentRound(currentRound - 1);
