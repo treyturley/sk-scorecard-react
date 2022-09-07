@@ -150,7 +150,7 @@ function Scorecard({ players }) {
    * @param {*} roundScoreToUpdate - The roundScore obj that will be updated with the new trick count.
    */
   function onBonusChange(bonus, roundScoreToUpdate) {
-    if (roundScoreToUpdate.bid > 0 && roundScoreToUpdate.bid === roundScoreToUpdate.tricks) {
+    if (roundScoreToUpdate.bid === roundScoreToUpdate.tricks) {
       if (bonus >= 0 && bonus <= 200) {
         roundScoreToUpdate.bonus = bonus;
       } else {
@@ -224,7 +224,6 @@ function Scorecard({ players }) {
 
     const newPlayerTotals = [...playerTotals];
     newPlayerTotals.find((player) => player.playerName === playerToUpdate).total = totalScore;
-    console.log(totalScore);
 
     setPlayerTotals(newPlayerTotals);
   }
@@ -241,6 +240,7 @@ function Scorecard({ players }) {
 
     if (bid === 0 && tricks === 0) {
       total += 10 * roundNumber;
+      total+= bonus;
     } else if (bid === 0 && tricks !== 0) {
       total -= 10 * roundNumber;
     } else {
