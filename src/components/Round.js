@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import '../styles/Round.css'
 
-const Round = ({ roundScore, onBidChange, onTrickChange, onBonusChange, onClickUpdateTotal }) => {
+function Round ({ roundScore, onBidChange, onTrickChange, onBonusChange, onClickUpdateTotal }) {
 
   return (
     <>
@@ -77,4 +77,4 @@ const Round = ({ roundScore, onBidChange, onTrickChange, onBonusChange, onClickU
   )
 }
 
-export default Round
+export default Round;
