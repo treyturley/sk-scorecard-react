@@ -11,7 +11,7 @@ const Round = ({ roundScore, onBidChange, onTrickChange, onBonusChange, onClickU
     <>
       <Card className='mb-3'>
         <Card.Header>
-          <Row>
+          <Row className='align-items-center'>
             <Col><h2>Player: {roundScore.playerName}</h2></Col>
           </Row>
         </Card.Header>
@@ -19,7 +19,7 @@ const Round = ({ roundScore, onBidChange, onTrickChange, onBonusChange, onClickU
         <ListGroup variant="flush">
 
           <ListGroup.Item>
-            <Row xs={3}>
+            <Row xs={3} className='align-items-center'>
               <Col>
                 <h4>Bid: {roundScore.bid}</h4>
               </Col>
@@ -33,7 +33,7 @@ const Round = ({ roundScore, onBidChange, onTrickChange, onBonusChange, onClickU
           </ListGroup.Item>
 
           <ListGroup.Item>
-            <Row xs={3}>
+            <Row xs={3} className='align-items-center'>
               <Col>
                 <h4>Tricks: {roundScore.tricks}</h4>
               </Col>
@@ -47,7 +47,7 @@ const Round = ({ roundScore, onBidChange, onTrickChange, onBonusChange, onClickU
           </ListGroup.Item>
 
           <ListGroup.Item>
-            <Row xs={3}>
+            <Row xs={3} className='align-items-center'>
               <Col>
                 <h4 className='bonus-header'>Bonus: {roundScore.bonus}</h4>
               </Col>
@@ -61,7 +61,7 @@ const Round = ({ roundScore, onBidChange, onTrickChange, onBonusChange, onClickU
           </ListGroup.Item>
 
           <ListGroup.Item>
-            <Row xs={2}>
+            <Row xs={2} className='align-items-center'>
               <Col>
                 <h4 className='round-total-header'>Round Total: {roundScore.roundTotal}</h4>
               </Col>
