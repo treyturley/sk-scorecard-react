@@ -1,4 +1,4 @@
-import backgroundVideo from '../video/pirate-flag-waving.mp4'
+// import backgroundVideo from '../video/pirate-flag-waving.mp4'
 // import backgroundVideo from '../video/Sea.mp4'
 import '../styles/PlayerSetup.css'
 
@@ -58,9 +58,9 @@ function PlayerSetupForm(props) {
 
       </div>
 
-      <video id='video' autoPlay loop muted>
+      {/* <video id='video' autoPlay loop muted>
         <source src={backgroundVideo} type='video/mp4'></source>
-      </video>
+      </video> */}
     </>
   )
 }
