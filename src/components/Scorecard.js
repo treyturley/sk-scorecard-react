@@ -275,7 +275,7 @@ function Scorecard({ players, scorecard, setScorecard, setGameComplete, PlayerSc
           <input
             className='btn-clear-round'
             type="button"
-            value="Clear Round"
+            value="Clear Round Scores"
             onClick={() => clearRound(currentRound)} />
         </div>
       </Container>
