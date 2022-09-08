@@ -2,10 +2,7 @@
 // import backgroundVideo from '../video/Sea.mp4'
 import '../styles/PlayerSetup.css'
 
-function PlayerSetupForm(props) {
-  const players = props.players;
-  const setPlayers = props.setPlayers;
-  const handleSubmit = props.handleSubmit;
+function PlayerSetupForm({ players, setPlayers, handleSubmit }) {
 
   const handleChange = index => event => {
     let newArr = [...players];
