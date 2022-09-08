@@ -259,9 +259,12 @@ function Scorecard({ players, scorecard, setScorecard, setGameComplete, PlayerSc
         <div className="round-header">
           <Row xs={3} className="round-row">
             <Col className='text-center round-col'>
-              <div className='round-button'>
-                <input type='button' value='Previus Round' onClick={changeRound}></input>
-              </div>
+              <input
+                type='button'
+                className='btn btn-secondary'
+                value='Previous Round'
+                onClick={changeRound}
+              />
             </Col>
             <Col className='text-center round-col'>
               <div className=''>
@@ -269,9 +272,12 @@ function Scorecard({ players, scorecard, setScorecard, setGameComplete, PlayerSc
               </div>
             </Col>
             <Col className='text-center round-col'>
-              <div className='round-button'>
-                <input type='button' value='Next Round' onClick={changeRound}></input>
-              </div>
+              <input
+                type='button'
+                className='btn btn-secondary'
+                value={nextRoundBtnTxt}
+                onClick={changeRound}
+              />
             </Col>
           </Row>
         </div>
@@ -289,9 +295,10 @@ function Scorecard({ players, scorecard, setScorecard, setGameComplete, PlayerSc
               />
             )}
         </div>
-        <div className='justify-center'>
+
+        <div className='d-flex justify-content-center'>
           <input
-            className='btn-clear-round'
+            className='btn btn-danger m-4'
             type="button"
             value="Clear Round Scores"
             onClick={() => clearRound(currentRound)} />

@@ -39,26 +39,13 @@
     align-items: center;
 }
 
-.round-button input{
-    -webkit-appearance: none;
-    padding: 1px 5px;
-    width: 117px;
-    background-color:  #ced4da;
-    border-radius: 0.375rem;
-    border: 1px solid #94999e;
-}
-
 .scores{
     display: flex;
     flex-direction: column;
 }
 
-.justify-center{
-    display: flex;
-    justify-content: center;
-}
-
 .btn-clear-round{
+    
     -webkit-appearance: none;
     margin-bottom: 20px;
     font-weight: 500;
@@ -81,7 +68,7 @@
     }
 }
 
-@media (max-width: 798px) {
+@media (max-width: 490px) {
     .round-title{
         white-space: nowrap;
     }
@@ -89,6 +76,6 @@
 
 @media (max-height:450px){
     .text-center{
-        color: white;
+        /* color: white; */
     }
 }
