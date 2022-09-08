@@ -24,10 +24,10 @@ function Round ({ roundScore, onBidChange, onTrickChange, onBonusChange, onClick
                 <h4>Bid: {roundScore.bid}</h4>
               </Col>
               <Col>
-                <input type="button" value="Bid -1" onClick={() => onBidChange(roundScore.bid - 1, roundScore)} />
+                <input type="button"  className='btn btn-primary' value="Bid  -1" onClick={() => onBidChange(roundScore.bid - 1, roundScore)} />
               </Col>
               <Col>
-                <input type="button" value="Bid +1" onClick={() => onBidChange(roundScore.bid + 1, roundScore)} />
+                <input type="button" className='btn btn-primary' value="Bid  +1" onClick={() => onBidChange(roundScore.bid + 1, roundScore)} />
               </Col>
             </Row>
           </ListGroup.Item>
@@ -38,10 +38,10 @@ function Round ({ roundScore, onBidChange, onTrickChange, onBonusChange, onClick
                 <h4>Tricks: {roundScore.tricks}</h4>
               </Col>
               <Col>
-                <input type="button" value="Tricks -1" onClick={() => onTrickChange(roundScore.tricks - 1, roundScore)} />
+                <input type="button" className='btn btn-primary' value="Tricks  -1" onClick={() => onTrickChange(roundScore.tricks - 1, roundScore)} />
               </Col>
               <Col>
-                <input type="button" value="Tricks +1" onClick={() => onTrickChange(roundScore.tricks + 1, roundScore)} />
+                <input type="button" className='btn btn-primary' value="Tricks  +1" onClick={() => onTrickChange(roundScore.tricks + 1, roundScore)} />
               </Col>
             </Row>
           </ListGroup.Item>
@@ -52,10 +52,10 @@ function Round ({ roundScore, onBidChange, onTrickChange, onBonusChange, onClick
                 <h4 className='bonus-header'>Bonus: {roundScore.bonus}</h4>
               </Col>
               <Col>
-                <input type="button" value="Bonus -10" onClick={() => onBonusChange(roundScore.bonus - 10, roundScore)} />
+                <input type="button" className='btn btn-primary' value="Bonus  -10" onClick={() => onBonusChange(roundScore.bonus - 10, roundScore)} />
               </Col>
               <Col>
-                <input type="button" value="Bonus +10" onClick={() => onBonusChange(roundScore.bonus + 10, roundScore)} />
+                <input type="button" className='btn btn-primary' value="Bonus  +10" onClick={() => onBonusChange(roundScore.bonus + 10, roundScore)} />
               </Col>
             </Row>
           </ListGroup.Item>
@@ -66,7 +66,7 @@ function Round ({ roundScore, onBidChange, onTrickChange, onBonusChange, onClick
                 <h4 className='round-total-header'>Round Total: {roundScore.roundTotal}</h4>
               </Col>
               <Col>
-                <input type="button" value="Update Total" onClick={() => onClickUpdateTotal(roundScore)} />
+                <input type="button" className='btn btn-success' value="Update Total" onClick={() => onClickUpdateTotal(roundScore)} />
               </Col>
             </Row>
           </ListGroup.Item>
