@@ -18,10 +18,25 @@
 
 .my-container{
     display: flex;
+    flex-direction: column;
     height: calc(100vh - var(--header-height) - var(--footer-height));
     width: 100%;
-    justify-content: center;
+
     align-items: center;
+    
+}
+
+.title{
+    /* TODO: Get a nice piratey font */
+    /* margin-bottom: 10px; */
+}
+
+.select-player-count{
+    margin: 20px 0;
+}
+
+.select-player-count label{
+    margin-right: 10px;
 }
 
 form input{

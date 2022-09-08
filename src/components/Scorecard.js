@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import '../styles/Scorecard.css'
-import backgroundVideo from '../video/Sea_Loop.mp4'
+// import backgroundVideo from '../video/Sea_Loop.mp4'
 
 function Scorecard({ players, scorecard, setScorecard, setGameComplete, PlayerScore, playerTotals, setPlayerTotals }) {
   const [currentRound, setCurrentRound] = useState(1);
@@ -29,6 +29,7 @@ function Scorecard({ players, scorecard, setScorecard, setGameComplete, PlayerSc
    * @param {Event} e - The event that was fired which represents which round button was clicked. 
    */
   function changeRound(e) {
+    // TODO: When the rounds changes to round 10, change next round button to "Go To Summary or Finish"
     if (e.target.value === 'Next Round') {
       if (currentRound < 10) {
         setCurrentRound(currentRound + 1);
@@ -147,7 +148,7 @@ function Scorecard({ players, scorecard, setScorecard, setGameComplete, PlayerSc
         : roundScore);
 
     // update scorecard with round total and updated bonus
-    setScorecard(prevScorecard => 
+    setScorecard(prevScorecard =>
       prevScorecard.map((roundScore) => {
         if (roundScore.playerName === roundScoreToUpdate.playerName
           && roundScore.roundNumber === roundScoreToUpdate.roundNumber) {
@@ -222,7 +223,7 @@ function Scorecard({ players, scorecard, setScorecard, setGameComplete, PlayerSc
 
     // call updatePlayerTotal for each player and pass updated scorecard
     playerTotals.forEach(player =>
-      updatePlayerTotal(newScoreCard,player.playerName)
+      updatePlayerTotal(newScoreCard, player.playerName)
     );
   }
 
@@ -230,12 +231,20 @@ function Scorecard({ players, scorecard, setScorecard, setGameComplete, PlayerSc
     <>
       <Container>
         <h1 className='text-center'>Score Totals</h1>
+
+        {/* TODO: Based on the # of players add/remove css classes to better display them.
+                  Might also be fixible with better css instead of dynamic css
+        */}
         <Row xs={2} md={4} className='text-center'>
-          <Col><h4 className='player-total'>{playerTotals[0].playerName} : {playerTotals[0].total}</h4></Col>
-          <Col><h4 className='player-total'>{playerTotals[1].playerName} : {playerTotals[1].total}</h4></Col>
-          <Col><h4 className='player-total'>{playerTotals[2].playerName} : {playerTotals[2].total}</h4></Col>
-          <Col><h4 className='player-total'>{playerTotals[3].playerName} : {playerTotals[3].total}</h4></Col>
+          {playerTotals.map((playerTotal) => {
+            return (
+              <Col key={playerTotal.playerName}>
+                <h4 className='player-total'>{playerTotal.playerName} : {playerTotal.total}</h4>
+              </Col>
+            )
+          })}
         </Row>
+
         <hr />
 
         <div className="round-header">
@@ -280,9 +289,9 @@ function Scorecard({ players, scorecard, setScorecard, setGameComplete, PlayerSc
         </div>
       </Container>
 
-      <video id='scorecard-video' autoPlay loop muted>
+      {/* <video id='scorecard-video' autoPlay loop muted>
         <source src={backgroundVideo} type='video/mp4'></source>
-      </video>
+      </video> */}
     </>
   )
 }
