@@ -9,9 +9,11 @@ import Footer from './layouts/Footer'
 function App() {
   return (
     <>
-      <Header />
-      <Game />
-      <Footer />
+      <React.StrictMode>
+        <Header />
+        <Game />
+        <Footer />
+      </React.StrictMode>
     </>
   )
 }
