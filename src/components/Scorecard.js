@@ -9,6 +9,10 @@ import '../styles/Scorecard.css'
 function Scorecard({ players, scorecard, setScorecard, setGameComplete, PlayerScore, playerTotals, setPlayerTotals }) {
   const [currentRound, setCurrentRound] = useState(1);
 
+  // TODO: Consider using constants for 
+  // the Next Round Button since it has a couple possibilities now.
+  const [nextRoundBtnTxt, setNextRoundBtnTxt] = useState("Next Round");
+
   /**
    * Initializes new roundScore objs for each player for a new round.
    * @param {number} roundNumber - The current round number.
@@ -38,14 +42,19 @@ function Scorecard({ players, scorecard, setScorecard, setGameComplete, PlayerSc
           startRound(currentRound + 1);
         }
         scorecard.filter((round) => round.roundNumber === currentRound).forEach((roundScore) => updateRoundAndPlayerTotal(roundScore));
-      } else {
-        scorecard.filter((round) => round.roundNumber === currentRound).forEach((roundScore) => updateRoundAndPlayerTotal(roundScore));
-        setGameComplete(true);
-      }
-    } else {
+
+        if(currentRound === 9){
+          setNextRoundBtnTxt("To Summary");
+        }
+      } 
+    } else if(e.target.value === 'Previous Round') {
       if (currentRound > 1) {
         setCurrentRound(currentRound - 1);
+        setNextRoundBtnTxt("Next Round");
       }
+    } else if(e.target.value === 'To Summary'){
+      scorecard.filter((round) => round.roundNumber === currentRound).forEach((roundScore) => updateRoundAndPlayerTotal(roundScore));
+        setGameComplete(true);
     }
     // Do we want to update score totals when clicking previous or next round?
     // scorecard.filter((round) => round.roundNumber === currentRound).forEach((roundScore) => updateRoundTotal(roundScore));
