@@ -4,7 +4,6 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import '../styles/Scorecard.css'
-// import backgroundVideo from '../video/Sea_Loop.mp4'
 
 function Scorecard({ players, scorecard, setScorecard, setGameComplete, PlayerScore, playerTotals, setPlayerTotals }) {
   const [currentRound, setCurrentRound] = useState(1);
@@ -304,10 +303,6 @@ function Scorecard({ players, scorecard, setScorecard, setGameComplete, PlayerSc
             onClick={() => clearRound(currentRound)} />
         </div>
       </Container>
-
-      {/* <video id='scorecard-video' autoPlay loop muted>
-        <source src={backgroundVideo} type='video/mp4'></source>
-      </video> */}
     </>
   )
 }
