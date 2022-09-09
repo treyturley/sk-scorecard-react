@@ -1,6 +1,7 @@
 import React from 'react'
 import Container from 'react-bootstrap/Container';
 import "../styles/Summary.css"
+import SummaryGraph from './SummaryGraph';
 
 function Summary({ playerTotals, scorecard, setGameComplete }) {
 
@@ -55,7 +56,6 @@ function Summary({ playerTotals, scorecard, setGameComplete }) {
     return output;
   }
 
-
   return (
     <Container className='summary mb-4'>
       <h1 className='d-flex justify-content-center title'>Game Summary</h1>
@@ -66,8 +66,10 @@ function Summary({ playerTotals, scorecard, setGameComplete }) {
       </div>
 
       <hr />
-      <p>Graph stuff goes here</p>
-
+      <SummaryGraph
+        playerTotals={playerTotals}
+        scorecard={scorecard}
+      />
       <hr />
 
       <div className='d-flex justify-content-center'>
