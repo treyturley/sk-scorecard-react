@@ -1,5 +1,3 @@
-// import backgroundVideo from '../video/pirate-flag-waving.mp4'
-// import backgroundVideo from '../video/Sea.mp4'
 import '../styles/PlayerSetup.css'
 import { useState } from 'react';
 
@@ -7,6 +5,7 @@ function PlayerSetupForm({ players, setPlayers, handleSubmit }) {
 
   const [playerCount, setPlayerCount] = useState(4);
 
+  // TODO: Need to define a min players (2)
   const maxPlayers = 10;
 
   const handlePlayerCountChange = (event) => {
@@ -67,17 +66,12 @@ function PlayerSetupForm({ players, setPlayers, handleSubmit }) {
 
         <form onSubmit={handleSubmit}>
           {playerInputRows(playerCount)}
-          <div className="d-flex justify-content-center">
+          <div className="d-flex justify-content-center mb-4">
             <button type="submit" className='btn btn-primary'>Set Sail</button>
           </div>
-
         </form>
 
       </div>
-
-      {/* <video id='video' autoPlay loop muted>
-        <source src={backgroundVideo} type='video/mp4'></source>
-      </video> */}
     </>
   )
 }
