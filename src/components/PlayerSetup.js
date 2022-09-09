@@ -67,8 +67,8 @@ function PlayerSetupForm({ players, setPlayers, handleSubmit }) {
 
         <form onSubmit={handleSubmit}>
           {playerInputRows(playerCount)}
-          <div className="form-button">
-            <button type="submit">Set Sail</button>
+          <div className="d-flex justify-content-center">
+            <button type="submit" className='btn btn-primary'>Set Sail</button>
           </div>
 
         </form>
