@@ -1,66 +1,77 @@
-import backgroundVideo from '../video/pirate-flag-waving.mp4'
-// import backgroundVideo from '../video/Sea.mp4'
 import '../styles/PlayerSetup.css'
+import { useState } from 'react';
 
-function PlayerSetupForm(props) {
-  const players = props.players;
-  const setPlayers = props.setPlayers;
-  const handleSubmit = props.handleSubmit;
+function PlayerSetupForm({ players, setPlayers, handleSubmit }) {
 
-  const handleChange = index => event => {
+  const [playerCount, setPlayerCount] = useState(4);
+
+  // TODO: Need to define a min players (2)
+  const maxPlayers = 10;
+
+  const handlePlayerCountChange = (event) => {
+    setPlayerCount(event.target.value);
+  }
+
+  const handleNameChange = index => event => {
     let newArr = [...players];
     newArr[index] = event.target.value;
     setPlayers(newArr);
   }
 
+  function createOptions() {
+    let rows = [];
+    for (let i = 0; i < maxPlayers; i++) {
+      rows.push(
+        <option key={i} value={i + 1}>{i + 1}</option>
+      );
+    }
+    return rows;
+  }
+
+  function playerInputRows(numPlayers) {
+    let rows = [];
+    for (let i = 0; i < numPlayers; i++) {
+      rows.push(
+        <input
+          key={i}
+          type="text"
+          name={`Player ${i + 1}`}
+          placeholder={`Player ${i + 1}`}
+          value={players[i] || ""}
+          onChange={handleNameChange(i)}
+        />
+      );
+    }
+    return rows;
+  }
+
   return (
     <>
       <div className="my-container">
+
+        <div className="title">
+          <h1>Player Setup</h1>
+        </div>
+
+        <div className="select-player-count">
+          <label htmlFor="SelectPlayerCount">How Many Players?</label>
+          <select
+            id='SelectPlayerCount'
+            name='SelectPlayerCount'
+            value={playerCount}
+            onChange={handlePlayerCountChange}>
+            {createOptions()}
+          </select>
+        </div>
+
         <form onSubmit={handleSubmit}>
-
-
-          <input
-            type="text"
-            name="Player 1"
-            placeholder="Player 1"
-            value={players[0] || ""}
-            onChange={handleChange(0)} />
-
-
-          <input
-            type="text"
-            name="Player 2"
-            placeholder="Player 2"
-            value={players[1] || ""}
-            onChange={handleChange(1)} />
-
-
-          <input
-            type="text"
-            name="Player 3"
-            placeholder="Player 3"
-            value={players[2] || ""}
-            onChange={handleChange(2)} />
-
-
-          <input
-            type="text"
-            name="Player 4"
-            placeholder="Player 4"
-            value={players[3] || ""}
-            onChange={handleChange(3)} />
-
-          <div className="form-button">
-            <button type="submit">Set Sail</button>
+          {playerInputRows(playerCount)}
+          <div className="d-flex justify-content-center mb-4">
+            <button type="submit" className='btn btn-primary'>Set Sail</button>
           </div>
-
         </form>
 
       </div>
-
-      <video id='video' autoPlay loop muted>
-        <source src={backgroundVideo} type='video/mp4'></source>
-      </video>
     </>
   )
 }

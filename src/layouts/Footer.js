@@ -3,7 +3,7 @@ import '../styles/Footer.css';
 
 const Footer = () => {
   return (
-    <div className="main-footer">
+    <footer>
       <Container>
         <Row className="justify-content-md-center">
           <Col md="auto">
@@ -26,7 +26,7 @@ const Footer = () => {
           </Col>
         </Row>
       </Container>
-    </div>
+      </footer>
   )
 }
 

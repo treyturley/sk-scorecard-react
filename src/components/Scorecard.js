@@ -4,72 +4,13 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import '../styles/Scorecard.css'
-import backgroundVideo from '../video/Sea_Loop.mp4'
 
-function Scorecard({ players }) {
+function Scorecard({ players, scorecard, setScorecard, setGameComplete, PlayerScore, playerTotals, setPlayerTotals }) {
   const [currentRound, setCurrentRound] = useState(1);
-  const [playerTotals, setPlayerTotals] = useState([
-    {
-      playerName: players[0],
-      total: 0
-    },
-    {
-      playerName: players[1],
-      total: 0
-    },
-    {
-      playerName: players[2],
-      total: 0
-    },
-    {
-      playerName: players[3],
-      total: 0
-    },
-  ]);
 
-  const [scorecard, setScorecard] = useState([
-    {
-      playerName: players[0],
-      roundNumber: 1,
-      bid: 0,
-      tricks: 0,
-      bonus: 0,
-      roundTotal: 0
-    },
-    {
-      playerName: players[1],
-      roundNumber: 1,
-      bid: 0,
-      tricks: 0,
-      bonus: 0,
-      roundTotal: 0
-    },
-    {
-      playerName: players[2],
-      roundNumber: 1,
-      bid: 0,
-      tricks: 0,
-      bonus: 0,
-      roundTotal: 0
-    },
-    {
-      playerName: players[3],
-      roundNumber: 1,
-      bid: 0,
-      tricks: 0,
-      bonus: 0,
-      roundTotal: 0
-    },
-  ]);
-
-  const playerScoreTemplate = {
-    playerName: "",
-    roundNumber: 0,
-    bid: 0,
-    tricks: 0,
-    bonus: 0,
-    roundTotal: 0
-  }
+  // TODO: Consider using constants for 
+  // the Next Round Button since it has a couple possibilities now.
+  const [nextRoundBtnTxt, setNextRoundBtnTxt] = useState("Next Round");
 
   /**
    * Initializes new roundScore objs for each player for a new round.
@@ -79,11 +20,8 @@ function Scorecard({ players }) {
     const newScoreCard = [...scorecard];
 
     players.forEach(player => {
-      // TODO: Figure out why we are doing this for newPlayerScore. Why not just do new PlayerScore()
-      let newPlayerScore = JSON.parse(JSON.stringify(playerScoreTemplate));
-      newPlayerScore.playerName = player;
-      newPlayerScore.roundNumber = roundNumber;
-      newScoreCard.push(newPlayerScore);
+      const newScore = new PlayerScore(player, roundNumber, 0, 0, 0, 0);
+      newScoreCard.push(newScore);
     });
 
     setScorecard(newScoreCard);
@@ -94,6 +32,7 @@ function Scorecard({ players }) {
    * @param {Event} e - The event that was fired which represents which round button was clicked. 
    */
   function changeRound(e) {
+    // TODO: When the rounds changes to round 10, change next round button to "Go To Summary or Finish"
     if (e.target.value === 'Next Round') {
       if (currentRound < 10) {
         setCurrentRound(currentRound + 1);
@@ -101,12 +40,20 @@ function Scorecard({ players }) {
         if (!scorecard.some(roundNumberExists)) {
           startRound(currentRound + 1);
         }
-      }
-      scorecard.filter((round) => round.roundNumber === currentRound).forEach((roundScore) => updateRoundAndPlayerTotal(roundScore));
-    } else {
+        scorecard.filter((round) => round.roundNumber === currentRound).forEach((roundScore) => updateRoundAndPlayerTotal(roundScore));
+
+        if(currentRound === 9){
+          setNextRoundBtnTxt("To Summary");
+        }
+      } 
+    } else if(e.target.value === 'Previous Round') {
       if (currentRound > 1) {
         setCurrentRound(currentRound - 1);
+        setNextRoundBtnTxt("Next Round");
       }
+    } else if(e.target.value === 'To Summary'){
+      scorecard.filter((round) => round.roundNumber === currentRound).forEach((roundScore) => updateRoundAndPlayerTotal(roundScore));
+        setGameComplete(true);
     }
     // Do we want to update score totals when clicking previous or next round?
     // scorecard.filter((round) => round.roundNumber === currentRound).forEach((roundScore) => updateRoundTotal(roundScore));
@@ -120,11 +67,13 @@ function Scorecard({ players }) {
   function onBidChange(bid, roundScoreToUpdate) {
     if (bid >= 0 && bid <= 10) {
       setScorecard(
-        scorecard.map((roundScore) =>
-          roundScore.playerName === roundScoreToUpdate.playerName
-            && roundScore.roundNumber === roundScoreToUpdate.roundNumber
-            ? { ...roundScore, bid: bid }
-            : roundScore));
+        scorecard.map((roundScore) => {
+          if (roundScore.playerName === roundScoreToUpdate.playerName
+            && roundScore.roundNumber === roundScoreToUpdate.roundNumber) {
+            roundScore.bid = bid;
+          }
+          return roundScore;
+        }));
     }
   }
 
@@ -136,11 +85,13 @@ function Scorecard({ players }) {
   function onTrickChange(tricks, roundScoreToUpdate) {
     if (tricks >= 0 && tricks <= 10) {
       setScorecard(
-        scorecard.map((roundScore) =>
-          roundScore.playerName === roundScoreToUpdate.playerName
-            && roundScore.roundNumber === roundScoreToUpdate.roundNumber
-            ? { ...roundScore, tricks: tricks }
-            : roundScore));
+        scorecard.map((roundScore) => {
+          if (roundScore.playerName === roundScoreToUpdate.playerName
+            && roundScore.roundNumber === roundScoreToUpdate.roundNumber) {
+            roundScore.tricks = tricks;
+          }
+          return roundScore;
+        }));
     }
   }
 
@@ -150,7 +101,7 @@ function Scorecard({ players }) {
    * @param {*} roundScoreToUpdate - The roundScore obj that will be updated with the new trick count.
    */
   function onBonusChange(bonus, roundScoreToUpdate) {
-    if (roundScoreToUpdate.bid > 0 && roundScoreToUpdate.bid === roundScoreToUpdate.tricks) {
+    if (roundScoreToUpdate.bid === roundScoreToUpdate.tricks) {
       if (bonus >= 0 && bonus <= 200) {
         roundScoreToUpdate.bonus = bonus;
       } else {
@@ -159,11 +110,15 @@ function Scorecard({ players }) {
     } else {
       roundScoreToUpdate.bonus = 0;
     }
-    
-    setScorecard(prevScorecard =>
-      prevScorecard.map((score) =>
-        score.playerName === roundScoreToUpdate.playerName
-          && score.roundNumber === roundScoreToUpdate.roundNumber ? roundScoreToUpdate : score));
+
+    setScorecard(
+      scorecard.map((roundScore) => {
+        if (roundScore.playerName === roundScoreToUpdate.playerName
+          && roundScore.roundNumber === roundScoreToUpdate.roundNumber) {
+          return roundScoreToUpdate;
+        }
+        return roundScore;
+      }));
   }
 
   /**
@@ -202,14 +157,14 @@ function Scorecard({ players }) {
 
     // update scorecard with round total and updated bonus
     setScorecard(prevScorecard =>
-      prevScorecard.map((score) => {
-        if (score.playerName === roundScoreToUpdate.playerName
-          && score.roundNumber === roundScoreToUpdate.roundNumber) {
-          return { ...score, roundTotal: total, bonus: roundScoreToUpdate.bonus };
+      prevScorecard.map((roundScore) => {
+        if (roundScore.playerName === roundScoreToUpdate.playerName
+          && roundScore.roundNumber === roundScoreToUpdate.roundNumber) {
+          roundScore.roundTotal = total;
+          roundScore.bonus = roundScoreToUpdate.bonus;
         }
-        return score;
-      })
-    );
+        return roundScore;
+      }));
 
     updatePlayerTotal(newScoreCard, roundScoreToUpdate.playerName);
   }
@@ -224,7 +179,6 @@ function Scorecard({ players }) {
 
     const newPlayerTotals = [...playerTotals];
     newPlayerTotals.find((player) => player.playerName === playerToUpdate).total = totalScore;
-    console.log(totalScore);
 
     setPlayerTotals(newPlayerTotals);
   }
@@ -241,6 +195,7 @@ function Scorecard({ players }) {
 
     if (bid === 0 && tricks === 0) {
       total += 10 * roundNumber;
+      total += bonus;
     } else if (bid === 0 && tricks !== 0) {
       total -= 10 * roundNumber;
     } else {
@@ -255,32 +210,73 @@ function Scorecard({ players }) {
     return total;
   }
 
+  /**
+   * Clears round totals for each player on the given round.
+   * @param {number} roundNumber - The round to clear.
+   */
+  function clearRound(roundNumber) {
+    const newScoreCard = scorecard.map((score) => {
+      if (score.roundNumber === roundNumber) {
+        score.bid = 0;
+        score.tricks = 0;
+        score.bonus = 0;
+        score.roundTotal = 0;
+        return score;
+      } else {
+        return score;
+      }
+    });
+
+    setScorecard(newScoreCard);
+
+    // call updatePlayerTotal for each player and pass updated scorecard
+    playerTotals.forEach(player =>
+      updatePlayerTotal(newScoreCard, player.playerName)
+    );
+  }
+
   return (
     <>
       <Container>
         <h1 className='text-center'>Score Totals</h1>
+
+        {/* TODO: Based on the # of players add/remove css classes to better display them.
+                  Might also be fixible with better css instead of dynamic css
+        */}
         <Row xs={2} md={4} className='text-center'>
-          <Col><h4 className='player-total'>{playerTotals[0].playerName} : {playerTotals[0].total}</h4></Col>
-          <Col><h4 className='player-total'>{playerTotals[1].playerName} : {playerTotals[1].total}</h4></Col>
-          <Col><h4 className='player-total'>{playerTotals[2].playerName} : {playerTotals[2].total}</h4></Col>
-          <Col><h4 className='player-total'>{playerTotals[3].playerName} : {playerTotals[3].total}</h4></Col>
+          {playerTotals.map((playerTotal) => {
+            return (
+              <Col key={playerTotal.playerName}>
+                <h4 className='player-total'>{playerTotal.playerName} : {playerTotal.total}</h4>
+              </Col>
+            )
+          })}
         </Row>
+
         <hr />
 
         <div className="round-header">
-          <Row xs={3}>
-            <Col className='text-center'>
-              <div className='round-button'>
-                <input type='button' value='Previus Round' onClick={changeRound}></input>
+          <Row xs={3} className="round-row">
+            <Col className='text-center round-col'>
+              <input
+                type='button'
+                className='btn btn-secondary'
+                value='Previous Round'
+                onClick={changeRound}
+              />
+            </Col>
+            <Col className='text-center round-col'>
+              <div className=''>
+                <h1 className='round-title'>Round {currentRound}</h1>
               </div>
             </Col>
-            <Col className='text-center'>
-              <h1 className='text-center round-title'>Round {currentRound}</h1>
-            </Col>
-            <Col className='text-center'>
-              <div className='round-button'>
-                <input type='button' value='Next Round' onClick={changeRound}></input>
-              </div>
+            <Col className='text-center round-col'>
+              <input
+                type='button'
+                className='btn btn-secondary'
+                value={nextRoundBtnTxt}
+                onClick={changeRound}
+              />
             </Col>
           </Row>
         </div>
@@ -298,11 +294,15 @@ function Scorecard({ players }) {
               />
             )}
         </div>
-      </Container>
 
-      <video id='scorecard-video' autoPlay loop muted>
-        <source src={backgroundVideo} type='video/mp4'></source>
-      </video>
+        <div className='d-flex justify-content-center'>
+          <input
+            className='btn btn-danger m-4'
+            type="button"
+            value="Clear Round Scores"
+            onClick={() => clearRound(currentRound)} />
+        </div>
+      </Container>
     </>
   )
 }
