@@ -45,20 +45,17 @@
 }
 
 .btn-clear-round{
-    
     -webkit-appearance: none;
     margin-bottom: 20px;
     font-weight: 500;
     padding: 1px 6px;
     border-width: 2px;
     background-color: lightgray;
-
 }
 
 @media (min-width: 798px) {
     .container{
         width: 60%;
-        /* background-color: red; */
     }
     .round-button {
         display: flex;
