@@ -1,5 +1,9 @@
 import React from 'react'
 
+// react chartjs 2 docs - https://react-chartjs-2.js.org/
+// line chart example - https://react-chartjs-2.js.org/examples/line-chart
+// sample color pallettes - https://personal.sron.nl/~pault/
+
 import {
   Chart as ChartJS,
   CategoryScale,
