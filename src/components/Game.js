@@ -33,8 +33,6 @@ function Game() {
     }
   }
 
-  // TODO: Consider if this is a good way to handle the player setup step.
-  // An altenative may be passing setPlayersExist as a prop to PlayerSetupForm instead.
   const handlePlayerSetupSubmit = (event) => {
     event.preventDefault();
     // TODO: Do some input validation before moving on to the scorecard
@@ -63,13 +61,29 @@ function Game() {
         handleSubmit={handlePlayerSetupSubmit}
       />
     )
+
   } else if (playersExist && !gameComplete) {
-    return <Scorecard players={players} scorecard={scorecard} setScorecard={setScorecard} setGameComplete={setGameComplete} PlayerScore={PlayerScore} playerTotals={playerTotals} setPlayerTotals={setPlayerTotals} />
-  } else if (playersExist && gameComplete) {
-    // console.log(playerTotals);
     return (
-      <Summary playerTotals={playerTotals} scorecard={scorecard}/>
+      <Scorecard
+        players={players}
+        scorecard={scorecard}
+        setScorecard={setScorecard}
+        setGameComplete={setGameComplete}
+        PlayerScore={PlayerScore}
+        playerTotals={playerTotals}
+        setPlayerTotals={setPlayerTotals}
+      />
     )
+
+  } else if (playersExist && gameComplete) {
+    return (
+      <Summary
+        playerTotals={playerTotals}
+        scorecard={scorecard}
+        setGameComplete={setGameComplete}
+      />
+    )
+
   }
 }
 
