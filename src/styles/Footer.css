@@ -1,17 +1,14 @@
-.main-footer {
+footer {
     display: flex;
+    flex-shrink: 0;
     background-color: lightgray;
     width: 100%;
 }
 
-.main-footer a {
+footer a {
     color: black;
 }
 
-.main-footer a:any-link {
+footer a:any-link {
     text-decoration: none;
-}
-
-a.shiplink {
-    font-size: 8pt;
 }
