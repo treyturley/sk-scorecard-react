@@ -1,34 +1,11 @@
-:root{
-    --header-height: 56px;
-    --footer-height: 107.86px;
-}
-
-#video{
-    /* position: fixed; */
-    /* top: 0; */
-
-    position: absolute;
-    top: var(--header-height);
-
-    width: 100%;
-    height: calc(100vh - var(--header-height) - var(--footer-height) + 100px);
-    object-fit: cover;
-    z-index: -1;
-}
-
 .my-container{
     display: flex;
     flex-direction: column;
-    height: calc(100vh - var(--header-height) - var(--footer-height));
-    width: 100%;
-
     align-items: center;
-    
 }
 
 .title{
     /* TODO: Get a nice piratey font */
-    /* margin-bottom: 10px; */
 }
 
 .select-player-count{
@@ -47,22 +24,4 @@ form input{
     opacity: .85;
     border-radius: .375rem; 
     border: 1px solid #ced4da;
-}
-
-@media (max-height: 798px) {
-    #video{
-        max-height: 700px;
-    }
-}
-
-@media (max-height: 400px) {
-    #video{
-        /* top: 15px; */
-        /* height: 100vh; */
-        height: calc(100vh - var(--header-height) - var(--footer-height) + 120px);
-    }
-    .my-container{
-        height: unset;
-        margin: 20px 0;
-    }
 }
