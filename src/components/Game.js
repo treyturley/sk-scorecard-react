@@ -15,6 +15,16 @@ function Game() {
   const [playersExist, setPlayersExist] = useState(false);
   const [gameComplete, setGameComplete] = useState(false);
 
+  const [selectedGame, setSelectedGame] = useState('');
+
+  class PlayerTypes {
+    static PLAYER_NOT_SET = 'none';
+    static PLAYER = 'Player';
+    static SCORE_KEEPER = 'Score Keeper';
+  }
+
+  const [playerType, setPlayerType] = useState(PlayerTypes.PLAYER_NOT_SET);
+
   class PlayerScore {
     constructor(name, roundNumber, bid, tricks, bonus, roundTotal) {
       this.playerName = name;
@@ -53,16 +63,24 @@ function Game() {
     setPlayersExist(true);
   }
 
-  if (!playersExist) {
+  if (
+    (playerType === PlayerTypes.PLAYER_NOT_SET) ||
+    (playerType === PlayerTypes.SCORE_KEEPER && !playersExist) ||
+    (playerType === PlayerTypes.PLAYER && selectedGame === '')) {
+    
     return (
       <PlayerSetupForm
         players={players}
         setPlayers={setPlayers}
         handleSubmit={handlePlayerSetupSubmit}
+        playerType={playerType}
+        setPlayerType={setPlayerType}
+        PlayerTypes={PlayerTypes}
+        setSelectedGame={setSelectedGame}
       />
     )
 
-  } else if (playersExist && !gameComplete) {
+  } else if (playersExist && playerType === PlayerTypes.SCORE_KEEPER && !gameComplete) {
     return (
       <Scorecard
         players={players}
@@ -75,7 +93,7 @@ function Game() {
       />
     )
 
-  } else if (playersExist && gameComplete) {
+  } else if (playersExist && playerType === PlayerTypes.SCORE_KEEPER && gameComplete) {
     return (
       <Summary
         playerTotals={playerTotals}
@@ -84,6 +102,14 @@ function Game() {
       />
     )
 
+  } else if (playerType === PlayerTypes.PLAYER && selectedGame !== '') {
+    return (
+      <>
+      {/* TODO: Implement player view component */}
+        <h1> Player View goes here!</h1>
+        <p>{`Selected Game was: ${selectedGame}`}</p>
+      </>
+    )
   }
 }
 
