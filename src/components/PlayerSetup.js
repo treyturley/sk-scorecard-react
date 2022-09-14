@@ -82,21 +82,20 @@ function PlayerSetupForm({
         // TODO: wrap this up in card or something nice looking
         if (game.gameStatus === "STARTED") {
           rows.push(
-            <h4 key={`${game.name}-${game.playerTotals.length}`}>{game.name} - {game.playerTotals.length} players</h4>
+            <h4 key={`${game.id}`}>{game.name} - {game.playerTotals.length} players</h4>
           );
 
           game.playerTotals.forEach((player) => {
             rows.push(
-              <p key={player.playerName}>{player.playerName} : {player.total}</p>
+              <p key={`${game.id}-${player.playerName}`}>{player.playerName} : {player.total}</p>
             );
           });
 
           if (!isScoreKeeper) {
             rows.push(
               <button
-                key={`${game.name}`}
+                key={`${game.id}-View`}
                 className='btn btn-primary'
-                value={`${game.name}`}
                 onClick={() => setSelectedGame(game.id)}
               >
                 View Game
@@ -153,6 +152,8 @@ function PlayerSetupForm({
               {createOptions()}
             </select>
           </div>
+
+          {/* TODO: Need a input field for the game name here somewhere */}
 
           <form onSubmit={handleSubmit}>
             {playerInputRows(playerCount)}
