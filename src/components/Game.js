@@ -48,6 +48,40 @@ function Game() {
     }
   }
 
+  function addScorecard(scorecard, playerTotals) {
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+
+    const game = {
+      name: selectedGame.name,
+      status: "STARTED",
+      scorecard: scorecard,
+      playerTotals: playerTotals
+    }
+
+    try {
+      const res = axios.post('http://192.168.1.25:5000/api/v1/scorecards', game, config);
+
+      if (res.status === '201') {
+        console.log(res.data);
+
+        //update selectedGame id with id we got from the api
+        setSelectedGame(prevGame => ({ ...prevGame, id: res.data.id }));
+      } else {
+        // TODO: Handle error when requests fails or response empty
+      }
+
+
+    } catch (error) {
+      console.error('Error occured during POST /api/v1/scorecards');
+      console.error(error);
+    }
+  }
+
   const handlePlayerSetupSubmit = (event) => {
     event.preventDefault();
     // TODO: Do some input validation before moving on to the scorecard
@@ -63,6 +97,10 @@ function Game() {
       newPlayerTotals.push(playerTotal);
     });
 
+    //post to api
+    addScorecard(newScoreCard, newPlayerTotals);
+
+    //update state
     setScorecard(newScoreCard);
     setPlayerTotals(newPlayerTotals);
     setPlayersExist(true);
