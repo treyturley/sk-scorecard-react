@@ -76,7 +76,7 @@ function PlayerSetupForm({
     let rows = [];
 
     if (activeGames.length === 0) {
-      // some sort of no games message
+      // TODO: some sort of no games message
     } else {
       activeGames.forEach(game => {
         // TODO: wrap this up in card or something nice looking
@@ -96,7 +96,7 @@ function PlayerSetupForm({
             rows.push(
               <button
                 key={`${game.id}-View`}
-                className='btn btn-primary'
+                className='btn btn-primary mb-4'
                 onClick={() => setSelectedGame({ id: game.id, name: game.name, status: "STARTED" })}
               >
                 View Game
@@ -143,7 +143,6 @@ function PlayerSetupForm({
             <h1>Game Setup</h1>
           </div>
           <form onSubmit={handleSubmit}>
-            {/* <label htmlFor="game-name">Enter Game Name</label> */}
             <input
               type="text"
               name='game-name'
@@ -168,10 +167,6 @@ function PlayerSetupForm({
               <button type="submit" className='btn btn-primary'>Set Sail</button>
             </div>
           </form>
-
-          {/* <h1>Games in Progress</h1> */}
-          {/* {listActiveGames(true)} */}
-
         </div>
       </>
 
