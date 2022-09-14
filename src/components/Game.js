@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Player from './Player';
 import PlayerSetupForm from "./PlayerSetup";
 import Scorecard from "./Scorecard";
 import Summary from './Summary';
@@ -104,11 +105,9 @@ function Game() {
 
   } else if (playerType === PlayerTypes.PLAYER && selectedGame !== '') {
     return (
-      <>
-      {/* TODO: Implement player view component */}
-        <h1> Player View goes here!</h1>
-        <p>{`Selected Game was: ${selectedGame}`}</p>
-      </>
+      <Player
+      selectedGame={selectedGame}
+      />
     )
   }
 }

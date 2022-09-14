@@ -97,7 +97,7 @@ function PlayerSetupForm({
                 key={`${game.name}`}
                 className='btn btn-primary'
                 value={`${game.name}`}
-                onClick={() => setSelectedGame(game.name)}
+                onClick={() => setSelectedGame(game.id)}
               >
                 View Game
               </button>
@@ -161,8 +161,8 @@ function PlayerSetupForm({
             </div>
           </form>
 
-          <h1>Games in Progress</h1>
-          {listActiveGames(true)}
+          {/* <h1>Games in Progress</h1> */}
+          {/* {listActiveGames(true)} */}
 
         </div>
       </>
