@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useState } from "react";
 import Player from './Player';
 import PlayerSetupForm from "./PlayerSetup";
@@ -16,9 +17,11 @@ function Game() {
   const [playersExist, setPlayersExist] = useState(false);
   const [gameComplete, setGameComplete] = useState(false);
 
+  // TODO: consider rolling up scorecard,playerTotals, and selectedGame into one state ogject called game
   const [selectedGame, setSelectedGame] = useState({
     id: '',
-    name: ''
+    name: '',
+    status: ''
   });
 
 
@@ -119,6 +122,7 @@ function Game() {
         playerType={playerType}
         setPlayerType={setPlayerType}
         PlayerTypes={PlayerTypes}
+        selectedGame={selectedGame}
         setSelectedGame={setSelectedGame}
       />
     )

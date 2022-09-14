@@ -10,6 +10,7 @@ function PlayerSetupForm({
   playerType,
   setPlayerType,
   PlayerTypes,
+  selectedGame,
   setSelectedGame
 }) {
 
@@ -25,7 +26,6 @@ function PlayerSetupForm({
         // TODO: figure out how to handle endpoints. Maybe just hard code once up on Heroku?
         const res = await axios.get(`http://192.168.1.25:5000/api/v1/scorecards`);
 
-        // activeGames = res.data;
         setActiveGames(res.data);
 
       } catch (error) {
@@ -80,7 +80,7 @@ function PlayerSetupForm({
     } else {
       activeGames.forEach(game => {
         // TODO: wrap this up in card or something nice looking
-        if (game.gameStatus === "STARTED") {
+        if (game.status === "STARTED") {
           rows.push(
             <h4 key={`${game.id}`}>{game.name} - {game.playerTotals.length} players</h4>
           );
@@ -91,12 +91,13 @@ function PlayerSetupForm({
             );
           });
 
+          // TODO: give the option to become the scorekeeper for this game?
           if (!isScoreKeeper) {
             rows.push(
               <button
                 key={`${game.id}-View`}
                 className='btn btn-primary'
-                onClick={() => setSelectedGame({ id: game.id, name: game.name })}
+                onClick={() => setSelectedGame({ id: game.id, name: game.name, status: "STARTED" })}
               >
                 View Game
               </button>
@@ -139,23 +140,29 @@ function PlayerSetupForm({
         <div className="my-container">
 
           <div className="title">
-            <h1>Player Setup</h1>
+            <h1>Game Setup</h1>
           </div>
-
-          <div className="select-player-count">
-            <label htmlFor="SelectPlayerCount">How Many Players?</label>
-            <select
-              id='SelectPlayerCount'
-              name='SelectPlayerCount'
-              value={playerCount}
-              onChange={handlePlayerCountChange}>
-              {createOptions()}
-            </select>
-          </div>
-
-          {/* TODO: Need a input field for the game name here somewhere */}
-
           <form onSubmit={handleSubmit}>
+            {/* <label htmlFor="game-name">Enter Game Name</label> */}
+            <input
+              type="text"
+              name='game-name'
+              value={selectedGame.name}
+              placeholder={selectedGame.name || "Game Name"}
+              onChange={(event) => setSelectedGame(prevGame => ({...prevGame, name:event.target.value}))}
+            />
+
+            <div className="select-player-count">
+              <label htmlFor="SelectPlayerCount">How Many Players?</label>
+              <select
+                id='SelectPlayerCount'
+                name='SelectPlayerCount'
+                value={playerCount}
+                onChange={handlePlayerCountChange}>
+                {createOptions()}
+              </select>
+            </div>
+
             {playerInputRows(playerCount)}
             <div className="d-flex justify-content-center mb-4">
               <button type="submit" className='btn btn-primary'>Set Sail</button>
