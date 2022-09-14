@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState } from "react";
+import { useState} from "react";
 import Player from './Player';
 import PlayerSetupForm from "./PlayerSetup";
 import Scorecard from "./Scorecard";
@@ -51,37 +51,61 @@ function Game() {
     }
   }
 
-  function addScorecard(scorecard, playerTotals) {
-
+  async function addScorecard(scorecard, playerTotals) {
     const config = {
       headers: {
         'Content-Type': 'application/json'
       }
     }
-
     const game = {
       name: selectedGame.name,
       status: "STARTED",
       scorecard: scorecard,
       playerTotals: playerTotals
     }
-
     try {
-      const res = axios.post('http://192.168.1.25:5000/api/v1/scorecards', game, config);
-
-      if (res.status === '201') {
-        console.log(res.data);
-
-        //update selectedGame id with id we got from the api
+      const res = await axios.post('http://192.168.1.25:5000/api/v1/scorecards', game, config);
+      if (res.status === 201) {
         setSelectedGame(prevGame => ({ ...prevGame, id: res.data.id }));
       } else {
         // TODO: Handle error when requests fails or response empty
       }
-
-
     } catch (error) {
       console.error('Error occured during POST /api/v1/scorecards');
       console.error(error);
+    }
+  }
+
+  async function updateScorecard() {
+    // TODO: determine if these checks are still needed
+    if (scorecard.length > 0 && selectedGame.id !== '') {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+      const game = {
+        scorecard: scorecard,
+        playerTotals: playerTotals
+      }
+      try {
+        const res = await axios.put(
+          `http://192.168.1.25:5000/api/v1/scorecards/${selectedGame.id}`,
+          game,
+          config);
+        if (res.status === 200) {
+          // success
+          // console.log('scorecard updated!');
+        } else {
+          // TODO: handle other response statuses
+          console.error(`Error occured during PUT /api/v1/scorecards/${selectedGame.id}`);
+          console.error(`Response code was: ${res.status}`);
+        }
+      } catch (error) {
+        // TODO: Handle error when requests fails or response empty
+        console.error(`PUT /api/v1/scorecards/${selectedGame.id} failed!`);
+        console.error(error);
+      }
     }
   }
 
@@ -137,6 +161,7 @@ function Game() {
         PlayerScore={PlayerScore}
         playerTotals={playerTotals}
         setPlayerTotals={setPlayerTotals}
+        updateScorecard={updateScorecard}
       />
     )
 
@@ -146,6 +171,7 @@ function Game() {
         playerTotals={playerTotals}
         scorecard={scorecard}
         setGameComplete={setGameComplete}
+        updateScorecard={updateScorecard}
       />
     )
 
