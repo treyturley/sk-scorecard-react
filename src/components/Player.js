@@ -45,7 +45,7 @@ function Player({ selectedGame }) {
 
       <hr />
 
-      <Accordion defaultActiveKey=''>
+      <Accordion defaultActiveKey='' className='mb-4'>
         {playerTotals.map((player) => {
           return (
             <Accordion.Item eventKey={player.playerName} key={player.playerName}>
