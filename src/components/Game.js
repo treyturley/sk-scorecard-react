@@ -16,7 +16,11 @@ function Game() {
   const [playersExist, setPlayersExist] = useState(false);
   const [gameComplete, setGameComplete] = useState(false);
 
-  const [selectedGame, setSelectedGame] = useState('');
+  const [selectedGame, setSelectedGame] = useState({
+    id: '',
+    name: ''
+  });
+
 
   class PlayerTypes {
     static PLAYER_NOT_SET = 'none';
@@ -67,8 +71,8 @@ function Game() {
   if (
     (playerType === PlayerTypes.PLAYER_NOT_SET) ||
     (playerType === PlayerTypes.SCORE_KEEPER && !playersExist) ||
-    (playerType === PlayerTypes.PLAYER && selectedGame === '')) {
-    
+    (playerType === PlayerTypes.PLAYER && selectedGame.id === '')) {
+
     return (
       <PlayerSetupForm
         players={players}
@@ -103,10 +107,10 @@ function Game() {
       />
     )
 
-  } else if (playerType === PlayerTypes.PLAYER && selectedGame !== '') {
+  } else if (playerType === PlayerTypes.PLAYER && selectedGame.id !== '') {
     return (
       <Player
-      selectedGame={selectedGame}
+        selectedGame={selectedGame}
       />
     )
   }

@@ -7,16 +7,14 @@ import Col from 'react-bootstrap/Col';
 import Accordion from 'react-bootstrap/Accordion';
 
 function Player({ selectedGame }) {
-  
+
   const [scorecard, setScorecard] = useState([]);
   const [playerTotals, setPlayerTotals] = useState([]);
-  // const [defaultPlayer, setDefaultPlayer] = useState('');
-  // const [game, setGame] = useState({});
 
   useEffect(() => {
     async function getGame() {
       try {
-        const res = await axios.get(`http://192.168.1.25:5000/api/v1/scorecards/${selectedGame}`);
+        const res = await axios.get(`http://192.168.1.25:5000/api/v1/scorecards/${selectedGame.id}`);
         if (res.status === 200) {
           setScorecard(res.data[0].scorecard);
           setPlayerTotals(res.data[0].playerTotals);

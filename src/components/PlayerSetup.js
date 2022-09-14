@@ -72,7 +72,7 @@ function PlayerSetupForm({
     return rows;
   }
 
-  function listActiveGames(isScoreKeeper=false) {
+  function listActiveGames(isScoreKeeper = false) {
     let rows = [];
 
     if (activeGames.length === 0) {
@@ -96,7 +96,7 @@ function PlayerSetupForm({
               <button
                 key={`${game.id}-View`}
                 className='btn btn-primary'
-                onClick={() => setSelectedGame(game.id)}
+                onClick={() => setSelectedGame({ id: game.id, name: game.name })}
               >
                 View Game
               </button>
