@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import '../styles/Scorecard.css'
+import Player from './Player';
 
 function Scorecard({
   players,
@@ -318,9 +319,7 @@ function Scorecard({
         </div>
 
         <hr />
-        <Player
-          selectedGame={selectedGame}
-        />
+        <Player selectedGame={selectedGame} />
 
       </Container>
     </>
