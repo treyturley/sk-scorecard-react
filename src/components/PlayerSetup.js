@@ -27,7 +27,7 @@ function PlayerSetupForm({
         // TODO: figure out how to handle endpoints. Maybe just hard code once up on Heroku?
         const res = await axios.get(`http://192.168.1.25:5000/api/v1/scorecards`);
 
-        setActiveGames(res.data);
+        setActiveGames(res.data.reverse());
 
       } catch (error) {
         console.error('Request to get active games failed');
@@ -77,6 +77,7 @@ function PlayerSetupForm({
   }
 
   function listActiveGames(isScoreKeeper = false) {
+    // TODO: invert this list
     let rows = [];
 
     if (activeGames.length === 0) {
