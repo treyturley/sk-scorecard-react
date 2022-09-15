@@ -23,7 +23,6 @@ function Scorecard({
   
   useEffect(() => {
     updateScorecard();
-    console.log('update from scorecard');
     // eslint-disable-next-line
   }, [playerTotals]);
 

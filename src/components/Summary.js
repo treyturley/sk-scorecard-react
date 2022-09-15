@@ -9,7 +9,6 @@ function Summary({ playerTotals, scorecard, setGameComplete, updateScorecard }) 
   // push the last update to scorecard
   useEffect(() => {
     updateScorecard();
-    console.log('update from summary');
     // eslint-disable-next-line
   }, []);
 
