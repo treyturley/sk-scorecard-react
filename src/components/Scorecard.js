@@ -14,6 +14,7 @@ function Scorecard({
   playerTotals,
   setPlayerTotals,
   updateScorecard,
+  selectedGame
 }) {
   const [currentRound, setCurrentRound] = useState(1);
 
@@ -315,6 +316,12 @@ function Scorecard({
             value="Clear Round Scores"
             onClick={() => clearRound(currentRound)} />
         </div>
+
+        <hr />
+        <Player
+          selectedGame={selectedGame}
+        />
+
       </Container>
     </>
   )
