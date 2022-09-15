@@ -16,6 +16,7 @@ function PlayerSetupForm({
 
   const [playerCount, setPlayerCount] = useState(4);
   const [activeGames, setActiveGames] = useState([]);
+  const [refreshGames, setRefreshGames] = useState(true);
 
   // TODO: Need to define a min players (2)
   const MAX_PLAYERS = 10;
@@ -32,8 +33,11 @@ function PlayerSetupForm({
         console.error('Request to get active games failed');
       }
     }
-    getActiveGames();
-  }, []);
+    if (refreshGames) {
+      getActiveGames();
+      setRefreshGames(false);
+    }
+  }, [refreshGames]);
 
   const handlePlayerCountChange = (event) => {
     setPlayerCount(event.target.value);
@@ -148,7 +152,7 @@ function PlayerSetupForm({
               name='game-name'
               value={selectedGame.name}
               placeholder={selectedGame.name || "Game Name"}
-              onChange={(event) => setSelectedGame(prevGame => ({...prevGame, name:event.target.value}))}
+              onChange={(event) => setSelectedGame(prevGame => ({ ...prevGame, name: event.target.value }))}
             />
 
             <div className="select-player-count">
@@ -176,6 +180,7 @@ function PlayerSetupForm({
       <>
         <div className="my-container">
           <h1>Games in Progress</h1>
+          <button className='btn btn-success mb-4' onClick={() => setRefreshGames(true)}>Refresh</button>
           {listActiveGames()}
         </div>
       </>
