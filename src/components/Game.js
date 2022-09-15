@@ -175,6 +175,7 @@ function Game() {
         setPlayerTotals={setPlayerTotals}
         updateScorecard={updateScorecard}
         selectedGame={selectedGame}
+        api_endpoint={api_endpoint}
       />
     )
 

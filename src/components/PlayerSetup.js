@@ -38,6 +38,7 @@ function PlayerSetupForm({
       getActiveGames();
       setRefreshGames(false);
     }
+    // eslint-disable-next-line
   }, [refreshGames]);
 
   const handlePlayerCountChange = (event) => {

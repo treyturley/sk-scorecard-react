@@ -15,7 +15,8 @@ function Scorecard({
   playerTotals,
   setPlayerTotals,
   updateScorecard,
-  selectedGame
+  selectedGame,
+  api_endpoint
 }) {
   const [currentRound, setCurrentRound] = useState(1);
   const firstRun = useRef(true);
@@ -324,7 +325,7 @@ function Scorecard({
         </div>
 
         <hr />
-        <Player selectedGame={selectedGame} />
+        <Player selectedGame={selectedGame} api_endpoint={api_endpoint} />
 
       </Container>
     </>
