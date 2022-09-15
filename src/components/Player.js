@@ -60,7 +60,7 @@ function Player({ selectedGame }) {
           return (
             <Accordion.Item eventKey={player.playerName} key={player.playerName}>
               <Accordion.Header>
-                <h4>Player: {player.playerName}</h4>
+                <h4>{player.playerName}: {player.total}</h4>
               </Accordion.Header>
               <Accordion.Body>
                 <ListGroup>
