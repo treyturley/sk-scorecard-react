@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Round from "./Round"
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -18,13 +18,18 @@ function Scorecard({
   selectedGame
 }) {
   const [currentRound, setCurrentRound] = useState(1);
+  const firstRun = useRef(true);
 
   // TODO: Consider using constants for 
   // the Next Round Button since it has a couple possibilities now.
   const [nextRoundBtnTxt, setNextRoundBtnTxt] = useState("Next Round");
-  
+
   useEffect(() => {
-    updateScorecard();
+    if (firstRun.current) {
+      firstRun.current = false;
+    } else {
+      updateScorecard();
+    }
     // eslint-disable-next-line
   }, [playerTotals]);
 
