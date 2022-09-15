@@ -162,6 +162,7 @@ function Game() {
         playerTotals={playerTotals}
         setPlayerTotals={setPlayerTotals}
         updateScorecard={updateScorecard}
+        selectedGame={selectedGame}
       />
     )
 
