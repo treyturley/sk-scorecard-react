@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState} from "react";
+import { useState } from "react";
 import Player from './Player';
 import PlayerSetupForm from "./PlayerSetup";
 import Scorecard from "./Scorecard";
@@ -84,8 +84,15 @@ function Game() {
           'Content-Type': 'application/json'
         }
       }
+      const trimmedScorecard = scorecard.filter(score => {
+        if (score.bid === 0 && score.tricks === 0 && score.bonus === 0 && score.roundTotal === 0) {
+          return null;
+        } else {
+          return score;
+        }
+      });
       const game = {
-        scorecard: scorecard,
+        scorecard: trimmedScorecard,
         playerTotals: playerTotals
       }
       try {
