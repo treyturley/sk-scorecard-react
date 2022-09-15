@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Accordion from 'react-bootstrap/Accordion';
 import { useRef } from 'react';
+import SummaryGraph from './SummaryGraph';
 
 function Player({ selectedGame }) {
   const firstRun = useRef(true);
@@ -38,7 +39,7 @@ function Player({ selectedGame }) {
   });
 
   return (
-    <Container>
+    <Container className='mb-4'>
       <h1 className='text-center'>Score Totals</h1>
       <Row xs={2} md={4} className='text-center'>
         {playerTotals.map((playerTotal) => {
@@ -80,6 +81,13 @@ function Player({ selectedGame }) {
           )
         })}
       </Accordion>
+
+      <hr />
+
+      <SummaryGraph
+        playerTotals={playerTotals}
+        scorecard={scorecard}
+      />
 
       {/* TODO: Maybe add the score summary score chart here as well*/}
 
