@@ -1,16 +1,38 @@
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Round from "./Round"
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import '../styles/Scorecard.css'
+import Player from './Player';
 
-function Scorecard({ players, scorecard, setScorecard, setGameComplete, PlayerScore, playerTotals, setPlayerTotals }) {
+function Scorecard({
+  players,
+  scorecard,
+  setScorecard,
+  setGameComplete,
+  PlayerScore,
+  playerTotals,
+  setPlayerTotals,
+  updateScorecard,
+  selectedGame,
+  api_endpoint
+}) {
   const [currentRound, setCurrentRound] = useState(1);
+  const firstRun = useRef(true);
 
   // TODO: Consider using constants for 
   // the Next Round Button since it has a couple possibilities now.
   const [nextRoundBtnTxt, setNextRoundBtnTxt] = useState("Next Round");
+
+  useEffect(() => {
+    if (firstRun.current) {
+      firstRun.current = false;
+    } else {
+      updateScorecard();
+    }
+    // eslint-disable-next-line
+  }, [playerTotals]);
 
   /**
    * Initializes new roundScore objs for each player for a new round.
@@ -39,24 +61,23 @@ function Scorecard({ players, scorecard, setScorecard, setGameComplete, PlayerSc
         const roundNumberExists = (round) => round.roundNumber === currentRound + 1;
         if (!scorecard.some(roundNumberExists)) {
           startRound(currentRound + 1);
+          // TODO: consider if we want to call api when starting a round so that players see a new round has started on their screen
         }
         scorecard.filter((round) => round.roundNumber === currentRound).forEach((roundScore) => updateRoundAndPlayerTotal(roundScore));
 
-        if(currentRound === 9){
+        if (currentRound === 9) {
           setNextRoundBtnTxt("To Summary");
         }
-      } 
-    } else if(e.target.value === 'Previous Round') {
+      }
+    } else if (e.target.value === 'Previous Round') {
       if (currentRound > 1) {
         setCurrentRound(currentRound - 1);
         setNextRoundBtnTxt("Next Round");
       }
-    } else if(e.target.value === 'To Summary'){
+    } else if (e.target.value === 'To Summary') {
       scorecard.filter((round) => round.roundNumber === currentRound).forEach((roundScore) => updateRoundAndPlayerTotal(roundScore));
-        setGameComplete(true);
+      setGameComplete(true);
     }
-    // Do we want to update score totals when clicking previous or next round?
-    // scorecard.filter((round) => round.roundNumber === currentRound).forEach((roundScore) => updateRoundTotal(roundScore));
   }
 
   /**
@@ -302,6 +323,10 @@ function Scorecard({ players, scorecard, setScorecard, setGameComplete, PlayerSc
             value="Clear Round Scores"
             onClick={() => clearRound(currentRound)} />
         </div>
+
+        <hr />
+        <Player selectedGame={selectedGame} api_endpoint={api_endpoint} />
+
       </Container>
     </>
   )

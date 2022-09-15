@@ -1,4 +1,6 @@
+import axios from 'axios';
 import { useState } from "react";
+import Player from './Player';
 import PlayerSetupForm from "./PlayerSetup";
 import Scorecard from "./Scorecard";
 import Summary from './Summary';
@@ -14,6 +16,26 @@ function Game() {
 
   const [playersExist, setPlayersExist] = useState(false);
   const [gameComplete, setGameComplete] = useState(false);
+
+  // TODO: figure out how to toggle this automatically. maybe with env vars?
+  const api_endpoint = 'https://polar-atoll-53052.herokuapp.com'
+  // const api_endpoint = 'https://localhost:5000'
+
+  // TODO: consider rolling up scorecard,playerTotals, and selectedGame into one state ogject called game
+  const [selectedGame, setSelectedGame] = useState({
+    id: '',
+    name: '',
+    status: ''
+  });
+
+
+  class PlayerTypes {
+    static PLAYER_NOT_SET = 'none';
+    static PLAYER = 'Player';
+    static SCORE_KEEPER = 'Score Keeper';
+  }
+
+  const [playerType, setPlayerType] = useState(PlayerTypes.PLAYER_NOT_SET);
 
   class PlayerScore {
     constructor(name, roundNumber, bid, tricks, bonus, roundTotal) {
@@ -33,6 +55,71 @@ function Game() {
     }
   }
 
+  async function addScorecard(scorecard, playerTotals) {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+    const game = {
+      name: selectedGame.name,
+      status: "STARTED",
+      scorecard: scorecard,
+      playerTotals: playerTotals
+    }
+    try {
+      const res = await axios.post(`${api_endpoint}/api/v1/scorecards`, game, config);
+      if (res.status === 201) {
+        setSelectedGame(prevGame => ({ ...prevGame, id: res.data.id }));
+      } else {
+        // TODO: Handle error when requests fails or response empty
+      }
+    } catch (error) {
+      console.error('Error occured during POST /api/v1/scorecards');
+      console.error(error);
+    }
+  }
+
+  async function updateScorecard() {
+    // TODO: determine if these checks are still needed
+    if (scorecard.length > 0 && selectedGame.id !== '') {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+      const trimmedScorecard = scorecard.filter(score => {
+        if (score.bid === 0 && score.tricks === 0 && score.bonus === 0 && score.roundTotal === 0) {
+          return null;
+        } else {
+          return score;
+        }
+      });
+      const game = {
+        scorecard: trimmedScorecard,
+        playerTotals: playerTotals
+      }
+      try {
+        const res = await axios.put(
+          `${api_endpoint}/api/v1/scorecards/${selectedGame.id}`,
+          game,
+          config);
+        if (res.status === 200) {
+          // success
+          // console.log('scorecard updated!');
+        } else {
+          // TODO: handle other response statuses
+          console.error(`Error occured during PUT /api/v1/scorecards/${selectedGame.id}`);
+          console.error(`Response code was: ${res.status}`);
+        }
+      } catch (error) {
+        // TODO: Handle error when requests fails or response empty
+        console.error(`PUT /api/v1/scorecards/${selectedGame.id} failed!`);
+        console.error(error);
+      }
+    }
+  }
+
   const handlePlayerSetupSubmit = (event) => {
     event.preventDefault();
     // TODO: Do some input validation before moving on to the scorecard
@@ -48,21 +135,35 @@ function Game() {
       newPlayerTotals.push(playerTotal);
     });
 
+    //post to api
+    addScorecard(newScoreCard, newPlayerTotals);
+
+    //update state
     setScorecard(newScoreCard);
     setPlayerTotals(newPlayerTotals);
     setPlayersExist(true);
   }
 
-  if (!playersExist) {
+  if (
+    (playerType === PlayerTypes.PLAYER_NOT_SET) ||
+    (playerType === PlayerTypes.SCORE_KEEPER && !playersExist) ||
+    (playerType === PlayerTypes.PLAYER && selectedGame.id === '')) {
+
     return (
       <PlayerSetupForm
         players={players}
         setPlayers={setPlayers}
         handleSubmit={handlePlayerSetupSubmit}
+        playerType={playerType}
+        setPlayerType={setPlayerType}
+        PlayerTypes={PlayerTypes}
+        selectedGame={selectedGame}
+        setSelectedGame={setSelectedGame}
+        api_endpoint={api_endpoint}
       />
     )
 
-  } else if (playersExist && !gameComplete) {
+  } else if (playersExist && playerType === PlayerTypes.SCORE_KEEPER && !gameComplete) {
     return (
       <Scorecard
         players={players}
@@ -72,18 +173,29 @@ function Game() {
         PlayerScore={PlayerScore}
         playerTotals={playerTotals}
         setPlayerTotals={setPlayerTotals}
+        updateScorecard={updateScorecard}
+        selectedGame={selectedGame}
+        api_endpoint={api_endpoint}
       />
     )
 
-  } else if (playersExist && gameComplete) {
+  } else if (playersExist && playerType === PlayerTypes.SCORE_KEEPER && gameComplete) {
     return (
       <Summary
         playerTotals={playerTotals}
         scorecard={scorecard}
         setGameComplete={setGameComplete}
+        updateScorecard={updateScorecard}
       />
     )
 
+  } else if (playerType === PlayerTypes.PLAYER && selectedGame.id !== '') {
+    return (
+      <Player
+        selectedGame={selectedGame}
+        api_endpoint={api_endpoint}
+      />
+    )
   }
 }
 

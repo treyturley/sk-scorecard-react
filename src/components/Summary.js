@@ -1,16 +1,22 @@
 import React from 'react'
+import { useEffect } from "react";
 import Container from 'react-bootstrap/Container';
 import "../styles/Summary.css"
 import SummaryGraph from './SummaryGraph';
 
-function Summary({ playerTotals, scorecard, setGameComplete }) {
+function Summary({ playerTotals, scorecard, setGameComplete, updateScorecard }) {
+
+  // push the last update to scorecard
+  useEffect(() => {
+    updateScorecard();
+    // eslint-disable-next-line
+  }, []);
 
   function onClickBackToScores() {
     setGameComplete(false);
   }
 
   function getSortedPlayers() {
-
     let output = null;
     let sortedPlayers = [...playerTotals];
 
