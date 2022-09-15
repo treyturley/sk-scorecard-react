@@ -17,6 +17,10 @@ function Game() {
   const [playersExist, setPlayersExist] = useState(false);
   const [gameComplete, setGameComplete] = useState(false);
 
+  // TODO: figure out how to toggle this automatically. maybe with env vars?
+  const api_endpoint = 'https://polar-atoll-53052.herokuapp.com'
+  // const api_endpoint = 'https://localhost:5000'
+
   // TODO: consider rolling up scorecard,playerTotals, and selectedGame into one state ogject called game
   const [selectedGame, setSelectedGame] = useState({
     id: '',
@@ -64,7 +68,7 @@ function Game() {
       playerTotals: playerTotals
     }
     try {
-      const res = await axios.post('http://192.168.1.25:5000/api/v1/scorecards', game, config);
+      const res = await axios.post(`${api_endpoint}/api/v1/scorecards`, game, config);
       if (res.status === 201) {
         setSelectedGame(prevGame => ({ ...prevGame, id: res.data.id }));
       } else {
@@ -97,7 +101,7 @@ function Game() {
       }
       try {
         const res = await axios.put(
-          `http://192.168.1.25:5000/api/v1/scorecards/${selectedGame.id}`,
+          `${api_endpoint}/api/v1/scorecards/${selectedGame.id}`,
           game,
           config);
         if (res.status === 200) {
@@ -155,6 +159,7 @@ function Game() {
         PlayerTypes={PlayerTypes}
         selectedGame={selectedGame}
         setSelectedGame={setSelectedGame}
+        api_endpoint={api_endpoint}
       />
     )
 
@@ -187,6 +192,7 @@ function Game() {
     return (
       <Player
         selectedGame={selectedGame}
+        api_endpoint={api_endpoint}
       />
     )
   }

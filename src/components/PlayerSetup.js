@@ -11,7 +11,8 @@ function PlayerSetupForm({
   setPlayerType,
   PlayerTypes,
   selectedGame,
-  setSelectedGame
+  setSelectedGame,
+  api_endpoint
 }) {
 
   const [playerCount, setPlayerCount] = useState(4);
@@ -25,7 +26,7 @@ function PlayerSetupForm({
     async function getActiveGames() {
       try {
         // TODO: figure out how to handle endpoints. Maybe just hard code once up on Heroku?
-        const res = await axios.get(`http://192.168.1.25:5000/api/v1/scorecards`);
+        const res = await axios.get(`${api_endpoint}/api/v1/scorecards`);
 
         setActiveGames(res.data.reverse());
 

@@ -8,14 +8,14 @@ import Accordion from 'react-bootstrap/Accordion';
 import { useRef } from 'react';
 import SummaryGraph from './SummaryGraph';
 
-function Player({ selectedGame }) {
+function Player({ selectedGame, api_endpoint }) {
   const firstRun = useRef(true);
   const [scorecard, setScorecard] = useState([]);
   const [playerTotals, setPlayerTotals] = useState([]);
 
   async function getGame() {
     try {
-      const res = await axios.get(`http://192.168.1.25:5000/api/v1/scorecards/${selectedGame.id}`);
+      const res = await axios.get(`${api_endpoint}/api/v1/scorecards/${selectedGame.id}`);
       if (res.status === 200) {
         setScorecard(res.data[0].scorecard);
         setPlayerTotals(res.data[0].playerTotals);
