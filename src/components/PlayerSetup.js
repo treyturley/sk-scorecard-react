@@ -20,6 +20,7 @@ function PlayerSetupForm({
   const [refreshGames, setRefreshGames] = useState(true);
 
   // TODO: Need to define a min players (2)
+  const MIN_PLAYERS = 2;
   const MAX_PLAYERS = 10;
 
   useEffect(() => {
@@ -53,9 +54,9 @@ function PlayerSetupForm({
 
   function createOptions() {
     let rows = [];
-    for (let i = 0; i < MAX_PLAYERS; i++) {
+    for (let i = MIN_PLAYERS; i <= MAX_PLAYERS; i++) {
       rows.push(
-        <option key={i} value={i + 1}>{i + 1}</option>
+        <option key={i} value={i}>{i}</option>
       );
     }
     return rows;
