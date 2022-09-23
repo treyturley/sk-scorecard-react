@@ -88,9 +88,6 @@ function Player({ selectedGame, api_endpoint }) {
         playerTotals={playerTotals}
         scorecard={scorecard}
       />
-
-      {/* TODO: Maybe add the score summary score chart here as well*/}
-
     </Container>
   )
 }
