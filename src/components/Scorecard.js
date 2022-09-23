@@ -21,8 +21,6 @@ function Scorecard({
   const [currentRound, setCurrentRound] = useState(1);
   const firstRun = useRef(true);
 
-  // TODO: Consider using constants for 
-  // the Next Round Button since it has a couple possibilities now.
   const [nextRoundBtnTxt, setNextRoundBtnTxt] = useState("Next Round");
 
   useEffect(() => {
@@ -54,14 +52,12 @@ function Scorecard({
    * @param {Event} e - The event that was fired which represents which round button was clicked. 
    */
   function changeRound(e) {
-    // TODO: When the rounds changes to round 10, change next round button to "Go To Summary or Finish"
     if (e.target.value === 'Next Round') {
       if (currentRound < 10) {
         setCurrentRound(currentRound + 1);
         const roundNumberExists = (round) => round.roundNumber === currentRound + 1;
         if (!scorecard.some(roundNumberExists)) {
           startRound(currentRound + 1);
-          // TODO: consider if we want to call api when starting a round so that players see a new round has started on their screen
         }
         scorecard.filter((round) => round.roundNumber === currentRound).forEach((roundScore) => updateRoundAndPlayerTotal(roundScore));
 
@@ -260,10 +256,7 @@ function Scorecard({
     <>
       <Container>
         <h1 className='text-center'>Score Totals</h1>
-
-        {/* TODO: Based on the # of players add/remove css classes to better display them.
-                  Might also be fixible with better css instead of dynamic css
-        */}
+        
         <Row xs={2} md={4} className='text-center'>
           {playerTotals.map((playerTotal) => {
             return (
