@@ -72,7 +72,7 @@ function Game() {
       if (res.status === 201) {
         setSelectedGame(prevGame => ({ ...prevGame, id: res.data.id }));
       } else {
-        // TODO: Handle error when requests fails or response empty
+        console.error(`Error occured on POST ${api_endpoint}/api/v1/scorecards. Received ${res.status} ${res.statusText}`);
       }
     } catch (error) {
       console.error('Error occured during POST /api/v1/scorecards');
@@ -81,7 +81,6 @@ function Game() {
   }
 
   async function updateScorecard() {
-    // TODO: determine if these checks are still needed
     if (scorecard.length > 0 && selectedGame.id !== '') {
       const config = {
         headers: {
@@ -106,14 +105,10 @@ function Game() {
           config);
         if (res.status === 200) {
           // success
-          // console.log('scorecard updated!');
         } else {
-          // TODO: handle other response statuses
-          console.error(`Error occured during PUT /api/v1/scorecards/${selectedGame.id}`);
-          console.error(`Response code was: ${res.status}`);
+          console.error(`Error occured during PUT /api/v1/scorecards/${selectedGame.id}. Received ${res.status} ${res.statusText}`);
         }
-      } catch (error) {
-        // TODO: Handle error when requests fails or response empty
+      } catch (error) {        
         console.error(`PUT /api/v1/scorecards/${selectedGame.id} failed!`);
         console.error(error);
       }
