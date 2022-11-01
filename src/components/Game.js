@@ -18,8 +18,11 @@ function Game() {
   const [gameComplete, setGameComplete] = useState(false);
 
   // TODO: figure out how to toggle this automatically. maybe with env vars?
-  const api_endpoint = 'https://polar-atoll-53052.herokuapp.com'
+  // const api_endpoint = 'https://polar-atoll-53052.herokuapp.com
   // const api_endpoint = 'https://localhost:5000'
+  
+	const api_endpoint = 'http://3.15.44.207:5000'
+
 
   // TODO: consider rolling up scorecard,playerTotals, and selectedGame into one state ogject called game
   const [selectedGame, setSelectedGame] = useState({
