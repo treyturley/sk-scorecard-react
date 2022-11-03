@@ -18,6 +18,7 @@ function Game() {
   const [gameComplete, setGameComplete] = useState(false);
 
   // TODO: figure out how to toggle this automatically. maybe with env vars?
+
   //const api_endpoint = 'https://polar-atoll-53052.herokuapp.com'
   const api_endpoint = 'https://treyturley.com/api/sk-scorecard-api'
 
