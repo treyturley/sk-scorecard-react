@@ -18,14 +18,14 @@ function PlayerSetupForm({
   const [playerCount, setPlayerCount] = useState(4);
   const [activeGames, setActiveGames] = useState([]);
   const [refreshGames, setRefreshGames] = useState(true);
-  
+
   const MIN_PLAYERS = 2;
   const MAX_PLAYERS = 10;
 
   useEffect(() => {
     async function getActiveGames() {
       try {
-        const res = await axios.get(`${api_endpoint}/api/v1/scorecards`);
+        const res = await axios.get(`${api_endpoint}/v1/scorecards`);
 
         setActiveGames(res.data.reverse());
 
