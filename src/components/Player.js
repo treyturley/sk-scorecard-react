@@ -15,7 +15,7 @@ function Player({ selectedGame, api_endpoint }) {
 
   async function getGame() {
     try {
-      const res = await axios.get(`${api_endpoint}/api/v1/scorecards/${selectedGame.id}`);
+      const res = await axios.get(`${api_endpoint}/v1/scorecards/${selectedGame.id}`);
       if (res.status === 200) {
         setScorecard(res.data[0].scorecard);
         setPlayerTotals(res.data[0].playerTotals);
@@ -88,9 +88,6 @@ function Player({ selectedGame, api_endpoint }) {
         playerTotals={playerTotals}
         scorecard={scorecard}
       />
-
-      {/* TODO: Maybe add the score summary score chart here as well*/}
-
     </Container>
   )
 }

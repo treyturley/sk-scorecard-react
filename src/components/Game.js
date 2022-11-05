@@ -18,8 +18,9 @@ function Game() {
   const [gameComplete, setGameComplete] = useState(false);
 
   // TODO: figure out how to toggle this automatically. maybe with env vars?
-  const api_endpoint = 'https://polar-atoll-53052.herokuapp.com'
-  // const api_endpoint = 'https://localhost:5000'
+
+  //const api_endpoint = 'https://polar-atoll-53052.herokuapp.com'
+  const api_endpoint = 'https://treyturley.com/api/sk-scorecard-api'
 
   // TODO: consider rolling up scorecard,playerTotals, and selectedGame into one state ogject called game
   const [selectedGame, setSelectedGame] = useState({
@@ -68,20 +69,19 @@ function Game() {
       playerTotals: playerTotals
     }
     try {
-      const res = await axios.post(`${api_endpoint}/api/v1/scorecards`, game, config);
+      const res = await axios.post(`${api_endpoint}/v1/scorecards`, game, config);
       if (res.status === 201) {
         setSelectedGame(prevGame => ({ ...prevGame, id: res.data.id }));
       } else {
-        // TODO: Handle error when requests fails or response empty
+        console.error(`Error occured on POST ${api_endpoint}/v1/scorecards. Received ${res.status} ${res.statusText}`);
       }
     } catch (error) {
-      console.error('Error occured during POST /api/v1/scorecards');
+      console.error('Error occured during POST /v1/scorecards');
       console.error(error);
     }
   }
 
   async function updateScorecard() {
-    // TODO: determine if these checks are still needed
     if (scorecard.length > 0 && selectedGame.id !== '') {
       const config = {
         headers: {
@@ -101,20 +101,16 @@ function Game() {
       }
       try {
         const res = await axios.put(
-          `${api_endpoint}/api/v1/scorecards/${selectedGame.id}`,
+          `${api_endpoint}/v1/scorecards/${selectedGame.id}`,
           game,
           config);
         if (res.status === 200) {
           // success
-          // console.log('scorecard updated!');
         } else {
-          // TODO: handle other response statuses
-          console.error(`Error occured during PUT /api/v1/scorecards/${selectedGame.id}`);
-          console.error(`Response code was: ${res.status}`);
+          console.error(`Error occured during PUT /v1/scorecards/${selectedGame.id}. Received ${res.status} ${res.statusText}`);
         }
       } catch (error) {
-        // TODO: Handle error when requests fails or response empty
-        console.error(`PUT /api/v1/scorecards/${selectedGame.id} failed!`);
+        console.error(`PUT /v1/scorecards/${selectedGame.id} failed!`);
         console.error(error);
       }
     }

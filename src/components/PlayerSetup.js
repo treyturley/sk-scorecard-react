@@ -19,14 +19,13 @@ function PlayerSetupForm({
   const [activeGames, setActiveGames] = useState([]);
   const [refreshGames, setRefreshGames] = useState(true);
 
-  // TODO: Need to define a min players (2)
+  const MIN_PLAYERS = 2;
   const MAX_PLAYERS = 10;
 
   useEffect(() => {
     async function getActiveGames() {
       try {
-        // TODO: figure out how to handle endpoints. Maybe just hard code once up on Heroku?
-        const res = await axios.get(`${api_endpoint}/api/v1/scorecards`);
+        const res = await axios.get(`${api_endpoint}/v1/scorecards`);
 
         setActiveGames(res.data.reverse());
 
@@ -53,9 +52,9 @@ function PlayerSetupForm({
 
   function createOptions() {
     let rows = [];
-    for (let i = 0; i < MAX_PLAYERS; i++) {
+    for (let i = MIN_PLAYERS; i <= MAX_PLAYERS; i++) {
       rows.push(
-        <option key={i} value={i + 1}>{i + 1}</option>
+        <option key={i} value={i}>{i}</option>
       );
     }
     return rows;
@@ -79,11 +78,9 @@ function PlayerSetupForm({
   }
 
   function listActiveGames(isScoreKeeper = false) {
-    // TODO: invert this list
     let rows = [];
 
     if (activeGames.length === 0) {
-      // TODO: some sort of no games message
     } else {
       activeGames.forEach(game => {
         // TODO: wrap this up in card or something nice looking

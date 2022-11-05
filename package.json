@@ -1,5 +1,6 @@
 {
   "name": "sk-scorecard-react",
+  "homepage": "https://treyturley.com/skullking-scorecard",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -42,7 +43,6 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://treyturley.github.io/sk-scorecard-react",
   "devDependencies": {
     "gh-pages": "^4.0.0",
     "react-router-dom": "^6.3.0"
