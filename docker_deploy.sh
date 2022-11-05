@@ -18,21 +18,20 @@ if [[ $docker_stopped_containers == *"$container_name"* ]]
 then
     echo "$container_name container is stopped"
     echo "removing $container_name container"
-    #docker rm $container_name
-
+    docker rm $container_name
 else
     echo "$container_name container not found"
 fi
 
 # build the new image
 echo building new image for $container_name
-#docker build -f Dockerfile -t $container_name .
+docker build -f Dockerfile -t $container_name .
 
 # start container with new image
 echo starting $container_name
-#docker run --name $container_name -p 82:80 -d $container_name
-docker start $container_name
+docker run --name $container_name -p 82:80 -d $container_name
+#docker start $container_name
 
-# pruning any dangling images
+# prune any dangling images
 echo pruning images
-#docker image prune -f
+docker image prune -f
