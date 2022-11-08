@@ -17,10 +17,11 @@ function Game() {
   const [playersExist, setPlayersExist] = useState(false);
   const [gameComplete, setGameComplete] = useState(false);
 
-  // TODO: figure out how to toggle this automatically. maybe with env vars?
+  let api_endpoint = process.env.REACT_APP_PROD_API;
 
-  //const api_endpoint = 'https://polar-atoll-53052.herokuapp.com'
-  const api_endpoint = 'https://treyturley.com/api/sk-scorecard-api'
+  if (process.env.NODE_ENV !== 'production') {
+    api_endpoint = process.env.REACT_APP_DEV_API;
+  }
 
   // TODO: consider rolling up scorecard,playerTotals, and selectedGame into one state ogject called game
   const [selectedGame, setSelectedGame] = useState({
@@ -28,7 +29,6 @@ function Game() {
     name: '',
     status: ''
   });
-
 
   class PlayerTypes {
     static PLAYER_NOT_SET = 'none';
