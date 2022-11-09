@@ -27,7 +27,7 @@ ChartJS.register(
   Legend
 );
 
-function SummaryGraph({ playerTotals, scorecard }) {
+function SummaryGraph({ playerTotals, scorecard, currentRound, gameComplete }) {
 
   const lineColors = [
     '#332288',
@@ -73,8 +73,8 @@ function SummaryGraph({ playerTotals, scorecard }) {
     datasets: []
   };
 
-  class DataSet{
-    constructor(label, data, color){
+  class DataSet {
+    constructor(label, data, color) {
       this.label = label;
       this.data = data;
       this.backgroundColor = color;
@@ -82,27 +82,29 @@ function SummaryGraph({ playerTotals, scorecard }) {
     }
   }
 
-  playerTotals.forEach((player,index) => {
+  playerTotals.forEach((player, index) => {
     const roundTotals = [];
     const roundScore = [];
 
     scorecard.forEach((score) => {
-      if(score.playerName === player.playerName){
-        roundScore.push(score.roundTotal);
+      if (score.playerName === player.playerName) {
+        if (gameComplete || (score.roundNumber !== currentRound)) {
+          roundScore.push(score.roundTotal);
+        }
       }
     });
 
     //calculate the score totals at each round
-    for(let x = 0; x < 10; x++){
+    for (let x = 0; x < 10; x++) {
       let total = 0;
-      for(let y = 0; y <= x; y++){
-        total+=roundScore[y];
+      for (let y = 0; y <= x; y++) {
+        total += roundScore[y];
       }
       roundTotals.push(total);
     }
 
     data.datasets.push(new DataSet(player.playerName, roundTotals, lineColors[index]));
-    
+
   });
 
   return (
