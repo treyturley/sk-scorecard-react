@@ -12,6 +12,8 @@ function Player({ selectedGame, api_endpoint }) {
   const firstRun = useRef(true);
   const [scorecard, setScorecard] = useState([]);
   const [playerTotals, setPlayerTotals] = useState([]);
+  const [currentRound, setCurrentRound] = useState(1);
+  const [gameComplete, setGameComplete] = useState("");
 
   async function getGame() {
     try {
@@ -19,6 +21,12 @@ function Player({ selectedGame, api_endpoint }) {
       if (res.status === 200) {
         setScorecard(res.data[0].scorecard);
         setPlayerTotals(res.data[0].playerTotals);
+        setCurrentRound(res.data[0].currentRound);
+        if (res.data[0].status === "FINISHED") {
+          setGameComplete(true);
+        } else {
+          setGameComplete(false);
+        }
       }
     } catch (error) {
       console.error(error);
@@ -40,7 +48,10 @@ function Player({ selectedGame, api_endpoint }) {
 
   return (
     <Container className='mb-4'>
-      <h1 className='text-center'>Score Totals</h1>
+      <h1 className='text-center'>
+        {gameComplete ? `Game Finished!` : `Current Round: ${currentRound}`}
+      </h1>
+      <h2 className='text-center'>Score Totals</h2>
       <Row xs={2} md={4} className='text-center'>
         {playerTotals.map((playerTotal) => {
           return (
@@ -60,7 +71,7 @@ function Player({ selectedGame, api_endpoint }) {
           return (
             <Accordion.Item eventKey={player.playerName} key={player.playerName}>
               <Accordion.Header>
-                <h4>{player.playerName}: {player.total}</h4>
+                <h4>{player.playerName}{!gameComplete && `: Current Bid ${player.currentBid}`}</h4>
               </Accordion.Header>
               <Accordion.Body>
                 <ListGroup>
@@ -70,7 +81,8 @@ function Player({ selectedGame, api_endpoint }) {
                       .map((score) => {
                         return (
                           <ListGroup.Item key={`${score.playername}-${score.roundNumber}`}>
-                            {`Round ${score.roundNumber}: ${score.roundTotal}`}
+                            <strong>{`[Round ${score.roundNumber}]`}</strong>
+                            {` Bid: ${score.bid}, Tricks: ${score.tricks}, Bonus: ${score.bonus}, Round Total: ${score.roundTotal}`}
                           </ListGroup.Item>
                         )
                       })
@@ -87,6 +99,8 @@ function Player({ selectedGame, api_endpoint }) {
       <SummaryGraph
         playerTotals={playerTotals}
         scorecard={scorecard}
+        currentRound={currentRound}
+        gameComplete={gameComplete}
       />
     </Container>
   )

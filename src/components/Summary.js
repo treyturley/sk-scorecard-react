@@ -1,19 +1,15 @@
 import React from 'react'
-import { useEffect } from "react";
+//import { useEffect } from "react";
 import Container from 'react-bootstrap/Container';
 import "../styles/Summary.css"
 import SummaryGraph from './SummaryGraph';
 
-function Summary({ playerTotals, scorecard, setGameComplete, updateScorecard }) {
-
-  // push the last update to scorecard
-  useEffect(() => {
-    updateScorecard();
-    // eslint-disable-next-line
-  }, []);
+function Summary({ playerTotals, scorecard, setGameComplete, currentRound, gameComplete, setSelectedGame }) {
 
   function onClickBackToScores() {
+    //TODO: set current round to 10 instead of going to the first round?
     setGameComplete(false);
+    setSelectedGame(prevGame => ({ ...prevGame, status: "STARTED" }))
   }
 
   function getSortedPlayers() {
@@ -75,6 +71,8 @@ function Summary({ playerTotals, scorecard, setGameComplete, updateScorecard }) 
       <SummaryGraph
         playerTotals={playerTotals}
         scorecard={scorecard}
+        currentRound={currentRound}
+        gameComplete={gameComplete}
       />
       <hr />
 

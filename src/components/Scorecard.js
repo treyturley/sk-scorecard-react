@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useState } from "react";
 import Round from "./Round"
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -14,23 +14,13 @@ function Scorecard({
   PlayerScore,
   playerTotals,
   setPlayerTotals,
-  updateScorecard,
+  setGameCurrentRound,
   selectedGame,
+  setSelectedGame,
   api_endpoint
 }) {
   const [currentRound, setCurrentRound] = useState(1);
-  const firstRun = useRef(true);
-
   const [nextRoundBtnTxt, setNextRoundBtnTxt] = useState("Next Round");
-
-  useEffect(() => {
-    if (firstRun.current) {
-      firstRun.current = false;
-    } else {
-      updateScorecard();
-    }
-    // eslint-disable-next-line
-  }, [playerTotals]);
 
   /**
    * Initializes new roundScore objs for each player for a new round.
@@ -42,6 +32,8 @@ function Scorecard({
     players.forEach(player => {
       const newScore = new PlayerScore(player, roundNumber, 0, 0, 0, 0);
       newScoreCard.push(newScore);
+      //set player's current bid back to zero for the new round
+      updatePlayerBid(player, 0);
     });
 
     setScorecard(newScoreCard);
@@ -55,6 +47,7 @@ function Scorecard({
     if (e.target.value === 'Next Round') {
       if (currentRound < 10) {
         setCurrentRound(currentRound + 1);
+        setGameCurrentRound(currentRound + 1);
         const roundNumberExists = (round) => round.roundNumber === currentRound + 1;
         if (!scorecard.some(roundNumberExists)) {
           startRound(currentRound + 1);
@@ -72,6 +65,7 @@ function Scorecard({
       }
     } else if (e.target.value === 'To Summary') {
       scorecard.filter((round) => round.roundNumber === currentRound).forEach((roundScore) => updateRoundAndPlayerTotal(roundScore));
+      setSelectedGame(prevGame => ({ ...prevGame, status: "FINISHED" }));
       setGameComplete(true);
     }
   }
@@ -91,6 +85,7 @@ function Scorecard({
           }
           return roundScore;
         }));
+      updatePlayerBid(roundScoreToUpdate.playerName, bid)
     }
   }
 
@@ -201,6 +196,17 @@ function Scorecard({
   }
 
   /**
+   * Updates the playerTotals state with the new bid amount for the given player
+   * @param {*} playerToUpdate - name of the player to update
+   * @param {*} bid - the new bid amount
+   */
+  function updatePlayerBid(playerToUpdate, bid) {
+    const newPlayerTotals = [...playerTotals];
+    newPlayerTotals.find((player) => player.playerName === playerToUpdate).currentBid = bid;
+    setPlayerTotals(newPlayerTotals);
+  }
+
+  /**
    * Calculates the score for one round given a bid, number of tricks taken, and any bonus points.
    * @param {number} bid - The number the player bid for this round.
    * @param {number} tricks - The number of tricks the player took this round.
@@ -256,7 +262,7 @@ function Scorecard({
     <>
       <Container>
         <h1 className='text-center'>Score Totals</h1>
-        
+
         <Row xs={2} md={4} className='text-center'>
           {playerTotals.map((playerTotal) => {
             return (

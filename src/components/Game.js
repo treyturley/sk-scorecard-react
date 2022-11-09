@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { useState } from "react";
+import { useCallback } from 'react';
+import { useState, useEffect } from "react";
 import Player from './Player';
 import PlayerSetupForm from "./PlayerSetup";
 import Scorecard from "./Scorecard";
@@ -13,6 +14,7 @@ function Game() {
   const [players, setPlayers] = useState([]);
   const [scorecard, setScorecard] = useState([]);
   const [playerTotals, setPlayerTotals] = useState([]);
+  const [currentRound, setCurrentRound] = useState(1);
 
   const [playersExist, setPlayersExist] = useState(false);
   const [gameComplete, setGameComplete] = useState(false);
@@ -53,51 +55,19 @@ function Game() {
     constructor(name) {
       this.playerName = name;
       this.total = 0;
+      this.currentBid = 0;
     }
   }
 
-  async function addScorecard(scorecard, playerTotals) {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }
-    const game = {
-      name: selectedGame.name,
-      status: "STARTED",
-      scorecard: scorecard,
-      playerTotals: playerTotals
-    }
-    try {
-      const res = await axios.post(`${api_endpoint}/v1/scorecards`, game, config);
-      if (res.status === 201) {
-        setSelectedGame(prevGame => ({ ...prevGame, id: res.data.id }));
-      } else {
-        console.error(`Error occured on POST ${api_endpoint}/v1/scorecards. Received ${res.status} ${res.statusText}`);
-      }
-    } catch (error) {
-      console.error('Error occured during POST /v1/scorecards');
-      console.error(error);
-    }
-  }
-
-  async function updateScorecard() {
-    if (scorecard.length > 0 && selectedGame.id !== '') {
+  /**
+   * Pushes the game state to the SK API
+   */
+  const putGame = useCallback((game) => {
+    async function asyncPutGame() {
       const config = {
         headers: {
           'Content-Type': 'application/json'
         }
-      }
-      const trimmedScorecard = scorecard.filter(score => {
-        if (score.bid === 0 && score.tricks === 0 && score.bonus === 0 && score.roundTotal === 0) {
-          return null;
-        } else {
-          return score;
-        }
-      });
-      const game = {
-        scorecard: trimmedScorecard,
-        playerTotals: playerTotals
       }
       try {
         const res = await axios.put(
@@ -114,8 +84,78 @@ function Game() {
         console.error(error);
       }
     }
+    asyncPutGame();
+  }, [api_endpoint, selectedGame.id]);
+
+  /**
+   * Pushes the initial game state to the SK API
+   * @param {*} scorecard - the scoreacard to push 
+   * @param {*} playerTotals 
+   */
+  async function addScorecard(scorecard, playerTotals) {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+
+    const game = {
+      name: selectedGame.name,
+      status: "STARTED",
+      scorecard: scorecard,
+      playerTotals: playerTotals,
+      currentRound: currentRound
+    }
+
+    try {
+      const res = await axios.post(`${api_endpoint}/v1/scorecards`, game, config);
+      if (res.status === 201) {
+        setSelectedGame(prevGame => ({ ...prevGame, id: res.data.id }));
+      } else {
+        console.error(`Error occured on POST ${api_endpoint}/v1/scorecards. Received ${res.status} ${res.statusText}`);
+      }
+    } catch (error) {
+      console.error('Error occured during POST /v1/scorecards');
+      console.error(error);
+    }
   }
 
+  /**
+   * Puts the scorecard, status, playerTotals, and current round together
+   * and calls putGame to push it to the SK API
+   */
+  const updateScorecard = useCallback(() => {
+    if (scorecard.length > 0 && selectedGame.id !== '') {
+      const game = {
+        scorecard: scorecard,
+        status: selectedGame.status,
+        playerTotals: playerTotals,
+        currentRound: currentRound
+      }
+      putGame(game);
+    }
+  }, [scorecard, playerTotals, currentRound, putGame, selectedGame.id, selectedGame.status]);
+
+  /**
+   * Debounce changes made to the scorecard and 
+   * push changes to SK API no more than once every 2 seconds
+   */
+  useEffect(() => {
+    // TODO: recalculate the players total scores?
+    const timeoutId = setTimeout(() => {
+      updateScorecard();
+    }, 2000);
+
+    return () => {
+      clearTimeout(timeoutId);
+    }
+  }, [scorecard, updateScorecard]);
+
+  /**
+   * Initializes the game by created the player totals and 
+   * scorecard and then pushes these to SK API
+   * @param {*} event - the event that triggered this method
+   */
   const handlePlayerSetupSubmit = (event) => {
     event.preventDefault();
     // TODO: Do some input validation before moving on to the scorecard
@@ -131,10 +171,8 @@ function Game() {
       newPlayerTotals.push(playerTotal);
     });
 
-    //post to api
     addScorecard(newScoreCard, newPlayerTotals);
 
-    //update state
     setScorecard(newScoreCard);
     setPlayerTotals(newPlayerTotals);
     setPlayersExist(true);
@@ -169,8 +207,9 @@ function Game() {
         PlayerScore={PlayerScore}
         playerTotals={playerTotals}
         setPlayerTotals={setPlayerTotals}
-        updateScorecard={updateScorecard}
+        setGameCurrentRound={setCurrentRound}
         selectedGame={selectedGame}
+        setSelectedGame={setSelectedGame}
         api_endpoint={api_endpoint}
       />
     )
@@ -182,6 +221,9 @@ function Game() {
         scorecard={scorecard}
         setGameComplete={setGameComplete}
         updateScorecard={updateScorecard}
+        currentRound={currentRound}
+        gameComplete={gameComplete}
+        setSelectedGame={setSelectedGame}
       />
     )
 
@@ -190,6 +232,7 @@ function Game() {
       <Player
         selectedGame={selectedGame}
         api_endpoint={api_endpoint}
+        gameComplete={gameComplete}
       />
     )
   }
