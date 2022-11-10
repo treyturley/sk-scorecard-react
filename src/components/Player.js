@@ -75,18 +75,30 @@ function Player({ selectedGame, api_endpoint }) {
               </Accordion.Header>
               <Accordion.Body>
                 <ListGroup>
-                  {
-                    scorecard
-                      .filter((roundScore) => roundScore.playerName === player.playerName)
-                      .map((score) => {
-                        return (
-                          <ListGroup.Item key={`${score.playername}-${score.roundNumber}`}>
-                            <strong>{`[Round ${score.roundNumber}]`}</strong>
-                            {` Bid: ${score.bid}, Tricks: ${score.tricks}, Bonus: ${score.bonus}, Round Total: ${score.roundTotal}`}
-                          </ListGroup.Item>
-                        )
-                      })
-                  }
+                  <ListGroup.Item>
+                    <Row className='text-center' >
+                      <Col><strong>Round</strong></Col>
+                      <Col>Bid</Col>
+                      <Col>Tricks</Col>
+                      <Col>Bonus</Col>
+                      <Col>Score</Col>
+                    </Row>
+                    {
+                      scorecard
+                        .filter((roundScore) => roundScore.playerName === player.playerName)
+                        .map((score) => {
+                          return (
+                            <Row className='text-center' key={`${score.playerName}-${score.roundNumber}`}>
+                              <Col><strong>{score.roundNumber}</strong></Col>
+                              <Col>{score.bid}</Col>
+                              <Col>{score.tricks}</Col>
+                              <Col>{score.bonus}</Col>
+                              <Col>{score.roundTotal}</Col>
+                            </Row>
+                          )
+                        })
+                    }
+                  </ListGroup.Item>
                 </ListGroup>
               </Accordion.Body>
             </Accordion.Item>
