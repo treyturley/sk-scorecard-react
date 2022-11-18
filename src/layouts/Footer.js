@@ -12,12 +12,7 @@ const Footer = () => {
         </Row>
         <Row className="justify-content-md-center">
           <Col md="auto">
-            <a href="/" >Home</a>
-          </Col>
-        </Row>
-        <Row className="justify-content-md-center">
-          <Col md="auto">
-            <a href="/sk-scorecard-react/">New Game</a>
+            <a href="/skullking-scorecard">New Game</a>
           </Col>
         </Row>
         <Row className="justify-content-md-center">
@@ -25,8 +20,13 @@ const Footer = () => {
             <a href="https://cdn.shopify.com/s/files/1/0565/3230/4053/files/sk_rulebook_optimized.pdf?v=1652992950" target="_blank" rel="noreferrer">Rules</a>
           </Col>
         </Row>
+        <Row className="justify-content-md-center">
+          <Col md="auto">
+            <a href="/" >treyturley.com</a>
+          </Col>
+        </Row>
       </Container>
-      </footer>
+    </footer>
   )
 }
 
