@@ -28,8 +28,6 @@ function Player({ selectedGame }) {
   const [currentRound, setCurrentRound] = useState(1);
   const [gameComplete, setGameComplete] = useState("");
 
-  // TODO: consider a game joined state to track which game was joined and detect when we switch games?
-
   useEffect(() => {
     console.log("player use effect triggered")
     if (socket && selectedGame.id) {
