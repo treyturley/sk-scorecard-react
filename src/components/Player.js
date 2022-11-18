@@ -28,7 +28,6 @@ function Player({ selectedGame }) {
   const [currentRound, setCurrentRound] = useState(1);
   const [gameComplete, setGameComplete] = useState("");
 
-  const [isConnected, setIsConnected] = useState(socket.connected);
   // TODO: consider a game joined state to track which game was joined and detect when we switch games?
 
   useEffect(() => {
@@ -42,7 +41,6 @@ function Player({ selectedGame }) {
 
       // on connect, join the game room
       socket.on('connect', () => {
-        setIsConnected(true);
         console.log('websocket connected');
 
         // join game room and get the current game info
@@ -80,7 +78,6 @@ function Player({ selectedGame }) {
       });
 
       socket.on('disconnect', () => {
-        setIsConnected(false);
         console.log('websocket disconnected');
       });
 
