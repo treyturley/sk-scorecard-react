@@ -5,44 +5,93 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Accordion from 'react-bootstrap/Accordion';
 import SummaryGraph from './SummaryGraph';
+import { io } from 'socket.io-client';
 
-function Player({ selectedGame, api_endpoint }) {
-  const firstRun = useRef(true);
+
+let socket = null;
+
+if (process.env.NODE_ENV === 'production') {
+  socket = io(process.env.REACT_APP_PROD_API_ENDPOINT, {
+    autoConnect: false,
+    path: process.env.REACT_APP_PROD_API_PATH
+  });
+} else {
+  socket = io(process.env.REACT_APP_DEV_API_ENDPOINT, {
+    autoConnect: false,
+    path: "/socket.io"
+  });
+}
+
   const [scorecard, setScorecard] = useState([]);
   const [playerTotals, setPlayerTotals] = useState([]);
   const [currentRound, setCurrentRound] = useState(1);
   const [gameComplete, setGameComplete] = useState("");
 
-  async function getGame() {
-    try {
-      const res = await axios.get(`${api_endpoint}/v1/scorecards/${selectedGame.id}`);
-      if (res.status === 200) {
-        setScorecard(res.data[0].scorecard);
-        setPlayerTotals(res.data[0].playerTotals);
-        setCurrentRound(res.data[0].currentRound);
-        if (res.data[0].status === "FINISHED") {
+  const [isConnected, setIsConnected] = useState(socket.connected);
+  // TODO: consider a game joined state to track which game was joined and detect when we switch games?
+
+  useEffect(() => {
+    console.log("player use effect triggered")
+    if (socket && selectedGame.id) {
+      console.log(`Selected Game is: ${selectedGame.id}`)
+
+      // connect to scorecards server
+      console.log("connecting the socket");
+      socket.connect();
+
+      // on connect, join the game room
+      socket.on('connect', () => {
+        setIsConnected(true);
+        console.log('websocket connected');
+
+        // join game room and get the current game info
+        socket.emit('join-game', selectedGame.id, (response) => {
+          if (response === 'success') {
+            socket.gameId = selectedGame.id;
+            socket.emit('get-game', selectedGame.id, (game) => {
+              if (game) {
+                setScorecard(game.scorecard);
+                setPlayerTotals(game.playerTotals);
+                setCurrentRound(game.currentRound);
+                if (game.status === "FINISHED") {
+                  setGameComplete(true);
+                } else {
+                  setGameComplete(false);
+                }
+              }
+            });
+          } else {
+            // TODO: error occurred, maybe try again later or use the rest api?
+          }
+        });
+      });
+
+      // on game update event, set the new game state
+      socket.on('update-game', (game) => {
+        setScorecard(game.scorecard);
+        setPlayerTotals(game.playerTotals);
+        setCurrentRound(game.currentRound);
+        if (game.status === "FINISHED") {
           setGameComplete(true);
         } else {
           setGameComplete(false);
         }
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }
+      });
 
-  useEffect(() => {
-    if (firstRun.current) {
-      getGame();
-      firstRun.current = false;
+      socket.on('disconnect', () => {
+        setIsConnected(false);
+        console.log('websocket disconnected');
+      });
+
+      //cleanup websocket
+      return () => {
+        socket.off('connect');
+        socket.off('update-game');
+        socket.off('disconnect');
+      };
     }
-    const intervalCall = setInterval(() => {
-      getGame();
-    }, 5000);
-    return () => {
-      clearInterval(intervalCall);
-    };
-  });
+
+  }, [selectedGame.id]);
 
   return (
     <Container className='mb-4'>
