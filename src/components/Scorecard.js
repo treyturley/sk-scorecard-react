@@ -324,7 +324,9 @@ function Scorecard({
         </div>
 
         <hr />
-        <Player selectedGame={selectedGame} api_endpoint={api_endpoint} />
+        <Player
+          selectedGame={selectedGame}
+        />
 
       </Container>
     </>

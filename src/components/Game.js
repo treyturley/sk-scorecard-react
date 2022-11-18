@@ -242,8 +242,6 @@ function Game() {
     return (
       <Player
         selectedGame={selectedGame}
-        api_endpoint={api_endpoint}
-        gameComplete={gameComplete}
       />
     )
   }

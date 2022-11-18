@@ -22,6 +22,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+function Player({ selectedGame }) {
   const [scorecard, setScorecard] = useState([]);
   const [playerTotals, setPlayerTotals] = useState([]);
   const [currentRound, setCurrentRound] = useState(1);
