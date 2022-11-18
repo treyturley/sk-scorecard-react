@@ -33,6 +33,16 @@ function Game() {
       console[methods[i]] = function () { };
     }
   }
+
+  // TODO: consider rolling up scorecard,playerTotals, and selectedGame into one state object called game
+  /* game would have:
+     - game id, game name, and status for the game (everything currently in selectedGame) plus gameComplete Bool
+     - currently active round number (currentRound)
+     - list of players (players), the array of PlayerScores (scorecard),
+     - each players overall score (PlayerTotal.total)
+     - Each players current bid (PlayerTotal.currentBid)
+   */
+
   const [selectedGame, setSelectedGame] = useState({
     id: '',
     name: '',
