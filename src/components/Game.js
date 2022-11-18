@@ -25,7 +25,24 @@ function Game() {
     api_endpoint = process.env.REACT_APP_DEV_API;
   }
 
-  // TODO: consider rolling up scorecard,playerTotals, and selectedGame into one state ogject called game
+  // disable all but error logs in prod
+  if (process.env.NODE_ENV === 'production') {
+    if (!window.console) window.console = {};
+    var methods = ["log", "debug", "warn", "info"];
+    for (var i = 0; i < methods.length; i++) {
+      console[methods[i]] = function () { };
+    }
+  }
+
+  // TODO: consider rolling up scorecard,playerTotals, and selectedGame into one state object called game
+  /* game would have:
+     - game id, game name, and status for the game (everything currently in selectedGame) plus gameComplete Bool
+     - currently active round number (currentRound)
+     - list of players (players), the array of PlayerScores (scorecard),
+     - each players overall score (PlayerTotal.total)
+     - Each players current bid (PlayerTotal.currentBid)
+   */
+
   const [selectedGame, setSelectedGame] = useState({
     id: '',
     name: '',
@@ -80,8 +97,12 @@ function Game() {
           console.error(`Error occured during PUT /v1/scorecards/${selectedGame.id}. Received ${res.status} ${res.statusText}`);
         }
       } catch (error) {
-        console.error(`PUT /v1/scorecards/${selectedGame.id} failed!`);
-        console.error(error);
+        console.error(`PUT /v1/scorecards/${selectedGame.id} failed! ${error.message}`);
+        if (error.response && error.response.status === 400) {
+          // TODO: notify the user that this game no longer exists for some reason
+          // needs popup message and link to go back to home screen
+        }
+        // console.error(error);
       }
     }
     asyncPutGame();
@@ -144,7 +165,7 @@ function Game() {
     // TODO: recalculate the players total scores?
     const timeoutId = setTimeout(() => {
       updateScorecard();
-    }, 2000);
+    }, 250);
 
     return () => {
       clearTimeout(timeoutId);
@@ -231,8 +252,6 @@ function Game() {
     return (
       <Player
         selectedGame={selectedGame}
-        api_endpoint={api_endpoint}
-        gameComplete={gameComplete}
       />
     )
   }
