@@ -25,7 +25,14 @@ function Game() {
     api_endpoint = process.env.REACT_APP_DEV_API;
   }
 
-  // TODO: consider rolling up scorecard,playerTotals, and selectedGame into one state ogject called game
+  // disable all but error logs in prod
+  if (process.env.NODE_ENV === 'production') {
+    if (!window.console) window.console = {};
+    var methods = ["log", "debug", "warn", "info"];
+    for (var i = 0; i < methods.length; i++) {
+      console[methods[i]] = function () { };
+    }
+  }
   const [selectedGame, setSelectedGame] = useState({
     id: '',
     name: '',
