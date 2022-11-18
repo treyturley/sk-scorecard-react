@@ -155,7 +155,7 @@ function Game() {
     // TODO: recalculate the players total scores?
     const timeoutId = setTimeout(() => {
       updateScorecard();
-    }, 2000);
+    }, 250);
 
     return () => {
       clearTimeout(timeoutId);
