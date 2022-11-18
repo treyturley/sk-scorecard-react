@@ -1,11 +1,9 @@
-import axios from 'axios';
-import React, { useEffect } from 'react'
-import { useState } from 'react';
+import React from 'react'
+import { useEffect, useState } from 'react';
 import { Container, ListGroup } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Accordion from 'react-bootstrap/Accordion';
-import { useRef } from 'react';
 import SummaryGraph from './SummaryGraph';
 
 function Player({ selectedGame, api_endpoint }) {
