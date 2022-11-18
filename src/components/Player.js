@@ -13,7 +13,7 @@ let socket = null;
 if (process.env.NODE_ENV === 'production') {
   socket = io(process.env.REACT_APP_PROD_API_ENDPOINT, {
     autoConnect: false,
-    path: process.env.REACT_APP_PROD_API_PATH
+    path: process.env.REACT_APP_PROD_API_PATH + '/socket.io/'
   });
 } else {
   socket = io(process.env.REACT_APP_DEV_API_ENDPOINT, {
