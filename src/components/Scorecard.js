@@ -214,6 +214,10 @@ function Scorecard({
       } else {
         const bidDiff = Math.abs(bid - tricks);
         total -= 10 * bidDiff;
+        // if bonues is negative (rascal of rotan bet) need to also take it into account
+        if (bonus < 0) {
+          total += bonus;
+        }
       }
     }
     return total;
