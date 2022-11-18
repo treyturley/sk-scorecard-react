@@ -87,8 +87,12 @@ function Game() {
           console.error(`Error occured during PUT /v1/scorecards/${selectedGame.id}. Received ${res.status} ${res.statusText}`);
         }
       } catch (error) {
-        console.error(`PUT /v1/scorecards/${selectedGame.id} failed!`);
-        console.error(error);
+        console.error(`PUT /v1/scorecards/${selectedGame.id} failed! ${error.message}`);
+        if (error.response && error.response.status === 400) {
+          // TODO: notify the user that this game no longer exists for some reason
+          // needs popup message and link to go back to home screen
+        }
+        // console.error(error);
       }
     }
     asyncPutGame();
