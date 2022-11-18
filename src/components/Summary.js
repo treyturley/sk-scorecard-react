@@ -80,6 +80,8 @@ function Summary({ playerTotals, scorecard, setGameComplete, currentRound, gameC
         <button className='btn btn-primary' onClick={onClickBackToScores}>Back to Scores</button>
       </div>
 
+      {/* TODO: option to delete game from server */}
+
     </Container>
   )
 }
