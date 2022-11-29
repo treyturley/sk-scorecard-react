@@ -8,19 +8,13 @@ import SummaryGraph from './SummaryGraph';
 import { io } from 'socket.io-client';
 
 
-let socket = null;
+const socketIOEndpoint = process.env.NODE_ENV === 'production' ?
+  process.env.REACT_APP_PROD_API_ENDPOINT : process.env.REACT_APP_DEV_API_ENDPOINT;
 
-if (process.env.NODE_ENV === 'production') {
-  socket = io(process.env.REACT_APP_PROD_API_ENDPOINT, {
-    autoConnect: false,
-    path: process.env.REACT_APP_PROD_API_PATH + '/socket.io/'
-  });
-} else {
-  socket = io(process.env.REACT_APP_DEV_API_ENDPOINT, {
-    autoConnect: false,
-    path: "/socket.io"
-  });
-}
+const socket = io(socketIOEndpoint, {
+  autoConnect: false,
+  path: process.env.REACT_APP_SOCKET_IO_PATH
+});
 
 function Player({ selectedGame }) {
   const [scorecard, setScorecard] = useState([]);
