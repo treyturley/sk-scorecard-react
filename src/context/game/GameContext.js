@@ -10,7 +10,6 @@ export const GameProvider = ({ children }) => {
     scorecard: [],
     playerTotals: [],
     currentRound: 1,
-    playersExist: false,
     gameComplete: false,
   };
 
