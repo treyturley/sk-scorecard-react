@@ -4,6 +4,7 @@ import {
   CLEAR_PLAYERS,
   CLEAR_SCORECARD,
   SET_PLAYERTOTALS,
+  SET_CURRENTROUND,
 } from './GameActionTypes';
 
 const gameReducer = (state, action) => {
@@ -19,6 +20,8 @@ const gameReducer = (state, action) => {
       return { ...state, scorecard: [] };
     case SET_PLAYERTOTALS:
       return { ...state, playerTotals: action.payload };
+    case SET_CURRENTROUND:
+      return { ...state, currentRound: action.payload };
     default:
       return state;
   }

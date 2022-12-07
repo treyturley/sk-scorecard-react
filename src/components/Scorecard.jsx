@@ -4,7 +4,10 @@ import Round from './Round';
 import Player from './Player';
 
 import GameContext from '../context/game/GameContext';
-import { SET_PLAYERTOTALS } from '../context/game/GameActionTypes';
+import {
+  SET_PLAYERTOTALS,
+  SET_CURRENTROUND,
+} from '../context/game/GameActionTypes';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -20,10 +23,9 @@ function Scorecard({
   setSelectedGame,
   api_endpoint,
 }) {
-  const [currentRound, setCurrentRound] = useState(1);
   const [nextRoundBtnTxt, setNextRoundBtnTxt] = useState('Next Round');
 
-  const { players, scorecard, playerTotals, dispatch } =
+  const { players, scorecard, playerTotals, currentRound, dispatch } =
     useContext(GameContext);
 
   /**
@@ -49,14 +51,11 @@ function Scorecard({
   function changeRound(e) {
     if (e.target.value === 'Next Round') {
       if (currentRound < 10) {
-        // TODO: Not sure if we even need this here, this is also weir because we are updating the scorecard while iterating over it
-        //
         scorecard
           .filter((round) => round.roundNumber === currentRound)
           .forEach((roundScore) => updateRoundAndPlayerTotal(roundScore));
 
-        setCurrentRound(currentRound + 1);
-        setGameCurrentRound(currentRound + 1);
+        dispatch({ type: SET_CURRENTROUND, payload: currentRound + 1 });
 
         const roundNumberExists = (round) =>
           round.roundNumber === currentRound + 1;
@@ -72,7 +71,7 @@ function Scorecard({
       }
     } else if (e.target.value === 'Previous Round') {
       if (currentRound > 1) {
-        setCurrentRound(currentRound - 1);
+        dispatch({ type: SET_CURRENTROUND, payload: currentRound - 1 });
         setNextRoundBtnTxt('Next Round');
       }
     } else if (e.target.value === 'To Summary') {

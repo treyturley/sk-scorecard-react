@@ -11,12 +11,10 @@ import GameContext from '../context/game/GameContext';
 import { SET_PLAYERTOTALS } from '../context/game/GameActionTypes';
 
 function Game() {
-  const [currentRound, setCurrentRound] = useState(1);
-
   const [playersExist, setPlayersExist] = useState(false);
   const [gameComplete, setGameComplete] = useState(false);
 
-  const { players, scorecard, playerTotals, dispatch } =
+  const { players, scorecard, playerTotals, currentRound, dispatch } =
     useContext(GameContext);
 
   let api_endpoint = process.env.REACT_APP_PROD_API;
@@ -245,7 +243,6 @@ function Game() {
       <Scorecard
         setGameComplete={setGameComplete}
         PlayerScore={PlayerScore}
-        setGameCurrentRound={setCurrentRound}
         selectedGame={selectedGame}
         setSelectedGame={setSelectedGame}
         api_endpoint={api_endpoint}
@@ -265,6 +262,7 @@ function Game() {
         setSelectedGame={setSelectedGame}
       />
     );
+    // TODO: This should really be a route to the player page containing the player view
   } else if (playerType === PlayerTypes.PLAYER && selectedGame.id !== '') {
     return <Player selectedGame={selectedGame} />;
   }
