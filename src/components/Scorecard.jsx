@@ -1,15 +1,14 @@
-import { useState } from "react";
-import Round from "./Round"
+import { useState } from 'react';
+import Round from './Round';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import '../styles/Scorecard.css'
+import '../styles/Scorecard.css';
 import Player from './Player';
+import { useContext } from 'react';
+import GameContext from '../context/game/GameContext';
 
 function Scorecard({
-  players,
-  scorecard,
-  setScorecard,
   setGameComplete,
   PlayerScore,
   playerTotals,
@@ -20,7 +19,9 @@ function Scorecard({
   api_endpoint
 }) {
   const [currentRound, setCurrentRound] = useState(1);
-  const [nextRoundBtnTxt, setNextRoundBtnTxt] = useState("Next Round");
+  const [nextRoundBtnTxt, setNextRoundBtnTxt] = useState('Next Round');
+
+  const { players, scorecard, dispatch } = useContext(GameContext);
 
   /**
    * Initializes new roundScore objs for each player for a new round.
@@ -36,7 +37,7 @@ function Scorecard({
       updatePlayerBid(player, 0);
     });
 
-    setScorecard(newScoreCard);
+    dispatch({ type: 'SET_SCORECARD', payload: newScoreCard });
   }
 
   /**
@@ -46,13 +47,22 @@ function Scorecard({
   function changeRound(e) {
     if (e.target.value === 'Next Round') {
       if (currentRound < 10) {
+        // TODO: Not sure if we even need this here, this is also weir because we are updating the scorecard while iterating over it
+        //
+        scorecard
+          .filter((round) => round.roundNumber === currentRound)
+          .forEach((roundScore) => updateRoundAndPlayerTotal(roundScore));
+
         setCurrentRound(currentRound + 1);
         setGameCurrentRound(currentRound + 1);
-        const roundNumberExists = (round) => round.roundNumber === currentRound + 1;
+
+        const roundNumberExists = (round) =>
+          round.roundNumber === currentRound + 1;
+
+        // if scores for next round dont exist, create them
         if (!scorecard.some(roundNumberExists)) {
           startRound(currentRound + 1);
         }
-        scorecard.filter((round) => round.roundNumber === currentRound).forEach((roundScore) => updateRoundAndPlayerTotal(roundScore));
 
         if (currentRound === 9) {
           setNextRoundBtnTxt("To Summary");
@@ -77,15 +87,18 @@ function Scorecard({
    */
   function onBidChange(bid, roundScoreToUpdate) {
     if (bid >= 0 && bid <= 10) {
-      setScorecard(
-        scorecard.map((roundScore) => {
-          if (roundScore.playerName === roundScoreToUpdate.playerName
-            && roundScore.roundNumber === roundScoreToUpdate.roundNumber) {
-            roundScore.bid = bid;
-          }
-          return roundScore;
-        }));
-      updatePlayerBid(roundScoreToUpdate.playerName, bid)
+      const newScoreCard = scorecard.map((roundScore) => {
+        if (
+          roundScore.playerName === roundScoreToUpdate.playerName &&
+          roundScore.roundNumber === roundScoreToUpdate.roundNumber
+        ) {
+          roundScore.bid = bid;
+        }
+        return roundScore;
+      });
+      dispatch({ type: 'SET_SCORECARD', payload: newScoreCard });
+
+      updatePlayerBid(roundScoreToUpdate.playerName, bid);
     }
   }
 
@@ -96,14 +109,16 @@ function Scorecard({
    */
   function onTrickChange(tricks, roundScoreToUpdate) {
     if (tricks >= 0 && tricks <= 10) {
-      setScorecard(
-        scorecard.map((roundScore) => {
-          if (roundScore.playerName === roundScoreToUpdate.playerName
-            && roundScore.roundNumber === roundScoreToUpdate.roundNumber) {
-            roundScore.tricks = tricks;
-          }
-          return roundScore;
-        }));
+      const newScoreCard = scorecard.map((roundScore) => {
+        if (
+          roundScore.playerName === roundScoreToUpdate.playerName &&
+          roundScore.roundNumber === roundScoreToUpdate.roundNumber
+        ) {
+          roundScore.tricks = tricks;
+        }
+        return roundScore;
+      });
+      dispatch({ type: 'SET_SCORECARD', payload: newScoreCard });
     }
   }
 
@@ -114,14 +129,16 @@ function Scorecard({
    */
   function onBonusChange(bonus, roundScoreToUpdate) {
     roundScoreToUpdate.bonus = bonus;
-    setScorecard(
-      scorecard.map((roundScore) => {
-        if (roundScore.playerName === roundScoreToUpdate.playerName
-          && roundScore.roundNumber === roundScoreToUpdate.roundNumber) {
-          return roundScoreToUpdate;
-        }
-        return roundScore;
-      }));
+    const newScoreCard = scorecard.map((roundScore) => {
+      if (
+        roundScore.playerName === roundScoreToUpdate.playerName &&
+        roundScore.roundNumber === roundScoreToUpdate.roundNumber
+      ) {
+        return roundScoreToUpdate;
+      }
+      return roundScore;
+    });
+    dispatch({ type: 'SET_SCORECARD', payload: newScoreCard });
   }
 
   /**
@@ -144,27 +161,22 @@ function Scorecard({
       roundScoreToUpdate.roundNumber,
       roundScoreToUpdate.bid,
       roundScoreToUpdate.tricks,
-      roundScoreToUpdate.bonus);
+      roundScoreToUpdate.bonus
+    );
 
-    // create a new score card with the updated round score
-    let newScoreCard = scorecard.map((roundScore) =>
-      roundScore.playerName === roundScoreToUpdate.playerName
-        && roundScore.roundNumber === roundScoreToUpdate.roundNumber
-        ? { ...roundScore, roundTotal: total, bonus: roundScoreToUpdate.bonus }
-        : roundScore);
+    const newScorecard = scorecard.map((roundScore) => {
+      if (
+        roundScore.playerName === roundScoreToUpdate.playerName &&
+        roundScore.roundNumber === roundScoreToUpdate.roundNumber
+      ) {
+        roundScore.roundTotal = total;
+      }
+      return roundScore;
+    });
 
-    // update scorecard with round total and updated bonus
-    setScorecard(prevScorecard =>
-      prevScorecard.map((roundScore) => {
-        if (roundScore.playerName === roundScoreToUpdate.playerName
-          && roundScore.roundNumber === roundScoreToUpdate.roundNumber) {
-          roundScore.roundTotal = total;
-          roundScore.bonus = roundScoreToUpdate.bonus;
-        }
-        return roundScore;
-      }));
+    dispatch({ type: 'SET_SCORECARD', payload: newScorecard });
 
-    updatePlayerTotal(newScoreCard, roundScoreToUpdate.playerName);
+    updatePlayerTotal(newScorecard, roundScoreToUpdate.playerName);
   }
 
   /**
@@ -240,7 +252,7 @@ function Scorecard({
       }
     });
 
-    setScorecard(newScoreCard);
+    dispatch({ type: 'SET_SCORECARD', payload: newScoreCard });
 
     // call updatePlayerTotal for each player and pass updated scorecard
     playerTotals.forEach(player =>
