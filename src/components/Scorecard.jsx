@@ -1,18 +1,20 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+
 import Round from './Round';
+import Player from './Player';
+
+import GameContext from '../context/game/GameContext';
+import { SET_PLAYERTOTALS } from '../context/game/GameActionTypes';
+
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+
 import '../styles/Scorecard.css';
-import Player from './Player';
-import { useContext } from 'react';
-import GameContext from '../context/game/GameContext';
 
 function Scorecard({
   setGameComplete,
   PlayerScore,
-  playerTotals,
-  setPlayerTotals,
   setGameCurrentRound,
   selectedGame,
   setSelectedGame,
@@ -21,7 +23,8 @@ function Scorecard({
   const [currentRound, setCurrentRound] = useState(1);
   const [nextRoundBtnTxt, setNextRoundBtnTxt] = useState('Next Round');
 
-  const { players, scorecard, dispatch } = useContext(GameContext);
+  const { players, scorecard, playerTotals, dispatch } =
+    useContext(GameContext);
 
   /**
    * Initializes new roundScore objs for each player for a new round.
@@ -36,7 +39,6 @@ function Scorecard({
       //set player's current bid back to zero for the new round
       updatePlayerBid(player, 0);
     });
-    console.log(newScoreCard);
     dispatch({ type: 'SET_SCORECARD', payload: newScoreCard });
   }
 
@@ -197,7 +199,7 @@ function Scorecard({
       (player) => player.playerName === playerToUpdate
     ).total = totalScore;
 
-    setPlayerTotals(newPlayerTotals);
+    dispatch({ type: SET_PLAYERTOTALS, payload: newPlayerTotals });
   }
 
   /**
@@ -210,7 +212,7 @@ function Scorecard({
     newPlayerTotals.find(
       (player) => player.playerName === playerToUpdate
     ).currentBid = bid;
-    setPlayerTotals(newPlayerTotals);
+    dispatch({ type: SET_PLAYERTOTALS, payload: newPlayerTotals });
   }
 
   /**

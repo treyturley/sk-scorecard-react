@@ -1,17 +1,18 @@
 import React from 'react';
-//import { useEffect } from "react";
+import { useContext } from 'react';
+import SummaryGraph from './SummaryGraph';
+import GameContext from '../context/game/GameContext';
 import Container from 'react-bootstrap/Container';
 import '../styles/Summary.css';
-import SummaryGraph from './SummaryGraph';
 
 function Summary({
-  playerTotals,
-  scorecard,
   setGameComplete,
   currentRound,
   gameComplete,
   setSelectedGame,
 }) {
+  const { scorecard, playerTotals } = useContext(GameContext);
+
   function onClickBackToScores() {
     //TODO: set current round to 10 instead of going to the first round?
     setGameComplete(false);

@@ -1,20 +1,23 @@
 import axios from 'axios';
-import { useCallback, useContext } from 'react';
-import { useState, useEffect } from 'react';
-import GameContext from '../context/game/GameContext';
+
+import { useCallback, useContext, useState, useEffect } from 'react';
+
 import Player from './Player';
 import PlayerSetupForm from './PlayerSetup';
 import Scorecard from './Scorecard';
 import Summary from './Summary';
 
+import GameContext from '../context/game/GameContext';
+import { SET_PLAYERTOTALS } from '../context/game/GameActionTypes';
+
 function Game() {
-  const [playerTotals, setPlayerTotals] = useState([]);
   const [currentRound, setCurrentRound] = useState(1);
 
   const [playersExist, setPlayersExist] = useState(false);
   const [gameComplete, setGameComplete] = useState(false);
 
-  const { players, scorecard, dispatch } = useContext(GameContext);
+  const { players, scorecard, playerTotals, dispatch } =
+    useContext(GameContext);
 
   let api_endpoint = process.env.REACT_APP_PROD_API;
 
@@ -209,12 +212,11 @@ function Game() {
       const playerTotal = new PlayerTotal(player);
       newPlayerTotals.push(playerTotal);
     });
-
     addScorecard(newScoreCard, newPlayerTotals);
 
     dispatch({ type: 'SET_SCORECARD', payload: newScoreCard });
 
-    setPlayerTotals(newPlayerTotals);
+    dispatch({ type: SET_PLAYERTOTALS, payload: newPlayerTotals });
     setPlayersExist(true);
   };
 
@@ -241,11 +243,8 @@ function Game() {
   ) {
     return (
       <Scorecard
-        scorecard={scorecard}
         setGameComplete={setGameComplete}
         PlayerScore={PlayerScore}
-        playerTotals={playerTotals}
-        setPlayerTotals={setPlayerTotals}
         setGameCurrentRound={setCurrentRound}
         selectedGame={selectedGame}
         setSelectedGame={setSelectedGame}
@@ -259,8 +258,6 @@ function Game() {
   ) {
     return (
       <Summary
-        playerTotals={playerTotals}
-        scorecard={scorecard}
         setGameComplete={setGameComplete}
         updateScorecard={updateScorecard}
         currentRound={currentRound}
