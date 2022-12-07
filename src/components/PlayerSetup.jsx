@@ -1,11 +1,8 @@
-import '../styles/PlayerSetup.css'
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import GameContext from '../context/game/GameContext';
 
 function PlayerSetupForm({
-  players,
-  setPlayers,
   handleSubmit,
   playerType,
   setPlayerType,
@@ -18,6 +15,8 @@ function PlayerSetupForm({
   const [playerCount, setPlayerCount] = useState(4);
   const [activeGames, setActiveGames] = useState([]);
   const [refreshGames, setRefreshGames] = useState(true);
+
+  const { players, dispatch } = useContext(GameContext);
 
   const MIN_PLAYERS = 2;
   const MAX_PLAYERS = 10;
@@ -47,8 +46,9 @@ function PlayerSetupForm({
   const handleNameChange = index => event => {
     let newArr = [...players];
     newArr[index] = event.target.value;
-    setPlayers(newArr);
-  }
+    dispatch({ type: 'SET_PLAYERS', payload: newArr });
+    // setPlayers(newArr);
+  };
 
   function createOptions() {
     let rows = [];
