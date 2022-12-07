@@ -8,6 +8,7 @@ import {
   SET_PLAYERTOTALS,
   SET_CURRENTROUND,
   SET_SCORECARD,
+  SET_GAMECOMPLETE,
 } from '../context/game/GameActionTypes';
 
 import Container from 'react-bootstrap/Container';
@@ -17,7 +18,6 @@ import Col from 'react-bootstrap/Col';
 import '../styles/Scorecard.css';
 
 function Scorecard({
-  setGameComplete,
   PlayerScore,
   setGameCurrentRound,
   selectedGame,
@@ -80,7 +80,7 @@ function Scorecard({
         .filter((round) => round.roundNumber === currentRound)
         .forEach((roundScore) => updateRoundAndPlayerTotal(roundScore));
       setSelectedGame((prevGame) => ({ ...prevGame, status: 'FINISHED' }));
-      setGameComplete(true);
+      dispatch({ type: SET_GAMECOMPLETE, payload: true });
     }
   }
 

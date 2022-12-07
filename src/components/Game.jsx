@@ -11,14 +11,20 @@ import GameContext from '../context/game/GameContext';
 import {
   SET_SCORECARD,
   SET_PLAYERTOTALS,
+  SET_GAMECOMPLETE,
 } from '../context/game/GameActionTypes';
 
 function Game() {
   const [playersExist, setPlayersExist] = useState(false);
-  const [gameComplete, setGameComplete] = useState(false);
 
-  const { players, scorecard, playerTotals, currentRound, dispatch } =
-    useContext(GameContext);
+  const {
+    players,
+    scorecard,
+    playerTotals,
+    currentRound,
+    gameComplete,
+    dispatch,
+  } = useContext(GameContext);
 
   let api_endpoint = process.env.REACT_APP_PROD_API;
 
@@ -244,7 +250,6 @@ function Game() {
   ) {
     return (
       <Scorecard
-        setGameComplete={setGameComplete}
         PlayerScore={PlayerScore}
         selectedGame={selectedGame}
         setSelectedGame={setSelectedGame}
@@ -258,7 +263,6 @@ function Game() {
   ) {
     return (
       <Summary
-        setGameComplete={setGameComplete}
         updateScorecard={updateScorecard}
         currentRound={currentRound}
         gameComplete={gameComplete}

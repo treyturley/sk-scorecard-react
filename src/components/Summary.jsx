@@ -5,17 +5,19 @@ import GameContext from '../context/game/GameContext';
 import Container from 'react-bootstrap/Container';
 import '../styles/Summary.css';
 
+import { SET_GAMECOMPLETE } from '../context/game/GameActionTypes';
+
 function Summary({
   setGameComplete,
   currentRound,
   gameComplete,
   setSelectedGame,
 }) {
-  const { scorecard, playerTotals } = useContext(GameContext);
+  const { scorecard, playerTotals, dispatch } = useContext(GameContext);
 
   function onClickBackToScores() {
     //TODO: set current round to 10 instead of going to the first round?
-    setGameComplete(false);
+    dispatch({ type: SET_GAMECOMPLETE, payload: false });
     setSelectedGame((prevGame) => ({ ...prevGame, status: 'STARTED' }));
   }
 
