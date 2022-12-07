@@ -24,18 +24,11 @@ function Player({ selectedGame }) {
   const [gameComplete, setGameComplete] = useState('');
 
   useEffect(() => {
-    console.log('player use effect triggered');
     if (socket && selectedGame.id) {
-      console.log(`Selected Game is: ${selectedGame.id}`);
-
-      // connect to scorecards server
-      console.log('connecting the socket');
       socket.connect();
 
       // on connect, join the game room
       socket.on('connect', () => {
-        console.log('websocket connected');
-
         // join game room and get the current game info
         socket.emit('join-game', selectedGame.id, (response) => {
           if (response === 'success') {
