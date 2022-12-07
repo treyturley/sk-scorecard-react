@@ -1,0 +1,4 @@
+export const SET_PLAYERS = 'SET_PLAYERS';
+export const CLEAR_PLAYERS = 'CLEAR_PLAYERS';
+export const SET_SCORECARD = 'SET_SCORECARD';
+export const CLEAR_SCORECARD = 'CLEAR_SCORECARD';
