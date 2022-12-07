@@ -11,7 +11,6 @@ import GameContext from '../context/game/GameContext';
 import {
   SET_SCORECARD,
   SET_PLAYERTOTALS,
-  SET_GAMECOMPLETE,
 } from '../context/game/GameActionTypes';
 
 function Game() {
