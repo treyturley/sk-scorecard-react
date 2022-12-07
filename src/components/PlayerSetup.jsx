@@ -1,3 +1,4 @@
+import '../styles/PlayerSetup.css';
 import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import GameContext from '../context/game/GameContext';
@@ -9,9 +10,8 @@ function PlayerSetupForm({
   PlayerTypes,
   selectedGame,
   setSelectedGame,
-  api_endpoint
+  api_endpoint,
 }) {
-
   const [playerCount, setPlayerCount] = useState(4);
   const [activeGames, setActiveGames] = useState([]);
   const [refreshGames, setRefreshGames] = useState(true);
@@ -27,7 +27,6 @@ function PlayerSetupForm({
         const res = await axios.get(`${api_endpoint}/v1/scorecards`);
 
         setActiveGames(res.data.reverse());
-
       } catch (error) {
         console.error('Request to get active games failed');
       }
@@ -41,9 +40,9 @@ function PlayerSetupForm({
 
   const handlePlayerCountChange = (event) => {
     setPlayerCount(event.target.value);
-  }
+  };
 
-  const handleNameChange = index => event => {
+  const handleNameChange = (index) => (event) => {
     let newArr = [...players];
     newArr[index] = event.target.value;
     dispatch({ type: 'SET_PLAYERS', payload: newArr });
@@ -54,7 +53,9 @@ function PlayerSetupForm({
     let rows = [];
     for (let i = MIN_PLAYERS; i <= MAX_PLAYERS; i++) {
       rows.push(
-        <option key={i} value={i}>{i}</option>
+        <option key={i} value={i}>
+          {i}
+        </option>
       );
     }
     return rows;
@@ -66,10 +67,10 @@ function PlayerSetupForm({
       rows.push(
         <input
           key={i}
-          type="text"
+          type='text'
           name={`Player ${i + 1}`}
           placeholder={`Player ${i + 1}`}
-          value={players[i] || ""}
+          value={players[i] || ''}
           onChange={handleNameChange(i)}
         />
       );
@@ -82,16 +83,20 @@ function PlayerSetupForm({
 
     if (activeGames.length === 0) {
     } else {
-      activeGames.forEach(game => {
+      activeGames.forEach((game) => {
         // TODO: wrap this up in card or something nice looking
-        if (game.status === "STARTED") {
+        if (game.status === 'STARTED') {
           rows.push(
-            <h4 key={`${game.id}`}>{game.name} - {game.playerTotals.length} players</h4>
+            <h4 key={`${game.id}`}>
+              {game.name} - {game.playerTotals.length} players
+            </h4>
           );
 
           game.playerTotals.forEach((player) => {
             rows.push(
-              <p key={`${game.id}-${player.playerName}`}>{player.playerName} : {player.total}</p>
+              <p key={`${game.id}-${player.playerName}`}>
+                {player.playerName} : {player.total}
+              </p>
             );
           });
 
@@ -101,7 +106,13 @@ function PlayerSetupForm({
               <button
                 key={`${game.id}-View`}
                 className='btn btn-primary mb-4'
-                onClick={() => setSelectedGame({ id: game.id, name: game.name, status: "STARTED" })}
+                onClick={() =>
+                  setSelectedGame({
+                    id: game.id,
+                    name: game.name,
+                    status: 'STARTED',
+                  })
+                }
               >
                 View Game
               </button>
@@ -116,75 +127,84 @@ function PlayerSetupForm({
   if (playerType === PlayerTypes.PLAYER_NOT_SET) {
     return (
       <>
-        <div className="my-container">
+        <div className='my-container'>
           <h1>Player Setup</h1>
           <h4>Are you the score keeper or a player?</h4>
 
           <input
-            type="button"
+            type='button'
             className='btn btn-primary mb-4'
             value={PlayerTypes.SCORE_KEEPER}
             onClick={() => setPlayerType(PlayerTypes.SCORE_KEEPER)}
           />
 
           <input
-            type="button"
+            type='button'
             className='btn btn-primary mb-4'
             value={PlayerTypes.PLAYER}
             onClick={() => setPlayerType(PlayerTypes.PLAYER)}
           />
         </div>
       </>
-
-    )
-  }
-  else if (playerType === PlayerTypes.SCORE_KEEPER) {
+    );
+  } else if (playerType === PlayerTypes.SCORE_KEEPER) {
     return (
       <>
-        <div className="my-container">
-
-          <div className="title">
+        <div className='my-container'>
+          <div className='title'>
             <h1>Game Setup</h1>
           </div>
           <form onSubmit={handleSubmit}>
             <input
-              type="text"
+              type='text'
               name='game-name'
               value={selectedGame.name}
-              placeholder={selectedGame.name || "Game Name"}
-              onChange={(event) => setSelectedGame(prevGame => ({ ...prevGame, name: event.target.value }))}
+              placeholder={selectedGame.name || 'Game Name'}
+              onChange={(event) =>
+                setSelectedGame((prevGame) => ({
+                  ...prevGame,
+                  name: event.target.value,
+                }))
+              }
             />
 
-            <div className="select-player-count">
-              <label htmlFor="SelectPlayerCount">How Many Players?</label>
+            <div className='select-player-count'>
+              <label htmlFor='SelectPlayerCount'>How Many Players?</label>
               <select
                 id='SelectPlayerCount'
                 name='SelectPlayerCount'
                 value={playerCount}
-                onChange={handlePlayerCountChange}>
+                onChange={handlePlayerCountChange}
+              >
                 {createOptions()}
               </select>
             </div>
 
             {playerInputRows(playerCount)}
-            <div className="d-flex justify-content-center mb-4">
-              <button type="submit" className='btn btn-primary'>Set Sail</button>
+            <div className='d-flex justify-content-center mb-4'>
+              <button type='submit' className='btn btn-primary'>
+                Set Sail
+              </button>
             </div>
           </form>
         </div>
       </>
-
-    )
+    );
   } else if (playerType === PlayerTypes.PLAYER) {
     return (
       <>
-        <div className="my-container">
+        <div className='my-container'>
           <h1>Games in Progress</h1>
-          <button className='btn btn-success mb-4' onClick={() => setRefreshGames(true)}>Refresh</button>
+          <button
+            className='btn btn-success mb-4'
+            onClick={() => setRefreshGames(true)}
+          >
+            Refresh
+          </button>
           {listActiveGames()}
         </div>
       </>
-    )
+    );
   }
 }
 
