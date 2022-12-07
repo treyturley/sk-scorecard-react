@@ -1,9 +1,10 @@
 import axios from 'axios';
-import { useCallback } from 'react';
-import { useState, useEffect } from "react";
+import { useCallback, useContext } from 'react';
+import { useState, useEffect } from 'react';
+import GameContext from '../context/game/GameContext';
 import Player from './Player';
-import PlayerSetupForm from "./PlayerSetup";
-import Scorecard from "./Scorecard";
+import PlayerSetupForm from './PlayerSetup';
+import Scorecard from './Scorecard';
 import Summary from './Summary';
 
 function Game() {
@@ -24,9 +25,9 @@ function Game() {
   // disable all but error logs in prod
   if (process.env.NODE_ENV === 'production') {
     if (!window.console) window.console = {};
-    var methods = ["log", "debug", "warn", "info"];
+    var methods = ['log', 'debug', 'warn', 'info'];
     for (var i = 0; i < methods.length; i++) {
-      console[methods[i]] = function () { };
+      console[methods[i]] = function () {};
     }
   }
 
@@ -42,7 +43,7 @@ function Game() {
   const [selectedGame, setSelectedGame] = useState({
     id: '',
     name: '',
-    status: ''
+    status: '',
   });
 
   class PlayerTypes {
@@ -75,61 +76,75 @@ function Game() {
   /**
    * Pushes the game state to the SK API
    */
-  const putGame = useCallback((game) => {
-    async function asyncPutGame() {
-      const config = {
-        headers: {
-          'Content-Type': 'application/json'
+  const putGame = useCallback(
+    (game) => {
+      async function asyncPutGame() {
+        const config = {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        };
+        try {
+          const res = await axios.put(
+            `${api_endpoint}/v1/scorecards/${selectedGame.id}`,
+            game,
+            config
+          );
+          if (res.status === 200) {
+            // success
+          } else {
+            console.error(
+              `Error occured during PUT /v1/scorecards/${selectedGame.id}. Received ${res.status} ${res.statusText}`
+            );
+          }
+        } catch (error) {
+          console.error(
+            `PUT /v1/scorecards/${selectedGame.id} failed! ${error.message}`
+          );
+          if (error.response && error.response.status === 400) {
+            // TODO: notify the user that this game no longer exists for some reason
+            // needs popup message and link to go back to home screen
+          }
+          // console.error(error);
         }
       }
-      try {
-        const res = await axios.put(
-          `${api_endpoint}/v1/scorecards/${selectedGame.id}`,
-          game,
-          config);
-        if (res.status === 200) {
-          // success
-        } else {
-          console.error(`Error occured during PUT /v1/scorecards/${selectedGame.id}. Received ${res.status} ${res.statusText}`);
-        }
-      } catch (error) {
-        console.error(`PUT /v1/scorecards/${selectedGame.id} failed! ${error.message}`);
-        if (error.response && error.response.status === 400) {
-          // TODO: notify the user that this game no longer exists for some reason
-          // needs popup message and link to go back to home screen
-        }
-        // console.error(error);
-      }
-    }
-    asyncPutGame();
-  }, [api_endpoint, selectedGame.id]);
+      asyncPutGame();
+    },
+    [api_endpoint, selectedGame.id]
+  );
 
   /**
    * Pushes the initial game state to the SK API
-   * @param {*} scorecard - the scoreacard to push 
-   * @param {*} playerTotals 
+   * @param {*} scorecard - the scoreacard to push
+   * @param {*} playerTotals
    */
   async function addScorecard(scorecard, playerTotals) {
     const config = {
       headers: {
-        'Content-Type': 'application/json'
-      }
-    }
+        'Content-Type': 'application/json',
+      },
+    };
 
     const game = {
       name: selectedGame.name,
-      status: "STARTED",
+      status: 'STARTED',
       scorecard: scorecard,
       playerTotals: playerTotals,
-      currentRound: currentRound
-    }
+      currentRound: currentRound,
+    };
 
     try {
-      const res = await axios.post(`${api_endpoint}/v1/scorecards`, game, config);
+      const res = await axios.post(
+        `${api_endpoint}/v1/scorecards`,
+        game,
+        config
+      );
       if (res.status === 201) {
-        setSelectedGame(prevGame => ({ ...prevGame, id: res.data.id }));
+        setSelectedGame((prevGame) => ({ ...prevGame, id: res.data.id }));
       } else {
-        console.error(`Error occured on POST ${api_endpoint}/v1/scorecards. Received ${res.status} ${res.statusText}`);
+        console.error(
+          `Error occured on POST ${api_endpoint}/v1/scorecards. Received ${res.status} ${res.statusText}`
+        );
       }
     } catch (error) {
       console.error('Error occured during POST /v1/scorecards');
@@ -147,14 +162,21 @@ function Game() {
         scorecard: scorecard,
         status: selectedGame.status,
         playerTotals: playerTotals,
-        currentRound: currentRound
-      }
+        currentRound: currentRound,
+      };
       putGame(game);
     }
-  }, [scorecard, playerTotals, currentRound, putGame, selectedGame.id, selectedGame.status]);
+  }, [
+    scorecard,
+    playerTotals,
+    currentRound,
+    putGame,
+    selectedGame.id,
+    selectedGame.status,
+  ]);
 
   /**
-   * Debounce changes made to the scorecard and 
+   * Debounce changes made to the scorecard and
    * push changes to SK API no more than once every 2 seconds
    */
   useEffect(() => {
@@ -165,11 +187,11 @@ function Game() {
 
     return () => {
       clearTimeout(timeoutId);
-    }
+    };
   }, [scorecard, updateScorecard]);
 
   /**
-   * Initializes the game by created the player totals and 
+   * Initializes the game by created the player totals and
    * scorecard and then pushes these to SK API
    * @param {*} event - the event that triggered this method
    */
@@ -191,15 +213,16 @@ function Game() {
     addScorecard(newScoreCard, newPlayerTotals);
 
     dispatch({ type: 'SET_SCORECARD', payload: newScoreCard });
+
     setPlayerTotals(newPlayerTotals);
     setPlayersExist(true);
-  }
+  };
 
   if (
-    (playerType === PlayerTypes.PLAYER_NOT_SET) ||
+    playerType === PlayerTypes.PLAYER_NOT_SET ||
     (playerType === PlayerTypes.SCORE_KEEPER && !playersExist) ||
-    (playerType === PlayerTypes.PLAYER && selectedGame.id === '')) {
-
+    (playerType === PlayerTypes.PLAYER && selectedGame.id === '')
+  ) {
     return (
       <PlayerSetupForm
         handleSubmit={handlePlayerSetupSubmit}
@@ -210,9 +233,12 @@ function Game() {
         setSelectedGame={setSelectedGame}
         api_endpoint={api_endpoint}
       />
-    )
-
-  } else if (playersExist && playerType === PlayerTypes.SCORE_KEEPER && !gameComplete) {
+    );
+  } else if (
+    playersExist &&
+    playerType === PlayerTypes.SCORE_KEEPER &&
+    !gameComplete
+  ) {
     return (
       <Scorecard
         scorecard={scorecard}
@@ -225,9 +251,12 @@ function Game() {
         setSelectedGame={setSelectedGame}
         api_endpoint={api_endpoint}
       />
-    )
-
-  } else if (playersExist && playerType === PlayerTypes.SCORE_KEEPER && gameComplete) {
+    );
+  } else if (
+    playersExist &&
+    playerType === PlayerTypes.SCORE_KEEPER &&
+    gameComplete
+  ) {
     return (
       <Summary
         playerTotals={playerTotals}
@@ -238,14 +267,9 @@ function Game() {
         gameComplete={gameComplete}
         setSelectedGame={setSelectedGame}
       />
-    )
-
+    );
   } else if (playerType === PlayerTypes.PLAYER && selectedGame.id !== '') {
-    return (
-      <Player
-        selectedGame={selectedGame}
-      />
-    )
+    return <Player selectedGame={selectedGame} />;
   }
 }
 
