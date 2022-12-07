@@ -1,14 +1,14 @@
 footer {
-    display: flex;
-    flex-shrink: 0;
-    background-color: lightgray;
-    width: 100%;
+  display: flex;
+  flex-shrink: 0;
+  background-color: lightgray;
+  width: 100%;
 }
 
 footer a {
-    color: black;
+  color: black;
 }
 
 footer a:any-link {
-    text-decoration: none;
+  text-decoration: none;
 }

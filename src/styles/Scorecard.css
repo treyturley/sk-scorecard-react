@@ -1,79 +1,79 @@
-#scorecard-video{
-    position: fixed;
-    top:0;
-    height: 100vh;
-    width: 100%;
-    object-fit: cover;
-    z-index: -1;
+#scorecard-video {
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  object-fit: cover;
+  z-index: -1;
 }
 
-.player-total{
-    word-wrap: break-word;
+.player-total {
+  word-wrap: break-word;
 }
 
-.round-header{
-    margin-bottom: 16px;
-    display: flex;
-    justify-content: center;
+.round-header {
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: center;
 }
 
-.round-row{
-    display: flex;
-    width: 100%;
-    align-items: center;
+.round-row {
+  display: flex;
+  width: 100%;
+  align-items: center;
 }
 
 .round-button {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
-.round-title{
-    padding: 0px;
-    margin: 0px;
+.round-title {
+  padding: 0px;
+  margin: 0px;
 }
 
-.round-col{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.round-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.scores{
-    display: flex;
-    flex-direction: column;
+.scores {
+  display: flex;
+  flex-direction: column;
 }
 
-.btn-clear-round{
-    -webkit-appearance: none;
-    margin-bottom: 20px;
-    font-weight: 500;
-    padding: 1px 6px;
-    border-width: 2px;
-    background-color: lightgray;
+.btn-clear-round {
+  -webkit-appearance: none;
+  margin-bottom: 20px;
+  font-weight: 500;
+  padding: 1px 6px;
+  border-width: 2px;
+  background-color: lightgray;
 }
 
 @media (min-width: 798px) {
-    .container{
-        width: 60%;
-    }
-    .round-button {
-        display: flex;
-        width: 100%; 
-        height: 100%;
-        align-items: center;
-        justify-content: center;
-    }
+  .container {
+    width: 60%;
+  }
+  .round-button {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 @media (max-width: 490px) {
-    .round-title{
-        white-space: nowrap;
-    }
+  .round-title {
+    white-space: nowrap;
+  }
 }
 
-@media (max-height:450px){
-    .text-center{
-        /* color: white; */
-    }
+@media (max-height: 450px) {
+  .text-center {
+    /* color: white; */
+  }
 }
