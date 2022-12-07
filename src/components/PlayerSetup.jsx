@@ -2,6 +2,7 @@ import '../styles/PlayerSetup.css';
 import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import GameContext from '../context/game/GameContext';
+import { SET_PLAYERS } from '../context/game/GameActionTypes';
 
 function PlayerSetupForm({
   handleSubmit,
@@ -45,8 +46,7 @@ function PlayerSetupForm({
   const handleNameChange = (index) => (event) => {
     let newArr = [...players];
     newArr[index] = event.target.value;
-    dispatch({ type: 'SET_PLAYERS', payload: newArr });
-    // setPlayers(newArr);
+    dispatch({ type: SET_PLAYERS, payload: newArr });
   };
 
   function createOptions() {

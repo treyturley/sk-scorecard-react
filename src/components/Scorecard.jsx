@@ -7,6 +7,7 @@ import GameContext from '../context/game/GameContext';
 import {
   SET_PLAYERTOTALS,
   SET_CURRENTROUND,
+  SET_SCORECARD,
 } from '../context/game/GameActionTypes';
 
 import Container from 'react-bootstrap/Container';
@@ -41,7 +42,7 @@ function Scorecard({
       //set player's current bid back to zero for the new round
       updatePlayerBid(player, 0);
     });
-    dispatch({ type: 'SET_SCORECARD', payload: newScoreCard });
+    dispatch({ type: SET_SCORECARD, payload: newScoreCard });
   }
 
   /**
@@ -99,7 +100,7 @@ function Scorecard({
         }
         return roundScore;
       });
-      dispatch({ type: 'SET_SCORECARD', payload: newScoreCard });
+      dispatch({ type: SET_SCORECARD, payload: newScoreCard });
 
       updatePlayerBid(roundScoreToUpdate.playerName, bid);
     }
@@ -121,7 +122,7 @@ function Scorecard({
         }
         return roundScore;
       });
-      dispatch({ type: 'SET_SCORECARD', payload: newScoreCard });
+      dispatch({ type: SET_SCORECARD, payload: newScoreCard });
     }
   }
 
@@ -141,7 +142,7 @@ function Scorecard({
       }
       return roundScore;
     });
-    dispatch({ type: 'SET_SCORECARD', payload: newScoreCard });
+    dispatch({ type: SET_SCORECARD, payload: newScoreCard });
   }
 
   /**
@@ -177,7 +178,7 @@ function Scorecard({
       return roundScore;
     });
 
-    dispatch({ type: 'SET_SCORECARD', payload: newScorecard });
+    dispatch({ type: SET_SCORECARD, payload: newScorecard });
 
     updatePlayerTotal(newScorecard, roundScoreToUpdate.playerName);
   }
@@ -262,7 +263,7 @@ function Scorecard({
       }
     });
 
-    dispatch({ type: 'SET_SCORECARD', payload: newScoreCard });
+    dispatch({ type: SET_SCORECARD, payload: newScoreCard });
 
     // call updatePlayerTotal for each player and pass updated scorecard
     playerTotals.forEach((player) =>
