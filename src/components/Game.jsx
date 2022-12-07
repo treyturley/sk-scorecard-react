@@ -8,7 +8,10 @@ import Scorecard from './Scorecard';
 import Summary from './Summary';
 
 import GameContext from '../context/game/GameContext';
-import { SET_PLAYERTOTALS } from '../context/game/GameActionTypes';
+import {
+  SET_SCORECARD,
+  SET_PLAYERTOTALS,
+} from '../context/game/GameActionTypes';
 
 function Game() {
   const [playersExist, setPlayersExist] = useState(false);
@@ -212,7 +215,7 @@ function Game() {
     });
     addScorecard(newScoreCard, newPlayerTotals);
 
-    dispatch({ type: 'SET_SCORECARD', payload: newScoreCard });
+    dispatch({ type: SET_SCORECARD, payload: newScoreCard });
 
     dispatch({ type: SET_PLAYERTOTALS, payload: newPlayerTotals });
     setPlayersExist(true);
