@@ -7,17 +7,13 @@ import Scorecard from "./Scorecard";
 import Summary from './Summary';
 
 function Game() {
-  // some examples of updating state
-  // https://stackoverflow.com/questions/54150783/react-hooks-usestate-with-object
-  // https://stackoverflow.com/questions/43638938/updating-an-object-with-setstate-in-react
-
-  const [players, setPlayers] = useState([]);
-  const [scorecard, setScorecard] = useState([]);
   const [playerTotals, setPlayerTotals] = useState([]);
   const [currentRound, setCurrentRound] = useState(1);
 
   const [playersExist, setPlayersExist] = useState(false);
   const [gameComplete, setGameComplete] = useState(false);
+
+  const { players, scorecard, dispatch } = useContext(GameContext);
 
   let api_endpoint = process.env.REACT_APP_PROD_API;
 
@@ -194,7 +190,7 @@ function Game() {
 
     addScorecard(newScoreCard, newPlayerTotals);
 
-    setScorecard(newScoreCard);
+    dispatch({ type: 'SET_SCORECARD', payload: newScoreCard });
     setPlayerTotals(newPlayerTotals);
     setPlayersExist(true);
   }
@@ -206,8 +202,6 @@ function Game() {
 
     return (
       <PlayerSetupForm
-        players={players}
-        setPlayers={setPlayers}
         handleSubmit={handlePlayerSetupSubmit}
         playerType={playerType}
         setPlayerType={setPlayerType}
@@ -221,9 +215,7 @@ function Game() {
   } else if (playersExist && playerType === PlayerTypes.SCORE_KEEPER && !gameComplete) {
     return (
       <Scorecard
-        players={players}
         scorecard={scorecard}
-        setScorecard={setScorecard}
         setGameComplete={setGameComplete}
         PlayerScore={PlayerScore}
         playerTotals={playerTotals}
