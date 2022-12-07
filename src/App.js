@@ -4,9 +4,14 @@ import Game from './components/Game';
 import Footer from './components/layouts/Footer';
 import Header from './components/layouts/Header';
 
+import { GameProvider } from './context/game/GameContext';
+
+// TODO: implement routing
+// /sk.../:game-id to get to the game
+
 function App() {
   return (
-    <>
+    <GameProvider>
       <div className='header'>
         <Header />
       </div>
@@ -16,7 +21,7 @@ function App() {
       <div className='footer'>
         <Footer />
       </div>
-    </>
+    </GameProvider>
   );
 }
 
