@@ -1,7 +1,7 @@
 footer {
   display: flex;
   flex-shrink: 0;
-  background-color: lightgray;
+  background-color: #474B4F;
   width: 100%;
 }
 
@@ -11,4 +11,5 @@ footer a {
 
 footer a:any-link {
   text-decoration: none;
+  color: white;;
 }

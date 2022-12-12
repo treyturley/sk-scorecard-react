@@ -1,4 +1,6 @@
 import { Container, Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+
 import '../../styles/Footer.css';
 
 const Footer = () => {
@@ -7,12 +9,19 @@ const Footer = () => {
       <Container>
         <Row className='justify-content-md-center'>
           <Col md='auto'>
-            <h4>Skull King Scorecard</h4>
+            <Link to='/skullking-scorecard'>
+              <h4>Skull King Scorecard</h4>
+            </Link>
           </Col>
         </Row>
         <Row className='justify-content-md-center'>
           <Col md='auto'>
-            <a href='/skullking-scorecard'>New Game</a>
+            <Link to='/skullking-scorecard/new-game'>New Game</Link>
+          </Col>
+        </Row>
+        <Row className='justify-content-md-center'>
+          <Col md='auto'>
+            <Link to='/skullking-scorecard/join-game'>Join Game</Link>
           </Col>
         </Row>
         <Row className='justify-content-md-center'>

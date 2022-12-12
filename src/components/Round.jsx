@@ -32,7 +32,7 @@ function Round({
               <Col>
                 <input
                   type='button'
-                  className='btn btn-primary'
+                  className='btn btn-dark'
                   value='Bid  -1'
                   onClick={() => onBidChange(roundScore.bid - 1, roundScore)}
                 />
@@ -40,7 +40,7 @@ function Round({
               <Col>
                 <input
                   type='button'
-                  className='btn btn-primary'
+                  className='btn btn-dark'
                   value='Bid  +1'
                   onClick={() => onBidChange(roundScore.bid + 1, roundScore)}
                 />
@@ -56,7 +56,7 @@ function Round({
               <Col>
                 <input
                   type='button'
-                  className='btn btn-primary'
+                  className='btn btn-dark'
                   value='Tricks  -1'
                   onClick={() =>
                     onTrickChange(roundScore.tricks - 1, roundScore)
@@ -66,7 +66,7 @@ function Round({
               <Col>
                 <input
                   type='button'
-                  className='btn btn-primary'
+                  className='btn btn-dark'
                   value='Tricks  +1'
                   onClick={() =>
                     onTrickChange(roundScore.tricks + 1, roundScore)
@@ -84,7 +84,7 @@ function Round({
               <Col>
                 <input
                   type='button'
-                  className='btn btn-primary'
+                  className='btn btn-dark'
                   value='Bonus  -10'
                   onClick={() =>
                     onBonusChange(roundScore.bonus - 10, roundScore)
@@ -94,7 +94,7 @@ function Round({
               <Col>
                 <input
                   type='button'
-                  className='btn btn-primary'
+                  className='btn btn-dark'
                   value='Bonus  +10'
                   onClick={() =>
                     onBonusChange(roundScore.bonus + 10, roundScore)
@@ -110,14 +110,6 @@ function Round({
                 <h4 className='round-total-header'>
                   Round Total: {roundScore.roundTotal}
                 </h4>
-              </Col>
-              <Col>
-                <input
-                  type='button'
-                  className='btn btn-success'
-                  value='Update Total'
-                  onClick={() => onClickUpdateTotal(roundScore)}
-                />
               </Col>
             </Row>
           </ListGroup.Item>
