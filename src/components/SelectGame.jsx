@@ -2,6 +2,7 @@ import { Button } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getActiveGames } from '../context/game/GameActions';
+import '../styles/SelectGame.css';
 
 function SelectGame() {
   const [refreshGames, setRefreshGames] = useState(true);
@@ -42,14 +43,26 @@ function SelectGame() {
           });
 
           rows.push(
-            <Button
-              key={`${game.id}-View`}
-              className='mb-4'
-              onClick={() => navigate(`/skullking-scorecard/player/${game.id}`)}
-              variant='dark'
-            >
-              Join Game
-            </Button>
+            <div key={`${game.id}-View`} className='join-buttons'>
+              <Button
+                className='join-button'
+                onClick={() =>
+                  navigate(`/skullking-scorecard/player/${game.id}`)
+                }
+                variant='dark'
+              >
+                Join as Player
+              </Button>
+              <Button
+                className='join-button'
+                onClick={() =>
+                  navigate(`/skullking-scorecard/scorekeeper/${game.id}`)
+                }
+                variant='dark'
+              >
+                Join as Scorekeeper
+              </Button>
+            </div>
           );
         }
       });
@@ -67,7 +80,7 @@ function SelectGame() {
         >
           Refresh
         </Button>
-        {listActiveGames()}
+        <div className='active-games'>{listActiveGames()}</div>
       </div>
     </div>
   );
