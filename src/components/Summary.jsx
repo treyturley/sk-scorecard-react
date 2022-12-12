@@ -1,24 +1,40 @@
-import React from 'react';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import SummaryGraph from './SummaryGraph';
 import GameContext from '../context/game/GameContext';
+import {
+  SET_GAME_COMPLETE,
+  SET_GAME_STATUS,
+} from '../context/game/GameActionTypes';
 import Container from 'react-bootstrap/Container';
 import '../styles/Summary.css';
 
-import { SET_GAMECOMPLETE } from '../context/game/GameActionTypes';
+function Summary() {
+  const {
+    scorecard,
+    playerTotals,
+    gameComplete,
+    currentRound,
+    selectedGame,
+    dispatch,
+  } = useContext(GameContext);
 
-function Summary({
-  setGameComplete,
-  currentRound,
-  gameComplete,
-  setSelectedGame,
-}) {
-  const { scorecard, playerTotals, dispatch } = useContext(GameContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!selectedGame.id || selectedGame.id === '') {
+      //someone directly navigated here without a game in the app state
+      navigate('/skullking-scorecard/game-not-found');
+    }
+    // TODO: should navigate go in useEffect dependency array
+    // eslint-disable-next-line
+  }, []);
 
   function onClickBackToScores() {
     //TODO: set current round to 10 instead of going to the first round?
-    dispatch({ type: SET_GAMECOMPLETE, payload: false });
-    setSelectedGame((prevGame) => ({ ...prevGame, status: 'STARTED' }));
+    dispatch({ type: SET_GAME_COMPLETE, payload: false });
+    dispatch({ type: SET_GAME_STATUS, payload: 'STARTED' });
+    navigate(`/skullking-scorecard/scorekeeper/${selectedGame.id}`);
   }
 
   function getSortedPlayers() {
