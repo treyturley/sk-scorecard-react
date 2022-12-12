@@ -111,14 +111,6 @@ function Round({
                   Round Total: {roundScore.roundTotal}
                 </h4>
               </Col>
-              <Col>
-                <input
-                  type='button'
-                  className='btn btn-success'
-                  value='Update Total'
-                  onClick={() => onClickUpdateTotal(roundScore)}
-                />
-              </Col>
             </Row>
           </ListGroup.Item>
         </ListGroup>
