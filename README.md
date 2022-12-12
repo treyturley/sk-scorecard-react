@@ -1,6 +1,11 @@
 # Project Info
 
-The goal of this project is to create a scorecard that can be used when playing the card game Skull King. This scorecard will automate some of the score keeping so that it is easier to keep track of each players score.
+The goal of this project is to create a scorecard that can be used while playing the card game Skull King. The scorecard will automate some of the score keeping so that it is easier to keep track of each players score while also prividing real-time score info to all players.
+
+The scorecard is hosted at https://treyturley.com/skullking-scorecard
+
+## How to play
+One player acts as the scorekeeper and after bidding takes place they enter each player's bid. The round is then played and at the end the scorekeeper enters the tricks taken and bonus points for each player. The rest of the players can also use the app to see their opponent's bid for the current round along with overall and round-by-round scores.
 
 # Getting Started with Create React App
 
