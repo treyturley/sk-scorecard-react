@@ -1,33 +1,109 @@
-import { useState, useContext } from 'react';
-
+import { useState, useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Round from './Round';
-import Player from './Player';
-
+import WatchGame from './WatchGame';
 import GameContext from '../context/game/GameContext';
 import {
-  SET_PLAYERTOTALS,
-  SET_CURRENTROUND,
+  SET_PLAYERS,
+  SET_PLAYER_TOTALS,
+  SET_CURRENT_ROUND,
   SET_SCORECARD,
-  SET_GAMECOMPLETE,
+  SET_GAME_COMPLETE,
+  SET_GAME_STATUS,
+  SET_GAME_NAME,
+  SET_GAME_ID,
 } from '../context/game/GameActionTypes';
-
+import {
+  createRoundScore,
+  updateGame,
+  getGame,
+} from '../context/game/GameActions';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-
 import '../styles/Scorecard.css';
 
-function Scorecard({
-  PlayerScore,
-  setGameCurrentRound,
-  selectedGame,
-  setSelectedGame,
-  api_endpoint,
-}) {
+function Scorecard({ gameId }) {
   const [nextRoundBtnTxt, setNextRoundBtnTxt] = useState('Next Round');
 
-  const { players, scorecard, playerTotals, currentRound, dispatch } =
-    useContext(GameContext);
+  const navigate = useNavigate();
+
+  /* TODO: consider rolling up scorecard, playerTotals, and selectedGame 
+     into one state object called game
+     game would have:
+      - game id, game name, and status (everything currently in selectedGame) 
+      - gameComplete Bool (gameComplete)
+      - currently active round number (currentRound)
+      - list of players (players), the array of PlayerScores (scorecard),
+      - each players overall score (PlayerTotal.total)
+      - Each players current bid (PlayerTotal.currentBid)
+   */
+
+  const {
+    players,
+    scorecard,
+    playerTotals,
+    currentRound,
+    selectedGame,
+    dispatch,
+  } = useContext(GameContext);
+
+  useEffect(() => {
+    if (gameId !== selectedGame.id) {
+      console.warn('gameId does not match with selectedGame.id!');
+      console.warn(`gameId: ${gameId}. selectedGame.id: ${selectedGame.id}`);
+      try {
+        getGame(gameId).then((data) => {
+          if (data === null) {
+            navigate('/skullking-scorecard/game-not-found');
+          } else {
+            // TODO: This is dumb, players and playerTotals need to become one thing...
+            // Whole game object needs to be looked at again along with how its saved on server
+            const players = data.playerTotals.map(
+              (player) => player.playerName
+            );
+
+            dispatch({ type: SET_PLAYERS, payload: players });
+            dispatch({ type: SET_SCORECARD, payload: data.scorecard });
+            dispatch({ type: SET_PLAYER_TOTALS, payload: data.playerTotals });
+            dispatch({ type: SET_CURRENT_ROUND, payload: data.currentRound });
+            dispatch({ type: SET_GAME_NAME, payload: data.name });
+            dispatch({ type: SET_GAME_ID, payload: data.id });
+            dispatch({ type: SET_GAME_STATUS, payload: data.status });
+          }
+        });
+      } catch (err) {
+        console.warn('error occured while retrieving a game!');
+      }
+    }
+
+    if (currentRound === 10) {
+      setNextRoundBtnTxt('To Summary');
+    }
+
+    // we only ever want to run this on first render so ignore lint rule for exhaustive-deps
+    // eslint-disable-next-line
+  }, []);
+
+  /**
+   * Debounce changes made to the scorecard and
+   * push changes to SK API no more than once every 2 seconds
+   */
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      updateGame(
+        gameId,
+        scorecard,
+        playerTotals,
+        currentRound,
+        selectedGame.status
+      );
+    }, 300);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [scorecard, gameId, currentRound, playerTotals, selectedGame.status]);
 
   /**
    * Initializes new roundScore objs for each player for a new round.
@@ -37,7 +113,8 @@ function Scorecard({
     const newScoreCard = [...scorecard];
 
     players.forEach((player) => {
-      const newScore = new PlayerScore(player, roundNumber, 0, 0, 0, 0);
+      const newScore = createRoundScore(player, roundNumber, 0, 0, 0, 0);
+
       newScoreCard.push(newScore);
       //set player's current bid back to zero for the new round
       updatePlayerBid(player, 0);
@@ -56,7 +133,7 @@ function Scorecard({
           .filter((round) => round.roundNumber === currentRound)
           .forEach((roundScore) => updateRoundAndPlayerTotal(roundScore));
 
-        dispatch({ type: SET_CURRENTROUND, payload: currentRound + 1 });
+        dispatch({ type: SET_CURRENT_ROUND, payload: currentRound + 1 });
 
         const roundNumberExists = (round) =>
           round.roundNumber === currentRound + 1;
@@ -72,15 +149,21 @@ function Scorecard({
       }
     } else if (e.target.value === 'Previous Round') {
       if (currentRound > 1) {
-        dispatch({ type: SET_CURRENTROUND, payload: currentRound - 1 });
+        dispatch({ type: SET_CURRENT_ROUND, payload: currentRound - 1 });
         setNextRoundBtnTxt('Next Round');
       }
     } else if (e.target.value === 'To Summary') {
       scorecard
         .filter((round) => round.roundNumber === currentRound)
         .forEach((roundScore) => updateRoundAndPlayerTotal(roundScore));
-      setSelectedGame((prevGame) => ({ ...prevGame, status: 'FINISHED' }));
-      dispatch({ type: SET_GAMECOMPLETE, payload: true });
+
+      dispatch({ type: SET_GAME_STATUS, payload: 'FINISHED' });
+      dispatch({ type: SET_GAME_COMPLETE, payload: true });
+
+      //update
+      updateGame(gameId, scorecard, playerTotals, currentRound, 'FINISHED');
+      // nav to summary
+      navigate('/skullking-scorecard/summary');
     }
   }
 
@@ -188,7 +271,6 @@ function Scorecard({
    * @param {string} player - The players name.
    */
   function updatePlayerTotal(newScoreCard, playerToUpdate) {
-    // TODO: can this just access the scorecard state directly now that we dont use setState?
     // filter scorecard array for this players rounds then reduce to a score total
     let totalScore = newScoreCard
       .filter((score) => score.playerName === playerToUpdate)
@@ -199,7 +281,7 @@ function Scorecard({
       (player) => player.playerName === playerToUpdate
     ).total = totalScore;
 
-    dispatch({ type: SET_PLAYERTOTALS, payload: newPlayerTotals });
+    dispatch({ type: SET_PLAYER_TOTALS, payload: newPlayerTotals });
   }
 
   /**
@@ -212,7 +294,7 @@ function Scorecard({
     newPlayerTotals.find(
       (player) => player.playerName === playerToUpdate
     ).currentBid = bid;
-    dispatch({ type: SET_PLAYERTOTALS, payload: newPlayerTotals });
+    dispatch({ type: SET_PLAYER_TOTALS, payload: newPlayerTotals });
   }
 
   /**
@@ -341,7 +423,7 @@ function Scorecard({
         </div>
 
         <hr />
-        <Player selectedGame={selectedGame} />
+        <WatchGame gameId={gameId} />
       </Container>
     </>
   );

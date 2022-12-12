@@ -1,11 +1,13 @@
-import React from 'react';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { io } from 'socket.io-client';
 import { Container, ListGroup } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Accordion from 'react-bootstrap/Accordion';
 import SummaryGraph from './SummaryGraph';
-import { io } from 'socket.io-client';
+
+import '../styles/WatchGame.css';
 
 const socketIOEndpoint =
   process.env.NODE_ENV === 'production'
@@ -17,23 +19,25 @@ const socket = io(socketIOEndpoint, {
   path: process.env.REACT_APP_SOCKET_IO_PATH,
 });
 
-function Player({ selectedGame }) {
+function WatchGame({ gameId }) {
   const [scorecard, setScorecard] = useState([]);
   const [playerTotals, setPlayerTotals] = useState([]);
   const [currentRound, setCurrentRound] = useState(1);
   const [gameComplete, setGameComplete] = useState('');
 
+  const navigate = useNavigate();
+
   useEffect(() => {
-    if (socket && selectedGame.id) {
+    if (socket && gameId) {
       socket.connect();
 
       // on connect, join the game room
       socket.on('connect', () => {
         // join game room and get the current game info
-        socket.emit('join-game', selectedGame.id, (response) => {
+        socket.emit('join-game', gameId, (response) => {
           if (response === 'success') {
-            socket.gameId = selectedGame.id;
-            socket.emit('get-game', selectedGame.id, (game) => {
+            socket.gameId = gameId;
+            socket.emit('get-game', gameId, (game) => {
               if (game) {
                 setScorecard(game.scorecard);
                 setPlayerTotals(game.playerTotals);
@@ -43,6 +47,9 @@ function Player({ selectedGame }) {
                 } else {
                   setGameComplete(false);
                 }
+              } else {
+                // no game found!
+                navigate('/skullking-scorecard/game-not-found');
               }
             });
           } else {
@@ -72,9 +79,12 @@ function Player({ selectedGame }) {
         socket.off('connect');
         socket.off('update-game');
         socket.off('disconnect');
+        socket.close();
       };
     }
-  }, [selectedGame.id]);
+    // TODO: figure out if its ok to have navigate in dep array
+    // eslint-disable-next-line
+  }, [gameId]);
 
   return (
     <Container className='mb-4'>
@@ -112,7 +122,7 @@ function Player({ selectedGame }) {
               <Accordion.Body>
                 <ListGroup>
                   <ListGroup.Item>
-                    <Row className='text-center'>
+                    <Row className='text-center player-round-header'>
                       <Col>
                         <strong>Round</strong>
                       </Col>
@@ -162,4 +172,4 @@ function Player({ selectedGame }) {
   );
 }
 
-export default Player;
+export default WatchGame;

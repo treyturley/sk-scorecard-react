@@ -6,11 +6,16 @@ const GameContext = createContext();
 export const GameProvider = ({ children }) => {
   //initial state goes here
   const initialState = {
-    players: [],
+    players: [], // TODO: combine players and player totals??
     scorecard: [],
     playerTotals: [],
     currentRound: 1,
-    gameComplete: false,
+    gameComplete: false, // TODO: combine gameComplete with selectedGame.status
+    selectedGame: {
+      id: '',
+      name: '',
+      status: '',
+    },
   };
 
   const [state, dispatch] = useReducer(gameReducer, initialState);
