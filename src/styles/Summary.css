@@ -1,24 +1,24 @@
-.summary ul{
-    /* display: flex;
+.summary ul {
+  /* display: flex;
     flex-direction: column; */
-    list-style-type: none;
+  list-style-type: none;
 }
 
-.first-place{
-    /* font-size: 2.50rem; */
-    font-size: 2rem;
+.first-place {
+  /* font-size: 2.50rem; */
+  font-size: 2rem;
 }
 
-.second-place{
-    /* font-size: 2rem; */
-    font-size: 2rem;
+.second-place {
+  /* font-size: 2rem; */
+  font-size: 2rem;
 }
 
-.third-place{
-    /* font-size: 1.50rem; */
-    font-size: 2rem;
+.third-place {
+  /* font-size: 1.50rem; */
+  font-size: 2rem;
 }
 
-.other-places{
-    font-size: 2rem;
+.other-places {
+  font-size: 2rem;
 }

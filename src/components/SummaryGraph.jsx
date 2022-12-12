@@ -1,5 +1,3 @@
-import React from 'react'
-
 // react chartjs 2 docs - https://react-chartjs-2.js.org/
 // line chart example - https://react-chartjs-2.js.org/examples/line-chart
 // sample color pallettes - https://personal.sron.nl/~pault/
@@ -28,7 +26,6 @@ ChartJS.register(
 );
 
 function SummaryGraph({ playerTotals, scorecard, currentRound, gameComplete }) {
-
   const lineColors = [
     '#332288',
     '#88CCEE',
@@ -39,7 +36,7 @@ function SummaryGraph({ playerTotals, scorecard, currentRound, gameComplete }) {
     '#CC6677',
     '#882255',
     '#AA4499',
-    '#CC3311'
+    '#CC3311',
   ];
 
   const options = {
@@ -65,12 +62,12 @@ function SummaryGraph({ playerTotals, scorecard, currentRound, gameComplete }) {
     'Round 7',
     'Round 8',
     'Round 9',
-    'Round 10'
+    'Round 10',
   ];
 
   const data = {
     labels,
-    datasets: []
+    datasets: [],
   };
 
   class DataSet {
@@ -88,7 +85,7 @@ function SummaryGraph({ playerTotals, scorecard, currentRound, gameComplete }) {
 
     scorecard.forEach((score) => {
       if (score.playerName === player.playerName) {
-        if (gameComplete || (score.roundNumber !== currentRound)) {
+        if (gameComplete || score.roundNumber !== currentRound) {
           roundScore.push(score.roundTotal);
         }
       }
@@ -103,13 +100,12 @@ function SummaryGraph({ playerTotals, scorecard, currentRound, gameComplete }) {
       roundTotals.push(total);
     }
 
-    data.datasets.push(new DataSet(player.playerName, roundTotals, lineColors[index]));
-
+    data.datasets.push(
+      new DataSet(player.playerName, roundTotals, lineColors[index])
+    );
   });
 
-  return (
-    <Line options={options} data={data} />
-  )
+  return <Line options={options} data={data} />;
 }
 
 export default SummaryGraph;
