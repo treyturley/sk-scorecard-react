@@ -11,6 +11,7 @@ body {
 
 #root {
   font-family: 'IM Fell English SC', serif;
+  font-size: 1.05rem;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -24,4 +25,10 @@ body {
   background-image: url('./images/sea.jpg');
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+@media only screen and (min-width: 992px) {
+  #root {
+    font-size: 1.20rem;
+  }
 }
