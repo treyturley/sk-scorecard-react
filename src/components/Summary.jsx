@@ -125,7 +125,7 @@ function Summary() {
       <hr />
 
       <div className='d-flex justify-content-center'>
-        <button className='btn btn-primary' onClick={onClickBackToScores}>
+        <button className='btn btn-dark' onClick={onClickBackToScores}>
           Back to Scores
         </button>
       </div>

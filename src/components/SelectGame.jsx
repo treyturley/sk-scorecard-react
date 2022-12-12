@@ -1,3 +1,4 @@
+import { Button } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getActiveGames } from '../context/game/GameActions';
@@ -41,13 +42,14 @@ function SelectGame() {
           });
 
           rows.push(
-            <button
+            <Button
               key={`${game.id}-View`}
-              className='btn btn-primary mb-4'
+              className='mb-4'
               onClick={() => navigate(`/skullking-scorecard/player/${game.id}`)}
+              variant='dark'
             >
               Join Game
-            </button>
+            </Button>
           );
         }
       });
@@ -58,12 +60,13 @@ function SelectGame() {
     <div className='content'>
       <div className='my-container'>
         <h1>Games in Progress</h1>
-        <button
-          className='btn btn-success mb-4'
+        <Button
+          variant='dark'
+          className='mb-4'
           onClick={() => setRefreshGames(true)}
         >
           Refresh
-        </button>
+        </Button>
         {listActiveGames()}
       </div>
     </div>
