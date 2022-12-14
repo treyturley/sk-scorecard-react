@@ -1,6 +1,6 @@
 # Project Info
 
-The goal of this project is to create a scorecard that can be used while playing the card game Skull King. The scorecard will automate some of the score keeping so that it is easier to keep track of each players score while also prividing real-time score info to all players.
+The goal of this project is to create a scorecard that can be used while playing the Skull King card game. The scorecard will automate some of the score keeping so that it is easier to keep track of each players score while also prividing real-time score info to all players.
 
 The scorecard is hosted at https://treyturley.com/skullking-scorecard
 
