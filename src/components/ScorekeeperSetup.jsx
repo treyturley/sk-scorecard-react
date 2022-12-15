@@ -86,23 +86,6 @@ function ScorekeeperSetup() {
     }
   };
 
-  function playerInputRows(numPlayers) {
-    let rows = [];
-    for (let i = 0; i < numPlayers; i++) {
-      rows.push(
-        <input
-          key={i}
-          type='text'
-          name={`Player ${i + 1}`}
-          placeholder={`Sailor ${i + 1}`}
-          value={players[i] || ''}
-          onChange={handleNameChange(i)}
-        />
-      );
-    }
-    return rows;
-  }
-
   function createOptions() {
     let rows = [];
     for (let i = MIN_PLAYERS; i <= MAX_PLAYERS; i++) {
@@ -144,7 +127,17 @@ function ScorekeeperSetup() {
             </select>
           </div>
 
-          {playerInputRows(playerCount)}
+          {Array.from({ length: playerCount }).map((it, i) => (
+            <input
+              key={i}
+              type='text'
+              name={`Player ${i + 1}`}
+              placeholder={`Sailor ${i + 1}`}
+              value={players[i] || ''}
+              onChange={handleNameChange(i)}
+            />
+          ))}
+
           <div className='d-flex justify-content-center mb-4'>
             <Button type='submit' variant='dark'>
               Set Sail
