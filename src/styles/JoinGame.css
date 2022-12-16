@@ -1,0 +1,16 @@
+.active-games{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.join-buttons{
+    display: flex;
+}
+
+.join-button{
+    width: 110px;
+    margin-bottom: 24px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
