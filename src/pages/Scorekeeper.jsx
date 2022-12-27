@@ -90,8 +90,8 @@ function Scorekeeper() {
   }, []);
 
   /**
-   * Debounce changes made to the scorecard and
-   * push changes to SK API no more than once every 2 seconds
+   * Debounce changes made to the scorecard, currentRound, playerTotals, game status, and game id
+   * and push these changes to SK API no more than once every 300 ms
    */
   useEffect(() => {
     const timeoutId = setTimeout(() => {
