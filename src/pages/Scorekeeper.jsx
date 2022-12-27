@@ -90,8 +90,8 @@ function Scorekeeper() {
   }, []);
 
   /**
-   * Debounce changes made to the scorecard and
-   * push changes to SK API no more than once every 2 seconds
+   * Debounce changes made to the scorecard, currentRound, playerTotals, game status, and game id
+   * and push these changes to SK API no more than once every 300 ms
    */
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -191,53 +191,6 @@ function Scorekeeper() {
 
       updatePlayerBid(roundScoreToUpdate.playerName, bid);
     }
-  }
-
-  /**
-   * Updates the target trick count for the player and round specified in roundScoreToUpdate.
-   * @param {number} tricks - The new number of tricks to set in the roundScore
-   * @param {*} roundScoreToUpdate - The roundScore obj that will be updated with the new trick count.
-   */
-  function onTrickChange(tricks, roundScoreToUpdate) {
-    if (tricks >= 0 && tricks <= 10) {
-      const newScoreCard = scorecard.map((roundScore) => {
-        if (
-          roundScore.playerName === roundScoreToUpdate.playerName &&
-          roundScore.roundNumber === roundScoreToUpdate.roundNumber
-        ) {
-          roundScore.tricks = tricks;
-        }
-        return roundScore;
-      });
-      dispatch({ type: SET_SCORECARD, payload: newScoreCard });
-    }
-  }
-
-  /**
-   * Updates the bonus amout for the player and round specified in roundScoreToUpdate.
-   * @param {*} bonus - The new bonus amout to set in the roundScore
-   * @param {*} roundScoreToUpdate - The roundScore obj that will be updated with the new trick count.
-   */
-  function onBonusChange(bonus, roundScoreToUpdate) {
-    roundScoreToUpdate.bonus = bonus;
-    const newScoreCard = scorecard.map((roundScore) => {
-      if (
-        roundScore.playerName === roundScoreToUpdate.playerName &&
-        roundScore.roundNumber === roundScoreToUpdate.roundNumber
-      ) {
-        return roundScoreToUpdate;
-      }
-      return roundScore;
-    });
-    dispatch({ type: SET_SCORECARD, payload: newScoreCard });
-  }
-
-  /**
-   * Updates the round total for the associated player.
-   * @param {roundScore} roundScoreToUpdate - The round score obj that needs to be updated.
-   */
-  function onClickUpdateTotal(roundScoreToUpdate) {
-    updateRoundAndPlayerTotal(roundScoreToUpdate);
   }
 
   /**
@@ -410,9 +363,7 @@ function Scorekeeper() {
                 key={index}
                 roundScore={roundScore}
                 onBidChange={onBidChange}
-                onTrickChange={onTrickChange}
-                onBonusChange={onBonusChange}
-                onClickUpdateTotal={onClickUpdateTotal}
+                updateRoundAndPlayerTotal={updateRoundAndPlayerTotal}
               />
             ))}
         </div>
