@@ -5,13 +5,7 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import '../styles/Round.css';
 
-function Round({
-  roundScore,
-  onBidChange,
-  onTrickChange,
-  onBonusChange,
-  onClickUpdateTotal,
-}) {
+function Round({ roundScore, onBidChange, updateRoundAndPlayerTotal }) {
   return (
     <>
       <Card className='mb-3'>
@@ -58,9 +52,12 @@ function Round({
                   type='button'
                   className='btn btn-dark'
                   value='Tricks  -1'
-                  onClick={() =>
-                    onTrickChange(roundScore.tricks - 1, roundScore)
-                  }
+                  onClick={() => {
+                    if (roundScore.tricks > 0 && roundScore.tricks <= 10) {
+                      roundScore.tricks -= 1;
+                      updateRoundAndPlayerTotal(roundScore);
+                    }
+                  }}
                 />
               </Col>
               <Col>
@@ -68,9 +65,12 @@ function Round({
                   type='button'
                   className='btn btn-dark'
                   value='Tricks  +1'
-                  onClick={() =>
-                    onTrickChange(roundScore.tricks + 1, roundScore)
-                  }
+                  onClick={() => {
+                    if (roundScore.tricks >= 0 && roundScore.tricks < 10) {
+                      roundScore.tricks += 1;
+                      updateRoundAndPlayerTotal(roundScore);
+                    }
+                  }}
                 />
               </Col>
             </Row>
@@ -86,9 +86,12 @@ function Round({
                   type='button'
                   className='btn btn-dark'
                   value='Bonus  -10'
-                  onClick={() =>
-                    onBonusChange(roundScore.bonus - 10, roundScore)
-                  }
+                  onClick={() => {
+                    if (roundScore.bonus > 0) {
+                      roundScore.bonus -= 10;
+                      updateRoundAndPlayerTotal(roundScore);
+                    }
+                  }}
                 />
               </Col>
               <Col>
@@ -96,9 +99,10 @@ function Round({
                   type='button'
                   className='btn btn-dark'
                   value='Bonus  +10'
-                  onClick={() =>
-                    onBonusChange(roundScore.bonus + 10, roundScore)
-                  }
+                  onClick={() => {
+                    roundScore.bonus += 10;
+                    updateRoundAndPlayerTotal(roundScore);
+                  }}
                 />
               </Col>
             </Row>
