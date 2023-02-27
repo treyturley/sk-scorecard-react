@@ -14,7 +14,9 @@ function JoinGame() {
     if (refreshGames) {
       getActiveGames(controller)
         .then((value) => {
-          setActiveGames(value.reverse());
+          setActiveGames(
+            value.filter((game) => game.status === 'STARTED').reverse()
+          );
           setRefreshGames(false);
         })
         .catch((err) => {
