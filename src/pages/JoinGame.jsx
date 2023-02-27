@@ -42,11 +42,14 @@ function JoinGame() {
         >
           Refresh
         </Button>
-        {activeGames
-          .filter((game) => game.status === 'STARTED')
-          .map((game) => (
-            <GameListing key={game.id} game={game} />
-          ))}
+        {refreshGames && <h5>Loading Active Games...</h5>}
+
+        {!refreshGames &&
+          (activeGames.length > 0
+            ? activeGames
+                .filter((game) => game.status === 'STARTED')
+                .map((game) => <GameListing key={game.id} game={game} />)
+            : 'No games found. Try refreshing.')}
       </div>
     </div>
   );
