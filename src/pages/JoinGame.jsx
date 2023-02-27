@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 import GameListing from '../components/GameListing';
 import { getActiveGames } from '../context/game/GameActions';
 import { Button } from 'react-bootstrap';
@@ -9,12 +10,25 @@ function JoinGame() {
   const [activeGames, setActiveGames] = useState([]);
 
   useEffect(() => {
+    const controller = new AbortController();
     if (refreshGames) {
-      getActiveGames().then((value) => {
-        setActiveGames(value.reverse());
-      });
-      setRefreshGames(false);
+      getActiveGames(controller)
+        .then((value) => {
+          setActiveGames(value.reverse());
+          setRefreshGames(false);
+        })
+        .catch((err) => {
+          if (err.name === 'AxiosError') {
+            console.log('axios error - connection refused');
+            setRefreshGames(false);
+          } else if (err.name === 'CanceledError') {
+            console.log('axios error - request canceled');
+          }
+        });
     }
+    return () => {
+      controller.abort();
+    };
   }, [refreshGames]);
 
   return (

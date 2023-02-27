@@ -155,10 +155,13 @@ export const updateGame = async (
 
 /**
  * Gets a list of currently active games from the SK API
+ * @param {AbortController} controller - an abort controller for the axios request
  * @returns an array of active games or an empty array if none found
  */
-export const getActiveGames = async () => {
-  const res = await axios.get(`${api_endpoint}/v1/scorecards`);
+export const getActiveGames = async (controller) => {
+  const res = await axios.get(`${api_endpoint}/v1/scorecards`, {
+    signal: controller.signal,
+  });
   if (res.status === 200) {
     return res.data;
   }
