@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import GameListing from '../components/GameListing';
 import { getActiveGames } from '../context/game/GameActions';
 import { Button } from 'react-bootstrap';
