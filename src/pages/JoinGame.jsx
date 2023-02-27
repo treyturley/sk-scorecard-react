@@ -9,12 +9,27 @@ function JoinGame() {
   const [activeGames, setActiveGames] = useState([]);
 
   useEffect(() => {
+    const controller = new AbortController();
     if (refreshGames) {
-      getActiveGames().then((value) => {
-        setActiveGames(value.reverse());
-      });
-      setRefreshGames(false);
+      getActiveGames(controller)
+        .then((value) => {
+          setActiveGames(
+            value.filter((game) => game.status === 'STARTED').reverse()
+          );
+          setRefreshGames(false);
+        })
+        .catch((err) => {
+          if (err.name === 'AxiosError') {
+            console.log('axios error - connection refused');
+            setRefreshGames(false);
+          } else if (err.name === 'CanceledError') {
+            console.log('axios error - request canceled');
+          }
+        });
     }
+    return () => {
+      controller.abort();
+    };
   }, [refreshGames]);
 
   return (
@@ -28,11 +43,14 @@ function JoinGame() {
         >
           Refresh
         </Button>
-        {activeGames
-          .filter((game) => game.status === 'STARTED')
-          .map((game) => (
-            <GameListing key={game.id} game={game} />
-          ))}
+        {refreshGames && <h5>Checking for games...</h5>}
+
+        {!refreshGames &&
+          (activeGames.length > 0
+            ? activeGames
+                .filter((game) => game.status === 'STARTED')
+                .map((game) => <GameListing key={game.id} game={game} />)
+            : 'No games in progress. Try refreshing.')}
       </div>
     </div>
   );

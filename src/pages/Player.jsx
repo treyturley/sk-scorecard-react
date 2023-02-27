@@ -6,7 +6,7 @@ function Player() {
 
   return (
     <div className='content'>
-      <WatchGame gameId={gameId} />;
+      <WatchGame gameId={gameId} />
     </div>
   );
 }

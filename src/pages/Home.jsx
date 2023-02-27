@@ -13,16 +13,25 @@ function Home() {
           </h1>
         </div>
         <div className='home-buttons'>
-          <Link to='/skullking-scorecard/new-game'>
-            <Button variant='dark' size='lg' className='my-5'>
-              Start a game
-            </Button>
-          </Link>
-          <Link to='/skullking-scorecard/join-game'>
-            <Button variant='dark' size='lg' className='mb-5'>
-              Join a game
-            </Button>
-          </Link>
+          <Button
+            as={Link}
+            to={'/skullking-scorecard/new-game'}
+            variant='dark'
+            size='lg'
+            className='my-5'
+          >
+            Start a game
+          </Button>
+
+          <Button
+            as={Link}
+            to='/skullking-scorecard/join-game'
+            variant='dark'
+            size='lg'
+            className='mb-5'
+          >
+            Join a game
+          </Button>
         </div>
       </div>
     </div>

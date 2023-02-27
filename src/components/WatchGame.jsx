@@ -122,7 +122,7 @@ function WatchGame({ gameId }) {
               <Accordion.Body>
                 <ListGroup>
                   <ListGroup.Item>
-                    <Row className='text-center player-round-header'>
+                    <Row className='text-center player-round-header' xs={5}>
                       <Col>
                         <strong>Round</strong>
                       </Col>
