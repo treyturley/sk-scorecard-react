@@ -54,7 +54,7 @@ const gameReducer = (state, action) => {
         selectedGame: {
           gameId: '',
           name: '',
-          status: '',
+          status: 'STARTED',
         },
       };
     default:

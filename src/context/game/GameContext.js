@@ -14,7 +14,7 @@ export const GameProvider = ({ children }) => {
     selectedGame: {
       gameId: '',
       name: '',
-      status: '',
+      status: 'STARTED',
     },
   };
 
