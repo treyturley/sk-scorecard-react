@@ -22,7 +22,7 @@ function Summary() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!selectedGame.id || selectedGame.id === '') {
+    if (!selectedGame.gameId || selectedGame.gameId === '') {
       //someone directly navigated here without a game in the app state
       navigate('/skullking-scorecard/game-not-found');
     }
@@ -34,7 +34,7 @@ function Summary() {
     //TODO: set current round to 10 instead of going to the first round?
     dispatch({ type: SET_GAME_COMPLETE, payload: false });
     dispatch({ type: SET_GAME_STATUS, payload: 'STARTED' });
-    navigate(`/skullking-scorecard/scorekeeper/${selectedGame.id}`);
+    navigate(`/skullking-scorecard/scorekeeper/${selectedGame.gameId}`);
   }
 
   function getSortedPlayers() {

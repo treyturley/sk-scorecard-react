@@ -88,7 +88,7 @@ export const createGame = async (scorecard, playerTotals, selectedGame) => {
   try {
     const res = await axios.post(`${api_endpoint}/v1/scorecards`, game, config);
     if (res.status === 201) {
-      return res.data.id;
+      return res.data.gameId;
     } else {
       console.error(
         `Error occured on POST ${api_endpoint}/v1/scorecards. Received ${res.status} ${res.statusText}`

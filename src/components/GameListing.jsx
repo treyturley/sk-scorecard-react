@@ -11,21 +11,23 @@ function GameListing({ game }) {
       </h4>
 
       {game.playerTotals.map((player) => (
-        <p key={`${game.id}-${player.playerName}`}>
+        <p key={`${game.gameId}-${player.playerName}`}>
           {player.playerName} : {player.total}
         </p>
       ))}
 
       <Button
         className='join-button'
-        onClick={() => navigate(`/skullking-scorecard/player/${game.id}`)}
+        onClick={() => navigate(`/skullking-scorecard/player/${game.gameId}`)}
         variant='dark'
       >
         Join as Player
       </Button>
       <Button
         className='join-button'
-        onClick={() => navigate(`/skullking-scorecard/scorekeeper/${game.id}`)}
+        onClick={() =>
+          navigate(`/skullking-scorecard/scorekeeper/${game.gameId}`)
+        }
         variant='dark'
       >
         Join as Scorekeeper
