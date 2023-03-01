@@ -54,10 +54,6 @@ function Scorekeeper() {
 
   useEffect(() => {
     if (gameId !== selectedGame.gameId) {
-      console.warn('gameId does not match with selectedGame.gameId!');
-      console.warn(
-        `gameId: ${gameId}. selectedGame.gameId: ${selectedGame.gameId}`
-      );
       try {
         getGame(gameId).then((data) => {
           if (data === null) {
