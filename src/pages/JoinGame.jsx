@@ -49,7 +49,7 @@ function JoinGame() {
           (activeGames.length > 0
             ? activeGames
                 .filter((game) => game.status === 'STARTED')
-                .map((game) => <GameListing key={game.id} game={game} />)
+                .map((game) => <GameListing key={game.gameId} game={game} />)
             : 'No games in progress. Try refreshing.')}
       </div>
     </div>

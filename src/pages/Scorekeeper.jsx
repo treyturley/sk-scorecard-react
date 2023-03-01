@@ -53,9 +53,7 @@ function Scorekeeper() {
   } = useContext(GameContext);
 
   useEffect(() => {
-    if (gameId !== selectedGame.id) {
-      console.warn('gameId does not match with selectedGame.id!');
-      console.warn(`gameId: ${gameId}. selectedGame.id: ${selectedGame.id}`);
+    if (gameId !== selectedGame.gameId) {
       try {
         getGame(gameId).then((data) => {
           if (data === null) {
@@ -72,7 +70,7 @@ function Scorekeeper() {
             dispatch({ type: SET_PLAYER_TOTALS, payload: data.playerTotals });
             dispatch({ type: SET_CURRENT_ROUND, payload: data.currentRound });
             dispatch({ type: SET_GAME_NAME, payload: data.name });
-            dispatch({ type: SET_GAME_ID, payload: data.id });
+            dispatch({ type: SET_GAME_ID, payload: data.gameId });
             dispatch({ type: SET_GAME_STATUS, payload: data.status });
           }
         });

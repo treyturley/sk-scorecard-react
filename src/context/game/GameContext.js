@@ -12,9 +12,9 @@ export const GameProvider = ({ children }) => {
     currentRound: 1,
     gameComplete: false, // TODO: combine gameComplete with selectedGame.status
     selectedGame: {
-      id: '',
+      gameId: '',
       name: '',
-      status: '',
+      status: 'STARTED',
     },
   };
 

@@ -37,7 +37,7 @@ const gameReducer = (state, action) => {
     case SET_GAME_ID:
       return {
         ...state,
-        selectedGame: { ...state.selectedGame, id: action.payload },
+        selectedGame: { ...state.selectedGame, gameId: action.payload },
       };
     case SET_GAME_STATUS:
       return {
@@ -52,9 +52,9 @@ const gameReducer = (state, action) => {
         currentRound: 1,
         gameComplete: false,
         selectedGame: {
-          id: '',
+          gameId: '',
           name: '',
-          status: '',
+          status: 'STARTED',
         },
       };
     default:
