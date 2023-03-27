@@ -1,0 +1,1755 @@
+{
+  "id": "8ca53268-5d0c-4511-b6ad-065ae3c3a37d",
+  "version": "2.0",
+  "name": "Skullking_Scorecard",
+  "url": "http://localhost:3000/",
+  "tests": [{
+    "id": "77044d70-c30c-457c-a8ce-e3fd0220add9",
+    "name": "Game Setup",
+    "commands": [{
+      "id": "88e42d1f-2b28-4d6a-8343-cf03ca040e40",
+      "comment": "",
+      "command": "run",
+      "target": "Start Game",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "04422ac5-ae48-4e1b-b022-b7c8a797346c",
+      "comment": "",
+      "command": "click",
+      "target": "name=game-name",
+      "targets": [
+        ["name=game-name", "name"],
+        ["css=input:nth-child(1)", "css:finder"],
+        ["xpath=//input[@name='game-name']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/form/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "586797d2-abc4-47a9-b604-e664f5ea88cb",
+      "comment": "",
+      "command": "type",
+      "target": "name=game-name",
+      "targets": [
+        ["name=game-name", "name"],
+        ["css=input:nth-child(1)", "css:finder"],
+        ["xpath=//input[@name='game-name']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/form/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Test"
+    }, {
+      "id": "561d6c86-0520-4b45-add9-a4ea0d7fa862",
+      "comment": "",
+      "command": "click",
+      "target": "name=Player 1",
+      "targets": [
+        ["name=Player 1", "name"],
+        ["css=input:nth-child(3)", "css:finder"],
+        ["xpath=//input[@name='Player 1']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/form/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9f8287bf-5d1e-45e9-ad81-d09364785408",
+      "comment": "",
+      "command": "type",
+      "target": "name=Player 1",
+      "targets": [
+        ["name=Player 1", "name"],
+        ["css=input:nth-child(3)", "css:finder"],
+        ["xpath=//input[@name='Player 1']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/form/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "Sailer One"
+    }, {
+      "id": "57e24878-d6b5-4332-b818-b9979d8782fb",
+      "comment": "",
+      "command": "click",
+      "target": "name=Player 2",
+      "targets": [
+        ["name=Player 2", "name"],
+        ["css=input:nth-child(4)", "css:finder"],
+        ["xpath=//input[@name='Player 2']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/form/input[3]", "xpath:idRelative"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d641183b-c59b-4b2c-8c19-62ea417e946b",
+      "comment": "",
+      "command": "type",
+      "target": "name=Player 2",
+      "targets": [
+        ["name=Player 2", "name"],
+        ["css=input:nth-child(4)", "css:finder"],
+        ["xpath=//input[@name='Player 2']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/form/input[3]", "xpath:idRelative"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": "Sailor Two"
+    }, {
+      "id": "31121b72-5eb1-42d6-87c0-c1fb11e45705",
+      "comment": "",
+      "command": "click",
+      "target": "name=Player 3",
+      "targets": [
+        ["name=Player 3", "name"],
+        ["css=input:nth-child(5)", "css:finder"],
+        ["xpath=//input[@name='Player 3']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/form/input[4]", "xpath:idRelative"],
+        ["xpath=//input[4]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7074109e-2f5d-4744-870c-bc4f17f81571",
+      "comment": "",
+      "command": "type",
+      "target": "name=Player 3",
+      "targets": [
+        ["name=Player 3", "name"],
+        ["css=input:nth-child(5)", "css:finder"],
+        ["xpath=//input[@name='Player 3']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/form/input[4]", "xpath:idRelative"],
+        ["xpath=//input[4]", "xpath:position"]
+      ],
+      "value": "Sailor Three"
+    }, {
+      "id": "ef737336-a80b-4fc4-8c2e-bd27e6625162",
+      "comment": "",
+      "command": "click",
+      "target": "name=Player 4",
+      "targets": [
+        ["name=Player 4", "name"],
+        ["css=input:nth-child(6)", "css:finder"],
+        ["xpath=//input[@name='Player 4']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/form/input[5]", "xpath:idRelative"],
+        ["xpath=//input[5]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2dbeb701-d0a0-4453-9155-015ffcac4279",
+      "comment": "",
+      "command": "type",
+      "target": "name=Player 4",
+      "targets": [
+        ["name=Player 4", "name"],
+        ["css=input:nth-child(6)", "css:finder"],
+        ["xpath=//input[@name='Player 4']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/form/input[5]", "xpath:idRelative"],
+        ["xpath=//input[5]", "xpath:position"]
+      ],
+      "value": "Sailor Four"
+    }, {
+      "id": "8c183ff5-9df9-45d5-a59c-53a6119a90d0",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/form/div[2]/button", "xpath:idRelative"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Set Sail')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e36a4511-5506-4b66-8e16-44f324c34dd7",
+      "comment": "",
+      "command": "waitForText",
+      "target": "css=.container:nth-child(1) > .text-center:nth-child(1)",
+      "targets": [
+        ["css=.container:nth-child(1) > .text-center:nth-child(1)", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/h1", "xpath:idRelative"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Score Totals')]", "xpath:innerText"]
+      ],
+      "value": "Score Totals"
+    }, {
+      "id": "612e031d-e717-4d7d-8261-d7730ffd372b",
+      "comment": "",
+      "command": "waitForText",
+      "target": "css=.round-title",
+      "targets": [
+        ["css=.round-title", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[2]/div/h1", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div[2]/div/h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Round 1')]", "xpath:innerText"]
+      ],
+      "value": "Round 1"
+    }, {
+      "id": "c2ad6f57-4d80-4efe-aaa5-58288eda4bcb",
+      "comment": "",
+      "command": "waitForText",
+      "target": "css=.mb-4 > .text-center:nth-child(1)",
+      "targets": [
+        ["css=.mb-4 > .text-center:nth-child(1)", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div[5]/h1", "xpath:idRelative"],
+        ["xpath=//div[5]/h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Current Round: 1')]", "xpath:innerText"]
+      ],
+      "value": "Current Round: 1"
+    }, {
+      "id": "8b1c6d18-c0e5-4206-b801-23ce265a32c4",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.mb-3:nth-child(1) h2",
+      "targets": [
+        ["css=.mb-3:nth-child(1) h2", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div[3]/div/div/div/div/h2", "xpath:idRelative"],
+        ["xpath=//h2", "xpath:position"],
+        ["xpath=//h2[contains(.,'Player: Sailer One')]", "xpath:innerText"]
+      ],
+      "value": "Player: Sailer One"
+    }, {
+      "id": "525f70bd-7037-434e-8fd5-46eea5a0d2d2",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.mb-3:nth-child(2) h2",
+      "targets": [
+        ["css=.mb-3:nth-child(2) h2", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div[3]/div[2]/div/div/div/h2", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/h2", "xpath:position"],
+        ["xpath=//h2[contains(.,'Player: Sailor Two')]", "xpath:innerText"]
+      ],
+      "value": "Player: Sailor Two"
+    }, {
+      "id": "4321b9b3-e19c-4c0a-a334-9117a6a2039d",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.mb-3:nth-child(3) h2",
+      "targets": [
+        ["css=.mb-3:nth-child(3) h2", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div[3]/div[3]/div/div/div/h2", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/h2", "xpath:position"],
+        ["xpath=//h2[contains(.,'Player: Sailor Three')]", "xpath:innerText"]
+      ],
+      "value": "Player: Sailor Three"
+    }, {
+      "id": "ad2f8fda-e4d3-4897-b416-d6403ff56678",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.mb-3:nth-child(4) h2",
+      "targets": [
+        ["css=.mb-3:nth-child(4) h2", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div[3]/div[4]/div/div/div/h2", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div/h2", "xpath:position"],
+        ["xpath=//h2[contains(.,'Player: Sailor Four')]", "xpath:innerText"]
+      ],
+      "value": "Player: Sailor Four"
+    }]
+  }, {
+    "id": "9e9809c6-6e95-4dcd-8d2c-f95ede2864c8",
+    "name": "Start Game",
+    "commands": [{
+      "id": "78da5bc5-172b-47be-96bb-cbf388c03a50",
+      "comment": "",
+      "command": "run",
+      "target": "Launch Skullking",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3487a8d5-360e-41b7-9131-b4acebfb2894",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Start a game",
+      "targets": [
+        ["linkText=Start a game", "linkText"],
+        ["css=.my-5", "css:finder"],
+        ["xpath=//a[contains(text(),'Start a game')]", "xpath:link"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/a", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, '/skullking-scorecard/new-game')])[2]", "xpath:href"],
+        ["xpath=//div[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Start a game')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c7192776-2596-4156-ab76-bddb3dc1a053",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=h1",
+      "targets": [
+        ["css=h1", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div/h1", "xpath:idRelative"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Ship Setup')]", "xpath:innerText"]
+      ],
+      "value": "Ship Setup"
+    }, {
+      "id": "7ffb09ae-7c92-4caf-8b2c-9dc27249dff5",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/form/div[2]/button", "xpath:idRelative"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Set Sail')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "3a0ff613-f06a-4b9a-9f8e-33a5930f17de",
+    "name": "Valid Bid",
+    "commands": [{
+      "id": "c3ed416c-5f13-49ca-9530-8d5e9ff2c21c",
+      "comment": "Start and Create a New Game",
+      "command": "run",
+      "target": "Game Setup",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "5a8a833c-743d-4c8c-9331-b5b90fadc2eb",
+      "comment": "Increment Sailor One Bid by 1",
+      "command": "click",
+      "target": "css=.mb-3:nth-child(1) .list-group-item:nth-child(1) .col:nth-child(3) > .btn",
+      "targets": [
+        ["css=.mb-3:nth-child(1) .list-group-item:nth-child(1) .col:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Bid  +1']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[3]/div/div[2]/div/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ace743fa-ed33-4113-a0f7-244a38e5a06e",
+      "comment": "Increment Sailor One Tricks by 1",
+      "command": "click",
+      "target": "css=.mb-3:nth-child(1) .list-group-item:nth-child(2) .col:nth-child(3) > .btn",
+      "targets": [
+        ["css=.mb-3:nth-child(1) .list-group-item:nth-child(2) .col:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Tricks  +1']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[3]/div/div[2]/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/div/div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4aff07ad-f99b-435b-91fe-6c2865a03073",
+      "comment": "Assert: Sailor One Bid = 1",
+      "command": "assertText",
+      "target": "css=.mb-3:nth-child(1) .list-group-item:nth-child(1) h4",
+      "targets": [
+        ["css=.mb-3:nth-child(1) .list-group-item:nth-child(1) h4", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div[3]/div/div[2]/div/div/div/h4", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div[2]/div/div/div/h4", "xpath:position"],
+        ["xpath=//h4[contains(.,'Bid: 1')]", "xpath:innerText"]
+      ],
+      "value": "Bid: 1"
+    }, {
+      "id": "a3ff4a49-f7e8-4d89-ada2-2ce2985813d4",
+      "comment": "Assert: Sailor One Tricks = 1",
+      "command": "assertText",
+      "target": "css=.mb-3:nth-child(1) .list-group-item:nth-child(2) h4",
+      "targets": [
+        ["css=.mb-3:nth-child(1) .list-group-item:nth-child(2) h4", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div[3]/div/div[2]/div[2]/div/div/h4", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/h4", "xpath:position"],
+        ["xpath=//h4[contains(.,'Tricks: 1')]", "xpath:innerText"]
+      ],
+      "value": "Tricks: 1"
+    }, {
+      "id": "4c97a5a6-23d2-4309-a826-87db0c87c53d",
+      "comment": "Assert: Sailor One Round Total = 20",
+      "command": "assertText",
+      "target": "css=.mb-3:nth-child(1) .round-total-header",
+      "targets": [
+        ["css=.mb-3:nth-child(1) .round-total-header", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div[3]/div/div[2]/div[4]/div/div/h4", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/h4", "xpath:position"],
+        ["xpath=//h4[contains(.,'Round Total: 20')]", "xpath:innerText"]
+      ],
+      "value": "Round Total: 20"
+    }, {
+      "id": "2aec1602-0805-4a13-b880-7f27c6661520",
+      "comment": "Assert: Sailor One Score Total = 20",
+      "command": "assertText",
+      "target": "css=.text-center:nth-child(2) > .col:nth-child(1) > .player-total",
+      "targets": [
+        ["css=.text-center:nth-child(2) > .col:nth-child(1) > .player-total", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div/div/h4", "xpath:idRelative"],
+        ["xpath=//h4", "xpath:position"],
+        ["xpath=//h4[contains(.,'Sailer One : 20')]", "xpath:innerText"]
+      ],
+      "value": "Sailer One : 20"
+    }, {
+      "id": "81c000bd-03c5-45c6-957c-917718b91767",
+      "comment": "Assert: Sailor One Score Total = 20 under lower Current Round Score Totals",
+      "command": "assertText",
+      "target": "css=.text-center:nth-child(3) > .col:nth-child(1) > .player-total",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .col:nth-child(1) > .player-total", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div[5]/div/div/h4", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/h4", "xpath:position"]
+      ],
+      "value": "Sailer One : 20"
+    }, {
+      "id": "989b9a8a-9a43-4c2c-8291-e82da839fe2f",
+      "comment": "Assert: Sailor One Current Bid = 1",
+      "command": "assertText",
+      "target": "css=.accordion-item:nth-child(1) h4",
+      "targets": [
+        ["css=.accordion-item:nth-child(1) h4", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div[5]/div[2]/div/h2/button/h4", "xpath:idRelative"],
+        ["xpath=//button/h4", "xpath:position"],
+        ["xpath=//h4[contains(.,'Sailer One: Current Bid 1')]", "xpath:innerText"]
+      ],
+      "value": "Sailer One: Current Bid 1"
+    }, {
+      "id": "b1e7b719-c6a1-4103-be8b-254a02650bdc",
+      "comment": "Expand Sailor One Accordion",
+      "command": "click",
+      "target": "css=.accordion-item:nth-child(1) .accordion-button",
+      "targets": [
+        ["css=.accordion-item:nth-child(1) .accordion-button", "css:finder"],
+        ["xpath=(//button[@type='button'])[2]", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[5]/div[2]/div/h2/button", "xpath:idRelative"],
+        ["xpath=//h2/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Sailer One: Current Bid 1')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "729713f8-bfd1-400c-838e-2982cb035c19",
+      "comment": "Assert: Sailor One Bid = 1 in accordion",
+      "command": "assertText",
+      "target": "css=.show .text-center:nth-child(2) > .col:nth-child(2)",
+      "targets": [
+        ["css=.show .text-center:nth-child(2) > .col:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div[5]/div[2]/div/div/div/div/div/div[2]/div[2]", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/div/div[2]/div[2]", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "90216438-ace1-4adb-bd2f-889d0e77a6bf",
+      "comment": "Assert: Sailor One Tricks = 1 under accordion",
+      "command": "assertText",
+      "target": "css=.show .text-center:nth-child(2) > .col:nth-child(3)",
+      "targets": [
+        ["css=.show .text-center:nth-child(2) > .col:nth-child(3)", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div[5]/div[2]/div/div/div/div/div/div[2]/div[3]", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/div/div[2]/div[3]", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "32204652-b4b7-4109-9dd1-f6afb6d7ca12",
+      "comment": "Assert: Sailor One Score = 20 for round 1 under accordion",
+      "command": "assertText",
+      "target": "css=.show .text-center:nth-child(2) > .col:nth-child(5)",
+      "targets": [
+        ["css=.show .text-center:nth-child(2) > .col:nth-child(5)", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div[5]/div[2]/div/div/div/div/div/div[2]/div[5]", "xpath:idRelative"],
+        ["xpath=//div[2]/div[5]", "xpath:position"]
+      ],
+      "value": "20"
+    }]
+  }, {
+    "id": "4a63ea5a-2369-48cc-a2df-086ba34dd149",
+    "name": "Finish Game",
+    "commands": [{
+      "id": "1df5a58c-481f-4e57-b681-3965f981e00c",
+      "comment": "",
+      "command": "run",
+      "target": "Game Setup",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f5f3b55e-060b-4657-8852-5d0059eefc21",
+      "comment": "",
+      "command": "click",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Next Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a4e41fbb-f35e-40fd-95f8-b4cf7f685929",
+      "comment": "",
+      "command": "waitForElementPresent",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Next Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "30000"
+    }, {
+      "id": "5bbe55ea-1c25-4e07-8f80-2bec678a4350",
+      "comment": "",
+      "command": "click",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Next Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7a509347-fb9a-45d9-9eaa-a6e0aa331a4b",
+      "comment": "",
+      "command": "waitForElementPresent",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Next Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "30000"
+    }, {
+      "id": "16b10d92-ee68-48f4-ad52-0fba594413f6",
+      "comment": "",
+      "command": "click",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Next Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "22798f4a-552a-4e93-ab09-036a40ebf086",
+      "comment": "",
+      "command": "waitForElementPresent",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Next Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "30000"
+    }, {
+      "id": "fdaa54ad-68a5-4560-950a-0e9eccac5749",
+      "comment": "",
+      "command": "click",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Next Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d8e2a29c-b52f-404a-8835-b6e1ae2df981",
+      "comment": "",
+      "command": "waitForElementPresent",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Next Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "30000"
+    }, {
+      "id": "240f81f4-f5db-4e57-915c-bd5de4d0e746",
+      "comment": "",
+      "command": "click",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Next Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7b425458-3b23-457e-8e7d-a48ab8412d01",
+      "comment": "",
+      "command": "waitForElementPresent",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Next Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "30000"
+    }, {
+      "id": "ef0e07e0-9cd7-42ac-a8be-639c7735f7d7",
+      "comment": "",
+      "command": "click",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Next Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "73921c7b-3c6c-4e72-8fcb-010f4b21a23d",
+      "comment": "",
+      "command": "waitForElementPresent",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Next Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "30000"
+    }, {
+      "id": "f3b5c920-25dc-414d-9e21-21e0baec0802",
+      "comment": "",
+      "command": "click",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Next Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "fc38ff18-7eb2-4966-9ac2-b14d286a5daa",
+      "comment": "",
+      "command": "waitForElementPresent",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Next Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "30000"
+    }, {
+      "id": "5024e735-0e69-4a5f-bd8a-5ae081acb871",
+      "comment": "",
+      "command": "click",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Next Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3546c230-fc97-4841-aaf0-0606116569c5",
+      "comment": "",
+      "command": "waitForElementPresent",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Next Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "30000"
+    }, {
+      "id": "66a49be9-fa41-4dad-9bd9-344b739b9c19",
+      "comment": "",
+      "command": "click",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Next Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c6212b87-683a-4e57-a9ea-e243fc40d661",
+      "comment": "",
+      "command": "waitForElementPresent",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='To Summary']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "30000"
+    }, {
+      "id": "124315ea-2c9c-4399-9418-7e783ba860be",
+      "comment": "",
+      "command": "click",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='To Summary']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6dbdd820-4870-4c37-aeb8-ef4cc07f6ad8",
+      "comment": "",
+      "command": "waitForElementPresent",
+      "target": "css=.title",
+      "targets": [
+        ["css=.title", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/h1", "xpath:idRelative"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Game Summary')]", "xpath:innerText"]
+      ],
+      "value": "30000"
+    }, {
+      "id": "b45b5f5a-7c09-4e51-a71b-cbcbc4ed6054",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.title",
+      "targets": [
+        ["css=.title", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/h1", "xpath:idRelative"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Game Summary')]", "xpath:innerText"]
+      ],
+      "value": "Game Summary"
+    }, {
+      "id": "d6ae844c-4298-49b7-bffb-ccb8897a4ff5",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.first-place",
+      "targets": [
+        ["css=.first-place", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div/ul/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'Sailor Four : 550')]", "xpath:innerText"]
+      ],
+      "value": "Sailor Four : 550"
+    }, {
+      "id": "8b3bddfb-9031-4125-a25b-ee3dbfdfc301",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.second-place",
+      "targets": [
+        ["css=.second-place", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div/ul/li[2]", "xpath:idRelative"],
+        ["xpath=//li[2]", "xpath:position"],
+        ["xpath=//li[contains(.,'Sailor Three : 550')]", "xpath:innerText"]
+      ],
+      "value": "Sailor Three : 550"
+    }, {
+      "id": "2a5de756-7515-48da-b784-c2fa2d0ac6e6",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.third-place",
+      "targets": [
+        ["css=.third-place", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div/ul/li[3]", "xpath:idRelative"],
+        ["xpath=//li[3]", "xpath:position"],
+        ["xpath=//li[contains(.,'Sailor Two : 550')]", "xpath:innerText"]
+      ],
+      "value": "Sailor Two : 550"
+    }, {
+      "id": "83995e13-9692-4478-b61b-d2569ae912d7",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.other-places",
+      "targets": [
+        ["css=.other-places", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div/ul/li[4]", "xpath:idRelative"],
+        ["xpath=//li[4]", "xpath:position"],
+        ["xpath=//li[contains(.,'Sailer One : 550')]", "xpath:innerText"]
+      ],
+      "value": "Sailer One : 550"
+    }, {
+      "id": "cc30a76e-510f-49da-b9f3-28ed85d9b55b",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/button", "xpath:idRelative"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Back to Scores')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "fd60f303-b6c8-488f-8f8e-e20bcf53fef3",
+    "name": "Join Game as Scorekeeper",
+    "commands": [{
+      "id": "7b9cc11d-7454-43a5-be9a-ef9244548bc8",
+      "comment": "",
+      "command": "run",
+      "target": "Game Setup",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0b11070e-468c-4a54-b294-5bb5ea64fd8b",
+      "comment": "",
+      "command": "run",
+      "target": "Launch Skullking",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "fdf63a0b-7253-4c41-a2d2-85d29f1a93fe",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Join a game",
+      "targets": [
+        ["linkText=Join a game", "linkText"],
+        ["css=.mb-5", "css:finder"],
+        ["xpath=//a[contains(text(),'Join a game')]", "xpath:link"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/a[2]", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, '/skullking-scorecard/join-game')])[2]", "xpath:href"],
+        ["xpath=//div[2]/a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'Join a game')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c21ca4ca-2947-4e7a-93b9-fde6b0410544",
+      "comment": "",
+      "command": "click",
+      "target": "css=.text-center:nth-child(3) > .join-button:nth-child(7)",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .join-button:nth-child(7)", "css:finder"],
+        ["xpath=(//button[@type='button'])[4]", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Join as Scorekeeper')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "de126c68-ab72-4765-a359-20aaafa5f403",
+      "comment": "",
+      "command": "waitForText",
+      "target": "css=.container:nth-child(1) > .text-center:nth-child(1)",
+      "targets": [
+        ["css=.container:nth-child(1) > .text-center:nth-child(1)", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/h1", "xpath:idRelative"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Score Totals')]", "xpath:innerText"]
+      ],
+      "value": "Score Totals"
+    }, {
+      "id": "0f103347-0097-40ef-b551-1a80a3dfc7c1",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.text-center:nth-child(2) > .col:nth-child(1) > .player-total",
+      "targets": [
+        ["css=.text-center:nth-child(2) > .col:nth-child(1) > .player-total", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div/div/h4", "xpath:idRelative"],
+        ["xpath=//h4", "xpath:position"],
+        ["xpath=//h4[contains(.,'Sailer One : 0')]", "xpath:innerText"]
+      ],
+      "value": "Sailer One : 0"
+    }, {
+      "id": "901ea3ac-068a-4748-8beb-b421bbb5931a",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.text-center:nth-child(2) > .col:nth-child(2) > .player-total",
+      "targets": [
+        ["css=.text-center:nth-child(2) > .col:nth-child(2) > .player-total", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div/div[2]/h4", "xpath:idRelative"],
+        ["xpath=//div[2]/h4", "xpath:position"],
+        ["xpath=//h4[contains(.,'Sailor Two : 0')]", "xpath:innerText"]
+      ],
+      "value": "Sailor Two : 0"
+    }, {
+      "id": "da982dc0-e5db-4fd3-98e4-3e4df5a25c8a",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.text-center:nth-child(2) > .col:nth-child(3) > .player-total",
+      "targets": [
+        ["css=.text-center:nth-child(2) > .col:nth-child(3) > .player-total", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div/div[3]/h4", "xpath:idRelative"],
+        ["xpath=//div[3]/h4", "xpath:position"],
+        ["xpath=//h4[contains(.,'Sailor Three : 0')]", "xpath:innerText"]
+      ],
+      "value": "Sailor Three : 0"
+    }, {
+      "id": "8e0576a9-5a47-44c4-aa8d-ef572d420051",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.text-center:nth-child(2) > .col:nth-child(4) > .player-total",
+      "targets": [
+        ["css=.text-center:nth-child(2) > .col:nth-child(4) > .player-total", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div/div[4]/h4", "xpath:idRelative"],
+        ["xpath=//div[4]/h4", "xpath:position"],
+        ["xpath=//h4[contains(.,'Sailor Four : 0')]", "xpath:innerText"]
+      ],
+      "value": "Sailor Four : 0"
+    }, {
+      "id": "5f3d343a-4e06-4c05-b6fd-8782012185a0",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.text-center:nth-child(1) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(1) > .btn", "css:finder"],
+        ["xpath=//input[@value='Previous Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1e5e017a-baf6-4de4-b163-1245a2b4df82",
+      "comment": "",
+      "command": "assertValue",
+      "target": "css=.text-center:nth-child(1) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(1) > .btn", "css:finder"],
+        ["xpath=//input[@value='Previous Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Previous Round"
+    }, {
+      "id": "b61a8564-88a4-4f76-ad3f-5a4e71a231a5",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Next Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "47c208e1-3a6f-49dc-bdb6-eea1c3dce582",
+      "comment": "",
+      "command": "assertValue",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Next Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "Next Round"
+    }, {
+      "id": "5913c685-15dc-481c-9997-ca999bd1ee81",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "2d190560-6c7e-45be-90fd-c7d89a9c4114",
+    "name": "Launch Skullking",
+    "commands": [{
+      "id": "1e694eda-2d35-4ee2-a62d-1fbb14092fa7",
+      "comment": "",
+      "command": "open",
+      "target": "/skullking-scorecard",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "084ea453-c277-47e5-82cd-b329340c31f5",
+      "comment": "",
+      "command": "waitForText",
+      "target": "css=.text-center",
+      "targets": [
+        ["css=.text-center", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div/h1", "xpath:idRelative"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Welcome to the Skull King Scorecard')]", "xpath:innerText"]
+      ],
+      "value": "Welcome to the Skull King Scorecard"
+    }, {
+      "id": "512cadee-bda5-44db-86f8-9d43ae86a7d2",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.text-center",
+      "targets": [
+        ["css=.text-center", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div/h1", "xpath:idRelative"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Welcome to the Skull King Scorecard')]", "xpath:innerText"]
+      ],
+      "value": "Welcome to the Skull King Scorecard"
+    }, {
+      "id": "c0b49d55-605e-4e78-b108-a71d9e395922",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "linkText=Start a game",
+      "targets": [
+        ["linkText=Start a game", "linkText"],
+        ["css=.my-5", "css:finder"],
+        ["xpath=//a[contains(text(),'Start a game')]", "xpath:link"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/a", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, '/skullking-scorecard/new-game')])[2]", "xpath:href"],
+        ["xpath=//div[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Start a game')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e79a10f1-94ce-43eb-a748-041c75d9e379",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "linkText=Join a game",
+      "targets": [
+        ["linkText=Join a game", "linkText"],
+        ["css=.mb-5", "css:finder"],
+        ["xpath=//a[contains(text(),'Join a game')]", "xpath:link"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/a[2]", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, '/skullking-scorecard/join-game')])[2]", "xpath:href"],
+        ["xpath=//div[2]/a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'Join a game')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "000457d0-9bca-47c7-af81-78f36dc49c04",
+    "name": "Join Game as Scorekeeper After Previous Game",
+    "commands": [{
+      "id": "3d03cdd9-e30b-4dd9-89fd-8072a3240e91",
+      "comment": "",
+      "command": "run",
+      "target": "Game Setup",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "024b2c42-b781-4dbb-a434-4c099ee25391",
+      "comment": "",
+      "command": "run",
+      "target": "Finish Game",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "00d9ab07-6de1-46e2-9840-fbe2246bcc25",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Join Game",
+      "targets": [
+        ["linkText=Join Game", "linkText"],
+        ["css=.nav-link:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Join Game')]", "xpath:link"],
+        ["xpath=//div[@id='basic-navbar-nav']/div/a[2]", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/skullking-scorecard/join-game')]", "xpath:href"],
+        ["xpath=//a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'Join Game')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d9b27d66-47c6-4a4e-a9a5-999cb21c7880",
+      "comment": "",
+      "command": "click",
+      "target": "css=.text-center:nth-child(3) > .join-button:nth-child(7)",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .join-button:nth-child(7)", "css:finder"],
+        ["xpath=(//button[@type='button'])[4]", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Join as Scorekeeper')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "08b73959-6280-424e-a509-28f76ad2e200",
+      "comment": "",
+      "command": "waitForText",
+      "target": "css=.container:nth-child(1) > .text-center:nth-child(1)",
+      "targets": [
+        ["css=.container:nth-child(1) > .text-center:nth-child(1)", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/h1", "xpath:idRelative"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Score Totals')]", "xpath:innerText"]
+      ],
+      "value": "Score Totals"
+    }, {
+      "id": "1b41e5d8-e196-4997-b52b-846302db9383",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.text-center:nth-child(1) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(1) > .btn", "css:finder"],
+        ["xpath=//input[@value='Previous Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c3151d5f-1f3d-4b18-ae32-4453f82edce0",
+      "comment": "",
+      "command": "assertValue",
+      "target": "css=.text-center:nth-child(1) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(1) > .btn", "css:finder"],
+        ["xpath=//input[@value='Previous Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Previous Round"
+    }, {
+      "id": "fe8f7a96-6058-434f-bd4f-7410af5faa7c",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Next Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "12beb9dd-12f8-46b1-be9f-1d7f96d54379",
+      "comment": "",
+      "command": "assertValue",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Next Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "Next Round"
+    }]
+  }, {
+    "id": "f8a67b5f-e016-4e73-b968-b6f42d27d6e3",
+    "name": "Join Game as Scorekeeper on Round 10",
+    "commands": [{
+      "id": "dd359cdd-e886-4ffd-a8b3-8f85cd40f087",
+      "comment": "",
+      "command": "run",
+      "target": "Game Setup",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0025efc2-8854-41a3-8854-0baeefbdf271",
+      "comment": "",
+      "command": "click",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Next Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "042e093c-9f2b-49bf-a378-71632728d914",
+      "comment": "",
+      "command": "waitForText",
+      "target": "css=.round-title",
+      "targets": [
+        ["css=.round-title", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[2]/div/h1", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div[2]/div/h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Round 2')]", "xpath:innerText"]
+      ],
+      "value": "Round 2"
+    }, {
+      "id": "2a8bcad1-ddcc-4004-8571-159f43f168a4",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.round-title",
+      "targets": [
+        ["css=.round-title", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[2]/div/h1", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div[2]/div/h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Round 3')]", "xpath:innerText"]
+      ],
+      "value": "Round 2"
+    }, {
+      "id": "d4bd3473-6336-42d1-8125-579a9ab16285",
+      "comment": "",
+      "command": "click",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Next Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e2b288ba-b92f-46b4-9b56-cb7afa6eb86e",
+      "comment": "",
+      "command": "waitForText",
+      "target": "css=.round-title",
+      "targets": [
+        ["css=.round-title", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[2]/div/h1", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div[2]/div/h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Round 3')]", "xpath:innerText"]
+      ],
+      "value": "Round 3"
+    }, {
+      "id": "df8fe18d-dc03-4149-b2a6-8318834528e9",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.round-title",
+      "targets": [
+        ["css=.round-title", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[2]/div/h1", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div[2]/div/h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Round 3')]", "xpath:innerText"]
+      ],
+      "value": "Round 3"
+    }, {
+      "id": "a526026f-0823-4be0-a59f-705959fce70a",
+      "comment": "",
+      "command": "click",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Next Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4d48d7fd-809e-4cdc-a4c9-2dc281aef0d1",
+      "comment": "",
+      "command": "waitForText",
+      "target": "css=.round-title",
+      "targets": [
+        ["css=.round-title", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[2]/div/h1", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div[2]/div/h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Round 3')]", "xpath:innerText"]
+      ],
+      "value": "Round 4"
+    }, {
+      "id": "5582bbe7-a24c-4c5a-a53d-1a48d7e2249c",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.round-title",
+      "targets": [
+        ["css=.round-title", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[2]/div/h1", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div[2]/div/h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Round 3')]", "xpath:innerText"]
+      ],
+      "value": "Round 4"
+    }, {
+      "id": "d1d6c533-cc0b-4d6f-a3d0-02d55d2d8701",
+      "comment": "",
+      "command": "click",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Next Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "acf1cd15-22e7-4dfe-beba-419b25c7dfaa",
+      "comment": "",
+      "command": "waitForText",
+      "target": "css=.round-title",
+      "targets": [
+        ["css=.round-title", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[2]/div/h1", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div[2]/div/h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Round 3')]", "xpath:innerText"]
+      ],
+      "value": "Round 5"
+    }, {
+      "id": "fa3a988f-9cf0-42e0-b1da-67b94e3e64cd",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.round-title",
+      "targets": [
+        ["css=.round-title", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[2]/div/h1", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div[2]/div/h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Round 3')]", "xpath:innerText"]
+      ],
+      "value": "Round 5"
+    }, {
+      "id": "46ad8bd8-f098-41ac-b512-7ccc266a45c0",
+      "comment": "",
+      "command": "click",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Next Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f4f0d122-5c8c-4ceb-859f-08770e3c596c",
+      "comment": "",
+      "command": "waitForText",
+      "target": "css=.round-title",
+      "targets": [
+        ["css=.round-title", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[2]/div/h1", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div[2]/div/h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Round 3')]", "xpath:innerText"]
+      ],
+      "value": "Round 6"
+    }, {
+      "id": "8a0bf029-b723-4d46-a268-970c091ac0e8",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.round-title",
+      "targets": [
+        ["css=.round-title", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[2]/div/h1", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div[2]/div/h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Round 3')]", "xpath:innerText"]
+      ],
+      "value": "Round 6"
+    }, {
+      "id": "25aa512d-2e88-42c2-99de-a5e87723df7e",
+      "comment": "",
+      "command": "click",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Next Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "feae048c-48f6-45e8-8b0e-57c22921679b",
+      "comment": "",
+      "command": "waitForText",
+      "target": "css=.round-title",
+      "targets": [
+        ["css=.round-title", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[2]/div/h1", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div[2]/div/h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Round 3')]", "xpath:innerText"]
+      ],
+      "value": "Round 7"
+    }, {
+      "id": "eb30980c-261a-4f5e-a2ab-137268670f8c",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.round-title",
+      "targets": [
+        ["css=.round-title", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[2]/div/h1", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div[2]/div/h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Round 3')]", "xpath:innerText"]
+      ],
+      "value": "Round 7"
+    }, {
+      "id": "8533685c-b40b-4e8d-9f36-9e984b3c1763",
+      "comment": "",
+      "command": "click",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Next Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "272df92e-b151-45fd-a40a-5892c8c3492c",
+      "comment": "",
+      "command": "waitForText",
+      "target": "css=.round-title",
+      "targets": [
+        ["css=.round-title", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[2]/div/h1", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div[2]/div/h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Round 3')]", "xpath:innerText"]
+      ],
+      "value": "Round 8"
+    }, {
+      "id": "f268300f-22af-4486-a878-22eb861781cb",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.round-title",
+      "targets": [
+        ["css=.round-title", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[2]/div/h1", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div[2]/div/h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Round 3')]", "xpath:innerText"]
+      ],
+      "value": "Round 8"
+    }, {
+      "id": "b88d5196-81dd-4ecd-99bd-2091dd017d7b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Next Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b5981c99-4277-4046-bcdf-2344d2cd8dc0",
+      "comment": "",
+      "command": "waitForText",
+      "target": "css=.round-title",
+      "targets": [
+        ["css=.round-title", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[2]/div/h1", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div[2]/div/h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Round 3')]", "xpath:innerText"]
+      ],
+      "value": "Round 9"
+    }, {
+      "id": "dd608296-8818-4556-ad25-8875263b97b7",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.round-title",
+      "targets": [
+        ["css=.round-title", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[2]/div/h1", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div[2]/div/h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Round 3')]", "xpath:innerText"]
+      ],
+      "value": "Round 9"
+    }, {
+      "id": "3e2f6631-aa3f-476f-a22d-6e8417468f22",
+      "comment": "",
+      "command": "click",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Next Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6b7f0626-54c7-48f8-a5e2-90318df5dc9b",
+      "comment": "",
+      "command": "waitForText",
+      "target": "css=.round-title",
+      "targets": [
+        ["css=.round-title", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[2]/div/h1", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div[2]/div/h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Round 3')]", "xpath:innerText"]
+      ],
+      "value": "Round 10"
+    }, {
+      "id": "e7f527c5-ebbb-4d5a-9ee4-e7010d4eca5c",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.round-title",
+      "targets": [
+        ["css=.round-title", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[2]/div/h1", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div[2]/div/h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Round 3')]", "xpath:innerText"]
+      ],
+      "value": "Round 10"
+    }, {
+      "id": "7f0547bf-8493-44a1-ac41-4f00b7577bda",
+      "comment": "",
+      "command": "assertValue",
+      "target": "css=.text-center:nth-child(1) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(1) > .btn", "css:finder"],
+        ["xpath=//input[@value='Previous Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Previous Round"
+    }, {
+      "id": "bf76b18a-4bb8-4f56-826e-1e311e73d02b",
+      "comment": "",
+      "command": "assertValue",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='To Summary']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "To Summary"
+    }, {
+      "id": "1d49d2a5-1211-41de-a548-05e1fe708bff",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Join Game",
+      "targets": [
+        ["linkText=Join Game", "linkText"],
+        ["css=.nav-link:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Join Game')]", "xpath:link"],
+        ["xpath=//div[@id='basic-navbar-nav']/div/a[2]", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/skullking-scorecard/join-game')]", "xpath:href"],
+        ["xpath=//a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'Join Game')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "950d25e6-b4ad-4dfa-b46d-26799aa0f0d0",
+      "comment": "",
+      "command": "waitForElementPresent",
+      "target": "css=.text-center:nth-child(3) > .join-button:nth-child(7)",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .join-button:nth-child(7)", "css:finder"],
+        ["xpath=(//button[@type='button'])[4]", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Join as Scorekeeper')]", "xpath:innerText"]
+      ],
+      "value": "30000"
+    }, {
+      "id": "002776fa-a955-49a5-b2fc-0c101cdb0daa",
+      "comment": "",
+      "command": "click",
+      "target": "css=.text-center:nth-child(3) > .join-button:nth-child(7)",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .join-button:nth-child(7)", "css:finder"],
+        ["xpath=(//button[@type='button'])[4]", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Join as Scorekeeper')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1662df14-9b24-4f33-bdf8-828124f8f76b",
+      "comment": "",
+      "command": "waitForText",
+      "target": "css=.container:nth-child(1) > .text-center:nth-child(1)",
+      "targets": [
+        ["css=.container:nth-child(1) > .text-center:nth-child(1)", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/h1", "xpath:idRelative"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Score Totals')]", "xpath:innerText"]
+      ],
+      "value": "Score Totals"
+    }, {
+      "id": "9de0ef5a-cda3-4ee9-a1e3-7e44792c8941",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.round-title",
+      "targets": [
+        ["css=.round-title", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[2]/div/h1", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div[2]/div/h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Round 10')]", "xpath:innerText"]
+      ],
+      "value": "Round 10"
+    }, {
+      "id": "1acf3eb2-2324-4c52-acdf-3ef04a1c0a9f",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.text-center:nth-child(1) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(1) > .btn", "css:finder"],
+        ["xpath=//input[@value='Previous Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4df44c23-b32c-42c8-8ce1-039aa25e407a",
+      "comment": "",
+      "command": "assertValue",
+      "target": "css=.text-center:nth-child(1) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(1) > .btn", "css:finder"],
+        ["xpath=//input[@value='Previous Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Previous Round"
+    }, {
+      "id": "ad751f54-bbcd-493e-8e31-9daff9fbac8b",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Next Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "77e8321a-03d6-466a-a049-86100f6857d2",
+      "comment": "",
+      "command": "assertValue",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Next Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "To Summary"
+    }]
+  }, {
+    "id": "47f39193-cc24-45de-b706-18205c955e80",
+    "name": "Cleanup: Remove Games in Progress",
+    "commands": [{
+      "id": "6f86c481-55b8-401d-a24c-b92961499ff5",
+      "comment": "",
+      "command": "run",
+      "target": "Launch Skullking",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8f248f59-5978-48c6-8fc1-b28dbc9a575d",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Join a game",
+      "targets": [
+        ["linkText=Join a game", "linkText"],
+        ["css=.mb-5", "css:finder"],
+        ["xpath=//a[contains(text(),'Join a game')]", "xpath:link"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/a[2]", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, '/skullking-scorecard/join-game')])[2]", "xpath:href"],
+        ["xpath=//div[2]/a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'Join a game')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "50d9f13a-c4c6-41f6-97f6-8d0e6e4704e9",
+      "comment": "",
+      "command": "//waitForElementPresent",
+      "target": "xpath=//button[contains(.,'Join as Scorekeeper')]",
+      "targets": [],
+      "value": "30000"
+    }, {
+      "id": "6fad3b8d-84ec-44f5-b573-5fd4bc369ff1",
+      "comment": "",
+      "command": "storeXpathCount",
+      "target": "xpath=//button[contains(.,'Join as Scorekeeper')]",
+      "targets": [],
+      "value": "activeGames"
+    }, {
+      "id": "ccbb7c95-de87-47f7-bfa1-32756a62426f",
+      "comment": "",
+      "command": "while",
+      "target": "${activeGames} > 0",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "968dbbfe-759e-414f-90ba-08c3d48a885c",
+      "comment": "",
+      "command": "click",
+      "target": "xpath=//button[contains(.,'Join as Scorekeeper')]",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "da38d51e-07b2-46bc-a283-71ddefcab826",
+      "comment": "",
+      "command": "run",
+      "target": "Cleanup: Finish Game",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e0f0dfc7-55a1-451f-9c1c-07b4650125dc",
+      "comment": "",
+      "command": "executeScript",
+      "target": "return ${activeGames} - 1",
+      "targets": [],
+      "value": "activeGames"
+    }, {
+      "id": "f826f729-831a-4cfe-914a-9fb9d7bd542f",
+      "comment": "",
+      "command": "end",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e4e5364a-0ca8-43f8-a840-c0f55cf03f7c",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "0398710a-57c8-433d-b356-5aafee21dbce",
+    "name": "Cleanup: Finish Game",
+    "commands": [{
+      "id": "07985301-de79-4c3b-8d5c-7b0f096d7554",
+      "comment": "",
+      "command": "storeValue",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Next Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "nextRound"
+    }, {
+      "id": "e76eb44e-4653-49e7-970f-54735cb2514e",
+      "comment": "",
+      "command": "while",
+      "target": "${nextRound} != \"To Summary\"",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6601ceae-306b-4506-a865-67f109012444",
+      "comment": "",
+      "command": "click",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Next Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7a03c992-4e73-4602-a1bf-ee871bce8bd5",
+      "comment": "",
+      "command": "storeValue",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='Next Round']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "nextRound"
+    }, {
+      "id": "efab0b8a-c278-463f-96c4-e271e18888c1",
+      "comment": "",
+      "command": "end",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8a2e0c09-1e1b-4b16-945c-d07834e6aadc",
+      "comment": "",
+      "command": "click",
+      "target": "css=.text-center:nth-child(3) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(3) > .btn", "css:finder"],
+        ["xpath=//input[@value='To Summary']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div[2]/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "dab7ae12-fce6-49c2-ad76-81e0452bac2b",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Join Game",
+      "targets": [
+        ["linkText=Join Game", "linkText"],
+        ["css=.nav-link:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Join Game')]", "xpath:link"],
+        ["xpath=//div[@id='basic-navbar-nav']/div/a[2]", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/skullking-scorecard/join-game')]", "xpath:href"],
+        ["xpath=//a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'Join Game')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "6b0d4e72-4cde-4a85-ba7a-93c21bb0d030",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["9e9809c6-6e95-4dcd-8d2c-f95ede2864c8", "77044d70-c30c-457c-a8ce-e3fd0220add9", "3a0ff613-f06a-4b9a-9f8e-33a5930f17de", "4a63ea5a-2369-48cc-a2df-086ba34dd149", "fd60f303-b6c8-488f-8f8e-e20bcf53fef3", "000457d0-9bca-47c7-af81-78f36dc49c04", "f8a67b5f-e016-4e73-b968-b6f42d27d6e3", "2d190560-6c7e-45be-90fd-c7d89a9c4114", "47f39193-cc24-45de-b706-18205c955e80"]
+  }, {
+    "id": "3f1526c9-2910-4329-8191-0099c54b3ec4",
+    "name": "To Summary Button Validation",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["fd60f303-b6c8-488f-8f8e-e20bcf53fef3", "000457d0-9bca-47c7-af81-78f36dc49c04", "f8a67b5f-e016-4e73-b968-b6f42d27d6e3", "4a63ea5a-2369-48cc-a2df-086ba34dd149", "47f39193-cc24-45de-b706-18205c955e80"]
+  }],
+  "urls": ["https://treyturley.com/", "http://localhost:3000/"],
+  "plugins": []
+}
