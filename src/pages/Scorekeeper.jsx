@@ -72,6 +72,12 @@ function Scorekeeper() {
             dispatch({ type: SET_GAME_NAME, payload: data.name });
             dispatch({ type: SET_GAME_ID, payload: data.gameId });
             dispatch({ type: SET_GAME_STATUS, payload: data.status });
+
+            if (data.currentRound === 10) {
+              setNextRoundBtnTxt('To Summary');
+            } else {
+              setNextRoundBtnTxt('Next Round');
+            }
           }
         });
       } catch (err) {
@@ -81,6 +87,8 @@ function Scorekeeper() {
 
     if (currentRound === 10) {
       setNextRoundBtnTxt('To Summary');
+    } else {
+      setNextRoundBtnTxt('Next Round');
     }
 
     // we only ever want to run this on first render so ignore lint rule for exhaustive-deps
